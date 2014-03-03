@@ -11,8 +11,8 @@
 	<version>1.0-RC1-SNAPSHOT</version>
 
 	<modules>
-	   <module>opentoutatice-ecm-platform-collab-tools-ecm</module>
-	   <module>opentoutatice-ecm-platform-collab-tools-marketplace</module>
+	   <module>opentoutatice-collab-tools-ecm</module>
+	   <module>opentoutatice-collab-tools-marketplace</module>
 	</modules>
 
 	<build>
