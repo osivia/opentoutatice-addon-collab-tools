@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.web.document.forms.layouts.faq.webapp">
+
+	<require>org.nuxeo.ecm.platform.forms.layout.WebLayoutManager</require>
+	<require>org.nuxeo.ecm.platform.actions.ActionService</require>
+	<require>fr.toutatice.ecm.platform.web.faq.widgets</require>
+
+	<extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
+		point="layouts">
+
+		<layout name="layout@FaqFolder">
+			<templates>
+				<template mode="create">/layouts/layout_default_template.xhtml
+				</template>
+				<template mode="edit">/layouts/layout_default_template.xhtml
+				</template>
+				<template mode="view">/layouts/layout_default_template.xhtml
+				</template>
+			</templates>
+			<rows>
+				<row>
+					<widget>title_faq</widget>
+				</row>
+				<row>
+					<widget>description</widget>
+				</row>
+			</rows>
+		</layout>
+
+		<layout name="layout@Question">
+			<templates>
+				<template mode="create">/layouts/layout_default_template.xhtml
+				</template>
+				<template mode="edit">/layouts/layout_default_template.xhtml
+				</template>
+				<template mode="view">/layouts/layout_default_template.xhtml
+				</template>
+			</templates>
+			<rows>
+				<row>
+					<widget>title_question</widget>
+				</row>
+				<row>
+					<widget>content_question_response</widget>
+				</row>
+			</rows>
+		</layout>
+
+	</extension>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+
+		<!-- Vue "Résumé" d'une Question -->
+		<action id="summary_question" type="widget" order="120">
+			<category>SUMMARY_PANEL_LEFT</category>
+			<properties>
+				<property name="widgetName">title_question_summary</property>
+			</properties>
+			<filter id="question_have_summary_extrait">
+				<rule grant="true">
+					<type>Question</type>
+				</rule>
+			</filter>
+		</action>
+
+		<action id="summary_question_response" type="widget" order="130">
+			<category>SUMMARY_PANEL_LEFT</category>
+			<properties>
+				<property name="widgetName">content_question_response_summary</property>
+			</properties>
+			<filter id="question_have_summary_content">
+				<rule grant="true">
+					<type>Question</type>
+				</rule>
+			</filter>
+		</action>
+
+	</extension>
+
+</component>

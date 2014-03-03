@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.web.forum.actions">
+
+	<require>org.nuxeo.ecm.platform.actions.ActionService</require>
+	<require>org.nuxeo.ecm.platform.forum.actions</require>
+	<require>fr.toutatice.ecm.platform.web.filters</require>
+	<require>fr.toutatice.ecm.platform.core.forum.filters</require>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+
+		<!-- Redéfini l'onglet d'affichage du contenu (conversions présentes) pour 
+			corriger un souci de gestion de la liste de selection. Utilisation d'un élément 
+			ContentView à la place de la page full JSF. -->
+		<action id="forumView" append="true">
+			<filter id="filter@forumView">
+				<rule grant="false">
+					<type>Forum</type>
+				</rule>
+			</filter>
+		</action>
+
+		<action id="ATAB_CONTENT_FORUM" link="/incl/tabs/toutatice_document_content.xhtml"
+			order="10" enabled="true" label="action.forum.content" icon="/icons/file.gif">
+			<category>VIEW_ACTION_LIST</category>
+			<filter-id>view_content</filter-id>
+			<filter id="filter@ATAB_CONTENT_FORUM">
+				<rule grant="true">
+					<type>Forum</type>
+				</rule>
+			</filter>
+		</action>
+
+		<action id="thread_rights" enabled="false" />
+
+		<action id="ATAB_THREAD_EDIT" link="/incl/tabs/document_edit.xhtml"
+			order="20" label="action.view.modification" icon="/icons/file.gif">
+			<category>VIEW_ACTION_LIST</category>
+			<filter-id>edit</filter-id>
+			<filter-id>mutable_document</filter-id>
+			<filter>
+				<rule grant="true">
+					<type>Thread</type>
+				</rule>
+			</filter>
+		</action>
+		
+		<!-- Redéfini les actions de sauvegarde et annulation pour les vues du document Thread afin que le
+			java bean ThreadActionBean soit appelé (Mantis #2789)
+		-->
+		<action id="EDIT_CURRENT_DOCUMENT" link="#{documentActions.updateCurrentDocument}"
+			order="0" label="command.save.draft">
+			<category>EDIT_DOCUMENT_FORM</category>
+			<filter-id>is_not_thread_document</filter-id>
+			<filter-id>dont_belong_to_publish_space</filter-id>
+		</action>
+		
+		<action id="CREATE_DOCUMENT" link="#{documentActions.saveDocument}"
+			order="1" label="command.create" >
+			<category>CREATE_DOCUMENT_FORM</category>
+			<filter-id>is_not_creating_thread_document</filter-id>		
+			<filter-id>is_not_creating_workspace</filter-id>
+		</action>
+
+		<action id="CREATE_THREAD_DOCUMENT" link="#{threadAction.addThread}"
+			order="0" label="command.create">
+			<category>CREATE_DOCUMENT_FORM</category>
+			<filter-id>is_creating_thread_document</filter-id>
+		</action>
+
+		<action id="EDIT_CURRENT_THREAD_DOCUMENT" link="#{threadAction.updateThread}"
+			order="0" label="command.save">
+			<category>EDIT_DOCUMENT_FORM</category>
+			<filter-id>is_thread_document</filter-id>
+		</action>
+		
+		<!-- Vues "Portail" -->
+		<action id="TOUTATICE_CREATE_THREAD_DOCUMENT" link="#{threadAction.addThread('toutatice_view')}"
+			order="1" label="command.create">
+			<category>TOUTATICE_CREATE_DOCUMENT_FORM</category>
+			<filter-id>is_creating_thread_document</filter-id>
+		</action>
+		
+		<action id="TOUTATICE_EDIT_CURRENT_THREAD_DOCUMENT" link="#{threadAction.updateThread('toutatice_view')}"
+			order="0" label="command.save.draft">
+			<category>TOUTATICE_EDIT_DOCUMENT_FORM</category>
+			<filter-id>is_thread_document</filter-id>
+		</action>
+		
+		<!-- Vue Commentaires désactivée -->
+		<action id="view_comments" order="60" append="true">
+			<filter-id>no_view_on_thread</filter-id>
+		</action>
+		
+		<action id="TAB_CONTENT_HISTORY" append="true">
+			<filter id="filter@NO_TAB_CONTENT_HISTORY_FOR_THREAD">
+				<rule grant="false">
+					<type>Thread</type>
+				</rule>
+			</filter>
+		</action>
+		
+		<action id="TAB_MANAGE_SUBSCRIPTIONS">
+			<filter-id>is_not_thread_document</filter-id>
+		</action>
+
+	</extension>
+
+</component>

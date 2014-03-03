@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.web.blog.actions">
+
+	<require>org.nuxeo.ecm.platform.actions.ActionService</require>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+
+		<action id="SAVE_CURRENT_DOCUMENT" link="#{documentActions.updateCurrentDocument}"
+			order="0" label="command.save">
+			<category>EDIT_DOCUMENT_FORM</category>
+			<filter-id>is_not_thread_document</filter-id>
+			<filter-id>belong_to_publish_space</filter-id>
+		</action>
+
+		<action id="TAB_FILES_EDIT" append="true">
+			<filter id="blogpost.deny.tab_files_edit">
+				<rule grant="false">
+					<type>BlogSite</type>
+					<type>BlogPost</type>
+				</rule>
+			</filter>
+		</action>
+
+	</extension>
+
+</component>
