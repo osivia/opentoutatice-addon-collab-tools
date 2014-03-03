@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<component name="fr.toutatice.ecm.platform.web.ui.article.types">
+
+	<require>org.nuxeo.ecm.platform.types.TypeService</require>
+
+	<extension target="org.nuxeo.ecm.platform.types.TypeService"
+		point="types">
+
+		<type id="Annonce">
+			<label>Article</label>
+			<category>SimpleDocument</category>
+			<icon>/img/annonce_16.png</icon>
+			<bigIcon>/img/annonce_100.png</bigIcon>
+			<description></description>
+			<default-view>view_documents</default-view>
+			<layouts mode="create">
+				<layout>layout@Annonce-create</layout>
+			</layouts>
+			<layouts mode="edit">
+				<layout>layout@Annonce-edit</layout>
+			</layouts>
+			<layouts mode="view" />
+		</type>
+
+		<type id="AnnonceFolder">
+			<label>Bulletin d'articles</label>
+			<category>Collaborative</category>
+			<icon>/img/annonceFolder_16.png</icon>
+			<bigIcon>/img/annonceFolder_100.png</bigIcon>
+			<description>Bulletin d'articles</description>
+			<default-view>view_documents</default-view>
+			<layouts mode="create">
+				<layout>layout@AnnonceFolder-create</layout>
+			</layouts>
+			<layouts mode="edit">
+				<layout>layout@AnnonceFolder-edit</layout>
+			</layouts>
+			<layouts mode="view" />
+			<contentViews category="content">
+				<contentView showInExportView="false">cv_ContentReadNWrite
+				</contentView>
+			</contentViews>
+			<contentViews category="trash_content">
+				<contentView showInExportView="false">document_trash_content
+				</contentView>
+			</contentViews>
+		</type>
+
+	</extension>
+
+
+</component>
