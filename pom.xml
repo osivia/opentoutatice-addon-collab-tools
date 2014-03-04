@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<description>Addon to leverage the collaboration tools</description>
 	<name>opentoutatice-collab-tools-parent</name>
-	<version>1.0-RC2-SNAPSHOT</version>
+	<version>1.0-RC2</version>
 
 	<modules>
 	   <module>opentoutatice-collab-tools-ecm</module>
@@ -32,7 +32,7 @@
 	</build>
 
 	<scm>
-		<developerConnection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/trunk</developerConnection>
+		<developerConnection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/tags/1.0-RC2</developerConnection>
 	</scm>
 
 	<distributionManagement>
