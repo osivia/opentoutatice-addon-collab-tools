@@ -49,9 +49,13 @@
 			<fields>
 				<field></field>
 			</fields>
-			<properties widgetMode="edit">
+			<properties widgetMode="create">
 				<property name="name">toutatice_metadata_moderator</property>
 				<property name="mode">create</property>
+			</properties>
+			<properties widgetMode="edit">
+				<property name="name">toutatice_metadata_moderator</property>
+				<property name="mode">edit</property>
 			</properties>
 			<properties widgetMode="view">
 				<property name="name">toutatice_metadata_moderator</property>
@@ -61,7 +65,9 @@
 
 		<widget name="toutatice_widget_moderators" type="template">
 			<labels>
-				<label mode="any">Modérateur</label>
+				<label mode="view"></label>
+				<label mode="edit">Modérateur</label>
+				<label mode="create">Modérateur</label>
 			</labels>
 			<translated>false</translated>
 			<fields>
