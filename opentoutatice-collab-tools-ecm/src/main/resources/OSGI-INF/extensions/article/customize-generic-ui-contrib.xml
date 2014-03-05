@@ -2,8 +2,6 @@
 
 <component name="fr.toutatice.ecm.platform.service.article.generic.ui">
 
-	<require>fr.toutatice.ecm.platform.service.generic.ui</require>
-
 	<extension target="fr.toutatice.ecm.platform.generic.ui.GenericUIService"
 		point="layouts">
 
