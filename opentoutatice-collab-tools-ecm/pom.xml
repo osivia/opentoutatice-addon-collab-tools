@@ -4,14 +4,14 @@
 
 	<groupId>opentoutatice-ecm.collab-tools</groupId>
 	<artifactId>opentoutatice-collab-tools-ecm</artifactId>
-	<version>1.0-RC4-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>collaboratives objects</name>
 
 	<properties>
 		<nuxeo.version>5.6.0-HF29</nuxeo.version>
 		<nuxeo.layout.version>5.6</nuxeo.layout.version>
-		<nuxeo.opentoutatice.version>1.1.0-RC1</nuxeo.opentoutatice.version>
+		<nuxeo.opentoutatice.version>1.1.0-SNAPSHOT</nuxeo.opentoutatice.version>
 	</properties>
 
 	<dependencies>
@@ -81,5 +81,33 @@
 			<url>http://projet.toutatice.fr/nexus/content/repositories/toutatice-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>	
+	
+	<profiles>
+		<profile>
+			<id>deploy-toutatice-ecm-modules</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-jar</id>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<copy file="${basedir}/target/${project.build.finalName}.jar" todir="${build.toutatice.ecm.modules.dir}" />
+									</tasks>
+								</configuration>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
