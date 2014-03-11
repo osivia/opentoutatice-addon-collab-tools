@@ -11,14 +11,33 @@
 		<contentView name="cv_ContentForum">
 			<coreQueryPageProvider>
 				<property name="coreSession">#{documentManager}</property>
-				<pattern>SELECT * FROM Document WHERE (ecm:mixinType !=
-					'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND
-					ecm:currentLifeCycleState != 'deleted' AND ecm:isProxy = 0 AND
-					ecm:parentId = ?)</pattern>
+				<whereClause docType="AdvancedSearch">
+					<predicate operator="FULLTEXT" parameter="ecm:fulltext">
+						<field name="fulltext_all" schema="advanced_search" />
+					</predicate>
+					<predicate operator="FULLTEXT" parameter="dc:title">
+						<field name="title" schema="advanced_search" />
+					</predicate>
+					<predicate operator="BETWEEN" parameter="dc:modified">
+						<field name="modified_min" schema="advanced_search" />
+						<field name="modified_max" schema="advanced_search" />
+					</predicate>
+					<fixedPart>
+						ecm:mixinType !=
+						'HiddenInNavigation' AND ecm:isCheckedInVersion = 0 AND
+						ecm:currentLifeCycleState != 'deleted' AND ecm:isProxy = 0 AND
+						ecm:parentId = ?
+					</fixedPart>
+				</whereClause>
 				<parameter>#{currentDocument.id}</parameter>
 				<sort column="dc:title" ascending="true" />
 				<pageSize>40</pageSize>
 			</coreQueryPageProvider>
+
+			<searchLayout filterDisplayType="quick"
+				name="document_content_filter" />
+			<showFilterForm>true</showFilterForm>
+
 			<useGlobalPageSize>true</useGlobalPageSize>
 			<refresh>
 				<event>documentChanged</event>
