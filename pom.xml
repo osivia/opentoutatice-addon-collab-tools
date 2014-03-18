@@ -11,7 +11,7 @@
 	<properties>
 		<nuxeo.version>5.6.0-HF29</nuxeo.version>
 		<nuxeo.layout.version>5.6</nuxeo.layout.version>
-		<nuxeo.opentoutatice.version>1.1.0-SNAPSHOT</nuxeo.opentoutatice.version>
+		<nuxeo.opentoutatice.version>1.1.0</nuxeo.opentoutatice.version>
 	</properties>
 
 	<dependencies>
@@ -68,7 +68,7 @@
 	</build>
 
 	<scm>
-		<developerConnection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/trunk</developerConnection>
+		<developerConnection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/trunk/opentoutatice-collab-tools-ecm</developerConnection>
 	</scm>
 	
 	<distributionManagement>
