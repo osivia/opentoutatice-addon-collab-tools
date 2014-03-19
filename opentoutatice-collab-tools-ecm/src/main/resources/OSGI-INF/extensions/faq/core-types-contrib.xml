@@ -16,6 +16,7 @@
 			<facet name="Folderish" />
 			<facet name="SpaceContent" />
 			<facet name="SpaceNavigationItem" />
+			<facet name="Orderable" />
 		</doctype>
 
 		<doctype name="Question" extends="Document">
