@@ -47,7 +47,8 @@
 			</labels>
 			<translated>false</translated>
 			<fields>
-				<field></field>
+				<field>thread:moderated</field>
+				<field>thread:moderators</field>
 			</fields>
 			<properties widgetMode="create">
 				<property name="name">toutatice_metadata_moderator</property>
@@ -71,6 +72,7 @@
 			</labels>
 			<translated>false</translated>
 			<fields>
+				<field>thread:moderated</field>
 				<field>thread:moderators</field>
 			</fields>
 			<properties mode="any">
