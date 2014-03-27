@@ -38,7 +38,7 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 
 import fr.toutatice.ecm.platform.collab.tools.constants.CollabToolsConstants;
 import fr.toutatice.ecm.platform.collab.tools.constants.ExtendedSeamPrecedence;
-import fr.toutatice.ecm.platform.core.constants.NuxeoStudioConst;
+import fr.toutatice.ecm.platform.core.constants.ToutaticeNuxeoStudioConst;
 
 @Name("ImageManagerActions")
 @Scope(ScopeType.EVENT)
@@ -60,7 +60,7 @@ public class ToutaticeCTImageManagerActionsBean extends ToutaticeImageManagerAct
             }
             
             // la génération de l'image de tête se fera automatiquement via l'event listener "OnHeadImageDocumentUpdate" (Nuxeo Studio)
-            Collection files = (Collection) currentDocument.getPropertyValue(NuxeoStudioConst.CST_DOC_XPATH_TOUTATICE_IMAGES);
+            Collection files = (Collection) currentDocument.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TOUTATICE_IMAGES);
             Map<String, Object> file = (Map<String, Object>) CollectionUtils.get(files, new Integer(index));
             currentDocument.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_HEAD_IMAGE, (Serializable) file.get("file"));
             

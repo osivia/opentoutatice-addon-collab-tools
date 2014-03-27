@@ -44,8 +44,8 @@
 		<chain id="annonce-update">
 			<operation id="Context.FetchDocument" />
 			<operation id="ImageResize.Operation">
-				<param type="int" name="img_heidth">300</param>
-				<param type="int" name="img_width">400</param>
+				<param type="int" name="img_heidth">480</param>
+        <param type="int" name="img_width">640</param>
 				<param type="string" name="xpath_img_in">annonce:image</param>
 				<param type="string" name="xpath_img_out">annonce:image</param>
 				<param type="boolean" name="enlarge">true</param>
@@ -68,8 +68,8 @@
 		<chain id="head-image-resizing">
 			<operation id="Context.FetchDocument" />
 			<operation id="ImageResize.Operation">
-				<param type="int" name="img_heidth">300</param>
-				<param type="int" name="img_width">400</param>
+				<param type="int" name="img_heidth">480</param>
+        		<param type="int" name="img_width">640</param>
 				<param type="string" name="xpath_img_in">annonce:image</param>
 				<param type="string" name="xpath_img_out">annonce:image</param>
 				<param type="boolean" name="enlarge">true</param>

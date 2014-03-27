@@ -10,7 +10,7 @@
 		point="event-handlers">
 
 		<handler chainId="annonce-update">
-			<event>aboutToCreate</event>
+			<event>documentCreated</event>
 			<filters>
 				<doctype>Annonce</doctype>
 			</filters>
