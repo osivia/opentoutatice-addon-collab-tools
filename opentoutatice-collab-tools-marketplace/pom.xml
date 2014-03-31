@@ -7,7 +7,7 @@
 	</parent>
 
 	<artifactId>opentoutatice-collab-tools-marketplace</artifactId>
-	<version>1.0-RC4-SNAPSHOT</version>
+	<version>1.0.0-RC4-SNAPSHOT</version>
 	<packaging>zip</packaging>
 	<name>Marketplace package - Collaboration tools</name>
 
