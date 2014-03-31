@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<description>Addon to leverage the collaboration tools</description>
 	<name>opentoutatice-collab-tools-parent</name>
-	<version>1.0-RC4-SNAPSHOT</version>
+	<version>1.0.0-RC4-SNAPSHOT</version>
 
 	<modules>
 	   <module>opentoutatice-collab-tools-ecm</module>
