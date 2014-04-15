@@ -30,7 +30,13 @@
 			<contentViews category="content">
 				<contentView showInExportView="false">cv_ContentReadNWrite_NIPS
 				</contentView>
+			</contentViews>						
+			<contentViews category="CVTAB@StudioOnlineDocs">
+				<contentView showInExportView="false">cv_ContentOnlineList</contentView>
 			</contentViews>
+			<contentViews category="CVTAB@StudioWorkingDocs">
+				<contentView showInExportView="false">cv_ContentReadNWrite</contentView>
+			</contentViews>			
 			<contentViews category="trash_content">
 				<contentView showInExportView="false">document_trash_content
 				</contentView>
