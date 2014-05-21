@@ -10,8 +10,8 @@
 		<type id="BlogSite">
 			<label>Blog</label>
 			<category>Collaborative</category>
-			<icon>/img/blog_folder.png</icon>
-			<bigIcon>/img/blogsite_100.png</bigIcon>
+			<icon>/icons/blog_folder.png</icon>
+			<bigIcon>/icons/blogsite_100.png</bigIcon>
 			<description></description>
 			<default-view>view_documents</default-view>
 			<subtypes>
@@ -46,8 +46,8 @@
 		<type id="BlogPost">
 			<label>blog post</label>
 			<category>SimpleDocument</category>
-			<icon>/img/blogpage.png</icon>
-			<bigIcon>/img/blogpage_100.png</bigIcon>
+			<icon>/icons/blogpage.png</icon>
+			<bigIcon>/icons/blogpage_100.png</bigIcon>
 			<icon-expanded>/icons/blogpage.png</icon-expanded>
 			<description></description>
 			<default-view>view_documents</default-view>

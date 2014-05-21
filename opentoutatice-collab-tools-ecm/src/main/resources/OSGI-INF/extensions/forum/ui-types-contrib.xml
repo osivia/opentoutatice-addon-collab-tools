@@ -10,8 +10,8 @@
 		<type id="Forum">
 			<label>Forum</label>
 			<category>Collaborative</category>
-			<icon>/img/forum.gif</icon>
-			<bigIcon>/img/forum_100.png</bigIcon>
+			<icon>/icons/forum.gif</icon>
+			<bigIcon>/icons/forum_100.png</bigIcon>
 			<description></description>
 			<default-view>view_documents</default-view>
 			<subtypes>
@@ -37,8 +37,8 @@
 		<type id="Thread">
 			<label>Fil de discussion</label>
 			<category>SimpleDocument</category>
-			<icon>/img/forum_thread.gif</icon>
-			<bigIcon>/img/forum_thread.gif</bigIcon>
+			<icon>/icons/forum_thread.gif</icon>
+			<bigIcon>/icons/forum_thread.gif</bigIcon>
 			<description></description>
 			<default-view>view_documents</default-view>
 			<layouts mode="create">

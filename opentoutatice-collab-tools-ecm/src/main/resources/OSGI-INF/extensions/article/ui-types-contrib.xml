@@ -10,8 +10,8 @@
 		<type id="Annonce">
 			<label>Article</label>
 			<category>SimpleDocument</category>
-			<icon>/img/annonce_16.png</icon>
-			<bigIcon>/img/annonce_100.png</bigIcon>
+			<icon>/icons/annonce_16.png</icon>
+			<bigIcon>/icons/annonce_100.png</bigIcon>
 			<description></description>
 			<default-view>view_documents</default-view>
 			<layouts mode="create">
@@ -26,8 +26,8 @@
 		<type id="AnnonceFolder">
 			<label>Bulletin d'articles</label>
 			<category>Collaborative</category>
-			<icon>/img/annonceFolder_16.png</icon>
-			<bigIcon>/img/annonceFolder_100.png</bigIcon>
+			<icon>/icons/annonceFolder_16.png</icon>
+			<bigIcon>/icons/annonceFolder_100.png</bigIcon>
 			<description>Bulletin d'articles</description>
 			<default-view>view_documents</default-view>
 			<layouts mode="create">
