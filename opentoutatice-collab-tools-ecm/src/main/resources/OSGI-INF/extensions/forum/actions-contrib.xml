@@ -75,13 +75,13 @@
 		</action>
 		
 		<!-- Vues "Portail" -->
-		<action id="TOUTATICE_CREATE_THREAD_DOCUMENT" link="#{threadAction.addThread('toutatice_view')}"
+		<action id="TOUTATICE_CREATE_THREAD_DOCUMENT" link="#{threadAction.addThread('done')}"
 			order="1" label="command.create">
 			<category>TOUTATICE_CREATE_DOCUMENT_FORM</category>
 			<filter-id>is_creating_thread_document</filter-id>
 		</action>
 		
-		<action id="TOUTATICE_EDIT_CURRENT_THREAD_DOCUMENT" link="#{threadAction.updateThread('toutatice_view')}"
+		<action id="TOUTATICE_EDIT_CURRENT_THREAD_DOCUMENT" link="#{threadAction.updateThread('done')}"
 			order="0" label="command.save.draft">
 			<category>TOUTATICE_EDIT_DOCUMENT_FORM</category>
 			<filter-id>is_thread_document</filter-id>
