@@ -21,6 +21,12 @@
 				<type>Annonce</type>
 			</rule>
 		</filter>
+		
+		<filter id="isAnnonce">
+			<rule grant="true">
+				<type>Annonce</type>
+			</rule>
+		</filter>
 
 	</extension>
 

@@ -26,6 +26,19 @@
 			</filter>
 		</action>
 
+		<!-- Stamp creation -->
+		<action id="TOUTATICE_IMAGES_CREATE_HEAD" label="toutatice.label.images.create.head"
+			link="#{ImageManagerActions.createHeadImage}">
+			<category>TOUTATICE_IMAGES_TAB_CREATE</category>
+			<properties>
+				<property name="confirmMessage">toutatice.label.images.confirm.head.creation
+				</property>
+				<property name="styleClass">toutaticeUploadImageGadget
+				</property>
+			</properties>
+			<filter-id>isAnnonce</filter-id>
+		</action>
+
 	</extension>
 
 </component>

@@ -33,6 +33,7 @@ import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.international.StatusMessage;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
@@ -48,7 +49,7 @@ public class ToutaticeCTImageManagerActionsBean extends ToutaticeImageManagerAct
 	private static final Log log = LogFactory.getLog(ToutaticeCTImageManagerActionsBean.class);
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})
-    public void createHeadImage(ActionEvent event) {
+    public void createHeadImage() {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext eContext = context.getExternalContext();
         String index = eContext.getRequestParameterMap().get("index");
@@ -68,8 +69,8 @@ public class ToutaticeCTImageManagerActionsBean extends ToutaticeImageManagerAct
             documentManager.saveDocument(currentDocument);
 
             // notifier la fin de l'opération
-            facesMessages.add(StatusMessage.Severity.INFO,
-                    resourcesAccessor.getMessages().get("toutatice.fileImporter.create.success.image"));
+            FacesMessages.instance().addFromResourceBundle(
+    				"toutatice.fileImporter.create.success.image");
             
             // some changes (versioning) happened server-side, fetch new one
             fetchCurrentDocument(currentDocument);          
