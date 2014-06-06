@@ -26,6 +26,7 @@
 			<schema name="common" />
 			<schema name="dublincore" />
 			<schema name="annoncefolder" />
+			<schema name="publishing" />
 			<facet name="Folderish" />
 			<facet name="Orderable" />
 			<facet name="SpaceContent" />
