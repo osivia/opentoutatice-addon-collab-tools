@@ -16,6 +16,7 @@
 			<schema name="blog" />
 			<schema name="files" />
 			<schema name="webcontainer" />
+			<facet name="WebView" />
 			<facet name="Folderish" />
 			<facet name="FolderishEditable" />
 			<facet name="TTCPublishSpace" />
