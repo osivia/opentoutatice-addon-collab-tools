@@ -25,11 +25,10 @@
 						<field name="modified_max" schema="advanced_search" />
 					</predicate>
 					<fixedPart>
-						ecm:mixinType !=
-						'HiddenInNavigation' AND
+						ecm:mixinType != 'HiddenInNavigation' AND
 						ecm:isCheckedInVersion = 0 AND
-						ecm:currentLifeCycleState !=
-						'deleted' AND ecm:isProxy = 0 AND
+						ecm:currentLifeCycleState != 'deleted' AND 
+						(ecm:isProxy = 0 OR (ecm:isProxy = 1 AND ecm:name NOT LIKE '%.proxy')) AND 
 						ecm:parentId = ?
 					</fixedPart>
 				</whereClause>
@@ -71,7 +70,6 @@
 			</flags>
 		</contentView>
 
-
 		<contentView name="cv_ContentReadNWrite_NIPS">
 			<coreQueryPageProvider>
 				<property name="coreSession">#{documentManager}</property>
@@ -87,11 +85,10 @@
 						<field name="modified_max" schema="advanced_search" />
 					</predicate>
 					<fixedPart>
-						ecm:mixinType !=
-						'HiddenInNavigation' AND
+						ecm:mixinType != 'HiddenInNavigation' AND
 						ecm:isCheckedInVersion = 0 AND
-						ecm:currentLifeCycleState !=
-						'deleted' AND ecm:isProxy = 0 AND
+						ecm:currentLifeCycleState != 'deleted' AND 
+						ecm:isProxy = 0 AND
 						ecm:parentId = ?
 					</fixedPart>
 				</whereClause>
@@ -148,11 +145,10 @@
 						<field name="modified_max" schema="advanced_search" />
 					</predicate>
 					<fixedPart>
-						ecm:mixinType !=
-						'HiddenInNavigation' AND
+						ecm:mixinType != 'HiddenInNavigation' AND 
 						ecm:isCheckedInVersion = 0 AND
-						ecm:currentLifeCycleState !=
-						'deleted' AND ecm:isProxy = 0 AND
+						ecm:currentLifeCycleState != 'deleted' AND 
+						ecm:isProxy = 0 AND
 						ecm:parentId = ?
 					</fixedPart>
 				</whereClause>
