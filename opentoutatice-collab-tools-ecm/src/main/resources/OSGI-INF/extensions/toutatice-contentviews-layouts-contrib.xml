@@ -187,7 +187,7 @@
 					</properties>
 					<widget>listing_livedit_link</widget>
 				</column>
-				<!-- <column name="template">
+				<column name="template">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
 						<property name="columnStyleClass">iconColumn</property>
@@ -201,7 +201,7 @@
 						<property name="showInSortInfoSelection">true</property>
 					</properties>
 					<widget>template</widget>
-				</column> -->
+				</column>
 				<column name="nxl_unknown_col" selectedByDefault="false">
 					<properties mode="any">
 						<property name="useFirstWidgetLabelAsColumnHeader">true</property>
@@ -362,25 +362,18 @@
 					<field>data</field>
 				</fields>
 			</widget>
-			<!-- <widget name="template" type="template">
+			<widget name="template" type="template">
 				<labels>
 					<label mode="any">Version en ligne?</label>
 				</labels>
 				<translated>false</translated>
 				<fields />
-				<properties widgetMode="view">
-					<property name="template">/widgets/toutatice_widget_document_listing_icon.xhtml
-					</property>
-					<property name="iconPath">icons/yes.png</property>
-					<property name="label">En ligne</property>
-				</properties>
 				<properties mode="any">
-					<property name="template">/widgets/toutatice_widget_document_listing_icon.xhtml
-					</property>
+					<property name="template">/widgets/toutatice_widget_document_listing_icon.xhtml</property>
 					<property name="iconPath">icons/yes.png</property>
 					<property name="label">En ligne</property>
 				</properties>
-			</widget>  -->
+			</widget>
 		</layout>
 
 		<layout name="cv_ContentReadNWrite_NIPS@cvListingLayout">
