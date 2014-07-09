@@ -7,7 +7,7 @@
 	</parent>
 
 	<artifactId>opentoutatice-collab-tools-marketplace</artifactId>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.1.2</version>
 	<packaging>zip</packaging>
 	<name>Marketplace package - Collaboration tools</name>
 
@@ -37,9 +37,9 @@
 	</build>
 	
 	<scm>
-		<developerConnection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/trunk</developerConnection>
-	  <connection>scm:git:git://github.com/nuxeo/nuxeo-distribution.git/opentoutatice-collab-tools-marketplace</connection>
-    <url>https://github.com/nuxeo/nuxeo-distribution/opentoutatice-collab-tools-marketplace</url>
+		<developerConnection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/tags/1.1.2/trunk</developerConnection>
+	  <connection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/tags/1.1.2/opentoutatice-collab-tools-marketplace</connection>
+    <url>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/tags/1.1.2/opentoutatice-collab-tools-marketplace</url>
   </scm>
 
 	<distributionManagement>
