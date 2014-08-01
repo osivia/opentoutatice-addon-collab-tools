@@ -9,7 +9,7 @@
 	<name>collaboratives objects</name>
 
 	<properties>
-		<nuxeo.version>5.8.0-HF11</nuxeo.version>
+		<nuxeo.version>5.8.0-HF13</nuxeo.version>
 		<nuxeo.opentoutatice.version>2.0.0-SNAPSHOT</nuxeo.opentoutatice.version>
 	</properties>
 
