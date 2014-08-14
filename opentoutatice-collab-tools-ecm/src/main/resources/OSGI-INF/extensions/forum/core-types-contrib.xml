@@ -18,7 +18,7 @@
 		</doctype>
 
 		<doctype name="Thread" extends="Document">
-			<schema name="thread_acaren" />
+			<schema name="thread_toutatice" />
 			<schema name="dublincore" />
 			<schema name="common" />
 			<schema name="thread" />

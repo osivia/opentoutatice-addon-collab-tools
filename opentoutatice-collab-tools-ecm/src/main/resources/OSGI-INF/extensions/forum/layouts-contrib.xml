@@ -345,6 +345,9 @@
 				<row>
 					<widget>description</widget>
 				</row>
+                <row>
+                    <widget>thread_message</widget>
+                </row>                
 				<row>
 					<widget>moderator_layout</widget>
 				</row>
