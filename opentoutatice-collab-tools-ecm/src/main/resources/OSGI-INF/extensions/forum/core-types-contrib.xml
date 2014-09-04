@@ -17,12 +17,8 @@
 			<facet name="SpaceContent" />
 		</doctype>
 
-		<doctype name="Thread" extends="Document">
+		<doctype name="Thread" append="true">
 			<schema name="thread_toutatice" />
-			<schema name="dublincore" />
-			<schema name="common" />
-			<schema name="thread" />
-			<facet name="Commentable" />
 		</doctype>
 
 	</extension>
