@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="fr.toutatice.ecm.platform.web.blog.event.handler">
 
-	<require>org.nuxeo.ecm.core.operation.OperationServiceComponent</require>
+	<require>org.nuxeo.ecm.core.operation.OperationServiceComponent
+	</require>
 	<require>fr.toutatice.ecm.platform.web.local.publishing.event.handler</require>
 
 	<extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent"

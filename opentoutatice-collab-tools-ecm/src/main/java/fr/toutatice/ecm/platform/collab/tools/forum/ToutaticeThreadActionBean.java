@@ -49,6 +49,8 @@ import fr.toutatice.ecm.platform.core.constants.ExtendedSeamPrecedence;
 public class ToutaticeThreadActionBean extends ThreadActionBean {
 
     private static final long serialVersionUID = 1L;
+    
+    protected String firstMessage;
 
     @In(create = true, required = false)
     protected FacesMessages facesMessages;
@@ -67,8 +69,12 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
         DocumentModel currentChangeableDocument = navigationContext.getChangeableDocument();
         this.title = currentChangeableDocument.getTitle();
         this.description = (String) currentChangeableDocument.getPropertyValue("dc:description");
+        this.firstMessage = (String) currentChangeableDocument.getPropertyValue("ttcth:message");
 
-        return super.getThreadModel();
+        DocumentModel threadModel = super.getThreadModel();
+        threadModel.setPropertyValue("ttcth:message", this.firstMessage);
+        
+        return threadModel;
     }
 
     @Override

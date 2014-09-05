@@ -70,6 +70,7 @@
 			</flags>
 		</contentView>
 
+
 		<contentView name="cv_ContentReadNWrite_NIPS">
 			<coreQueryPageProvider>
 				<property name="coreSession">#{documentManager}</property>
@@ -85,10 +86,11 @@
 						<field name="modified_max" schema="advanced_search" />
 					</predicate>
 					<fixedPart>
-						ecm:mixinType != 'HiddenInNavigation' AND
+						ecm:mixinType !=
+						'HiddenInNavigation' AND
 						ecm:isCheckedInVersion = 0 AND
-						ecm:currentLifeCycleState != 'deleted' AND 
-						ecm:isProxy = 0 AND
+						ecm:currentLifeCycleState !=
+						'deleted' AND ecm:isProxy = 0 AND
 						ecm:parentId = ?
 					</fixedPart>
 				</whereClause>
@@ -145,10 +147,11 @@
 						<field name="modified_max" schema="advanced_search" />
 					</predicate>
 					<fixedPart>
-						ecm:mixinType != 'HiddenInNavigation' AND 
+						ecm:mixinType !=
+						'HiddenInNavigation' AND
 						ecm:isCheckedInVersion = 0 AND
-						ecm:currentLifeCycleState != 'deleted' AND 
-						ecm:isProxy = 0 AND
+						ecm:currentLifeCycleState !=
+						'deleted' AND ecm:isProxy = 0 AND
 						ecm:parentId = ?
 					</fixedPart>
 				</whereClause>
@@ -169,7 +172,6 @@
 			<cacheKey>#{currentDocument.id}</cacheKey>
 			<cacheSize>10</cacheSize>
 			<selectionList>CURRENT_SELECTION</selectionList>
-			<actions category="CURRENT_SELECTION_LIST" />
 			<actions category="ORDERABLE_CURRENT_SELECTION_LIST" />
 			<resultLayouts>
 				<layout name="cv_ContentOrderedReadNWrite_NIPS@cvListingLayout"

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<component name="fr.toutatice.ecm.platform.core.forum.doctypes">
+<component name="fr.toutatice.ecm.platform.core.agenda.doctypes">
 
 	<require>org.nuxeo.ecm.core.schema.TypeService</require>
 	<require>fr.toutatice.ecm.platform.core.schemas</require>
@@ -9,32 +9,36 @@
 	<extension target="org.nuxeo.ecm.core.schema.TypeService"
 		point="doctype">
 
-		<doctype name="Forum" extends="Document">
-			<schema name="common" />
-			<schema name="dublincore" />
-			<!-- <schema name="forum_acaren" />-->
-			<facet name="Folderish" />
+		<doctype name="Agenda" extends="OrderedFolder">
 			<facet name="SpaceContent" />
-		</doctype>
-
-		<doctype name="Thread" append="true">
-			<schema name="thread_toutatice" />
 		</doctype>
 
 	</extension>
 
 	<extension target="org.nuxeo.ecm.platform.types.TypeService"
 		point="types">
-
-		<type id="Workspace">
+		
+		<type id="PortalSite">
 			<subtypes>
-				<type>Forum</type>
+				<type>Agenda</type>
 			</subtypes>
 		</type>
-
-		<type id="Forum">
+		
+		<type id="PortalPage">
 			<subtypes>
-				<type>Thread</type>
+				<type>Agenda</type>
+			</subtypes>
+		</type>
+		
+		<type id="Workspace">
+			<subtypes>
+				<type>Agenda</type>
+			</subtypes>
+		</type>
+		
+		<type id="Agenda">
+			<subtypes>
+				<type>VEVENT</type>
 			</subtypes>
 		</type>
 

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
+
 <component name="fr.toutatice.ecm.platform.web.ui.article.types">
 
 	<require>org.nuxeo.ecm.platform.types.TypeService</require>
-	<require>fr.toutatice.ecm.platform.web.contentview.local.publishing.contrib</require>
 
 	<extension target="org.nuxeo.ecm.platform.types.TypeService"
 		point="types">
@@ -37,17 +37,13 @@
 				<layout>layout@AnnonceFolder-edit</layout>
 			</layouts>
 			<layouts mode="view" />
-			<contentViews category="CVTAB@StudioOnlineDocs">
-				<contentView showInExportView="false">cv_ContentOnlineList</contentView>
-			</contentViews>
-			<contentViews category="CVTAB@StudioWorkingDocs">
-				<contentView showInExportView="false">cv_ContentOrderedReadNWrite</contentView>
-			</contentViews>
 			<contentViews category="content">
-				<contentView showInExportView="false">cv_ContentOrderedReadNWrite_NIPS</contentView>
+				<contentView showInExportView="false">cv_ContentReadNWrite
+				</contentView>
 			</contentViews>
 			<contentViews category="trash_content">
-				<contentView showInExportView="false">document_trash_content</contentView>
+				<contentView showInExportView="false">document_trash_content
+				</contentView>
 			</contentViews>
 		</type>
 
