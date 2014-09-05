@@ -47,17 +47,10 @@
             </labels>
             <translated>false</translated>
             <fields>
-                <field>ttcth:message</field>
+                <field>ttcth:firstmessage</field>
             </fields>
-            <properties widgetMode="create">
-                <property name="styleClass">dataInputText</property>
-                <property name="required">true</property>
-                <property name="disabled">false</property>
-            </properties>
             <properties widgetMode="edit">
-                <property name="styleClass">dataInputText</property>
                 <property name="required">true</property>
-                <property name="disabled">false</property>
             </properties>
         </widget>        
 
