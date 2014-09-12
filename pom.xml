@@ -12,7 +12,7 @@
 
 	<properties>
 		<nuxeo.version>5.8.0-HF19</nuxeo.version>
-		<nuxeo.opentoutatice.version>2.0.0-rc1</nuxeo.opentoutatice.version>
+		<nuxeo.opentoutatice.version>2.0.0-SNAPSHOT</nuxeo.opentoutatice.version>
 	</properties>
 
 	<modules>
