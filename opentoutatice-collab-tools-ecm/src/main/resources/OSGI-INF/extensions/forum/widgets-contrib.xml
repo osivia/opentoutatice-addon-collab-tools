@@ -40,6 +40,19 @@
 				<property name="disabled">false</property>
 			</properties>
 		</widget>
+        
+        <widget name="thread_message" type="htmltext">
+            <labels>
+                <label mode="any">Message</label>
+            </labels>
+            <translated>false</translated>
+            <fields>
+                <field>ttcth:message</field>
+            </fields>
+            <properties widgetMode="edit">
+                <property name="required">true</property>
+            </properties>
+        </widget>        
 
 		<widget name="moderator_layout" type="layout">
 			<labels>
