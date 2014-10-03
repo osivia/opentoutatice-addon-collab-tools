@@ -17,30 +17,47 @@
 
 	<extension target="org.nuxeo.ecm.platform.types.TypeService"
 		point="types">
-		
+
 		<type id="PortalSite">
 			<subtypes>
 				<type>Agenda</type>
 			</subtypes>
 		</type>
-		
+
 		<type id="PortalPage">
 			<subtypes>
 				<type>Agenda</type>
 			</subtypes>
 		</type>
-		
+
 		<type id="Workspace">
 			<subtypes>
 				<type>Agenda</type>
 			</subtypes>
 		</type>
-		
+
 		<type id="Agenda">
 			<subtypes>
 				<type>VEVENT</type>
 			</subtypes>
 		</type>
+
+	</extension>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="filters">
+
+		<filter id="create" append="true">
+			<rule grant="false">
+				<condition>document.isImmutable()</condition>
+			</rule>
+			<rule grant="true">
+				<permission>AddChildren</permission>
+				<type>Agenda</type>
+				<condition>#{typeManager.getAllowedSubTypes(document.getType(),
+					document).size() &gt; 0}</condition>
+			</rule>
+		</filter>
 
 	</extension>
 
