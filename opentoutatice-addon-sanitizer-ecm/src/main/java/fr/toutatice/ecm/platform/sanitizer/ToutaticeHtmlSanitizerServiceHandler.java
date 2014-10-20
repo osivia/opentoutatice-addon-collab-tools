@@ -35,11 +35,6 @@ import org.nuxeo.ecm.platform.htmlsanitizer.HtmlSanitizerServiceImpl;
 import org.owasp.validator.html.AntiSamy;
 import org.owasp.validator.html.CleanResults;
 
-/**
- * @author mberhaut1
- *
- * @param <T>
- */
 public class ToutaticeHtmlSanitizerServiceHandler<T> extends HtmlSanitizerServiceImpl implements InvocationHandler {
 	private static final Log log = LogFactory.getLog(ToutaticeHtmlSanitizerServiceHandler.class);
 
