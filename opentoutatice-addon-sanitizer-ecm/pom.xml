@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>opentoutatice-ecm.sanitizer</groupId>
 		<artifactId>opentoutatice-sanitizer-parent</artifactId>
-		<version>1.0-RC01-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 
 	<artifactId>opentoutatice-sanitizer-ecm</artifactId>
