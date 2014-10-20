@@ -3,6 +3,7 @@
 	<title>Addon to make the sanitizer service support the html5 tags</title>
 	<description>
 		<p>Make possible to insert html5 tags into RTE content. Empty tags are configurable</p>
+		<P>(This is not supported until Nuxeio version >= 5.9.5)</P>
 	</description>
 	<home-page>http://www.toutatice.fr</home-page>
 	<vendor>Academie de Rennes</vendor>
