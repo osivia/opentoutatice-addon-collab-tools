@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 1
+Bundle-Name: OpenToutatice upgraded sanitizer service 
+Bundle-SymbolicName: fr.toutatice.ecm.platform.sanitizer;singleton:=true
+Bundle-Localization: plugin
+Bundle-Category: stateful
+Nuxeo-Component: OSGI-INF/toutatice-htmlsanitizer-contrib.xml,
+  OSGI-INF/toutatice-proxy-factory-contrib.xml
+  

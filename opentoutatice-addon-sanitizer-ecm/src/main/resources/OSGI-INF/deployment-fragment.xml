@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<fragment version="1">
+
+	<requi>fr.toutatice.ecm.platform.core</requi>
+
+	<extension target="faces-config#NAVIGATION" />
+
+	<extension target="pages#PAGES" />
+
+	<extension target="application#MODULE">
+		<module>
+			<java>${bundle.fileName}</java>
+		</module>
+	</extension>
+
+	<install />
+
+</fragment>

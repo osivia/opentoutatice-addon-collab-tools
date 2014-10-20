@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.sanitizer.sanitizerhtml">
+
+	<require>org.nuxeo.ecm.platform.htmlsanitizer.HtmlSanitizerService</require>
+	<require>org.nuxeo.ecm.platform.htmlsanitizer.config</require>
+
+	<extension point="antisamy" target="org.nuxeo.ecm.platform.htmlsanitizer.HtmlSanitizerService">
+		<antisamy policy="toutatice-antisamy-nuxeo-policy.xml" />
+	</extension>
+
+</component>
