@@ -22,7 +22,7 @@
 			</properties>
 		</widget>
 
-		<widget name="article_extrait" type="richtext_with_mimetype">
+		<widget name="article_extrait" type="htmltext">
 			<labels>
 				<label mode="any">Extrait</label>
 			</labels>
@@ -34,11 +34,10 @@
 			<translated>false</translated>
 			<fields>
 				<field>annonce:resume</field>
-				<field>annonce:resume_mime_type</field>
 			</fields>
 			<properties widgetMode="edit">
 				<property name="editorSelector">mceExtrait</property>
-				<property name="rows">3</property>
+				<property name="disableHtmlInit">true</property>
 			</properties>
 		</widget>
 		
