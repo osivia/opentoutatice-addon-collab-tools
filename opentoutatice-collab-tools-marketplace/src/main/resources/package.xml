@@ -20,7 +20,7 @@
 		<!-- Dépendance sur addons -->
 		<package>nuxeo-sites-blogs:1.0.0:1.0.0</package>
 		<package>nuxeo-agenda:1.0.0:1.0.0</package>
-		<package>open-toutatice:2.1.0-SNAPSHOT</package>
+		<package>open-toutatice:2.1.0</package>
 	</dependencies>
 	<license>LGPL 2.1</license>
 	<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
