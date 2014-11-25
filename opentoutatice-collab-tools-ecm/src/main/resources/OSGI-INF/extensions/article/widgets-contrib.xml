@@ -9,9 +9,9 @@
 
 		<widget name="article_title" type="text">
 			<labels>
-				<label mode="any">Titre</label>
+				<label mode="any">toutatice.label.title</label>
 			</labels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>dc:title</field>
 			</fields>
@@ -24,14 +24,14 @@
 
 		<widget name="article_extrait" type="htmltext">
 			<labels>
-				<label mode="any">Extrait</label>
+				<label mode="any">toutatice.label.extract</label>
 			</labels>
 			<helpLabels>
 				<label mode="any">Les extraits sont des résumés facultatifs de vos
 					articles, écrits à la main.
 				</label>
 			</helpLabels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>annonce:resume</field>
 			</fields>
@@ -43,14 +43,14 @@
 		
 		<widget name="article_extrait_summary" type="summary_content_type">
 			<labels>
-				<label mode="any">Extrait</label>
+				<label mode="any">toutatice.label.extract</label>
 			</labels>
 			<helpLabels>
 				<label mode="any">Les extraits sont des résumés facultatifs de vos
 					articles, écrits à la main.
 				</label>
 			</helpLabels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>annonce:resume</field>
 				<field>annonce:resume_mime_type</field>
@@ -62,9 +62,9 @@
 
 		<widget name="article_content" type="richtext_with_mimetype">
 			<labels>
-				<label mode="any">Contenu</label>
+				<label mode="any">toutatice.label.content</label>
 			</labels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>note:note</field>
 				<field>note:mime_type</field>
@@ -77,9 +77,9 @@
 		
 		<widget name="article_content_summary" type="summary_content_type">
 			<labels>
-				<label mode="any">Contenu</label>
+				<label mode="any">toutatice.label.content</label>
 			</labels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>note:note</field>
 				<field>note:mime_type</field>
@@ -91,13 +91,13 @@
 
 		<widget name="article_image" type="file">
 			<labels>
-				<label mode="any">Image de tête</label>
+				<label mode="any">toutatice.label.article.header.picture</label>
 			</labels>
 			<helpLabels>
 				<label mode="any">Déposez une image pour illustrer votre annonce.
 				</label>
 			</helpLabels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>annonce:image</field>
 				<field>annonce:image/filename</field>
@@ -114,13 +114,13 @@
 		
 		<widget name="article_image_summary" type="summary_picture_type">
 			<labels>
-				<label mode="any">Image de tête</label>
+				<label mode="any">toutatice.label.article.header.picture</label>
 			</labels>
 			<helpLabels>
 				<label mode="any">Déposez une image pour illustrer votre annonce.
 				</label>
 			</helpLabels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>annonce:image</field>
 				<field>annonce:image/filename</field>
@@ -131,7 +131,7 @@
 
 		<widget name="article_folder_title" type="text">
 			<labels>
-				<label mode="any">Titre du bulletin d'articles</label>
+				<label mode="any">toutatice.label.article.folder.titleTitre du bulletin d'articles</label>
 			</labels>
 			<translated>false</translated>
 			<fields>
@@ -146,9 +146,9 @@
 
 		<widget name="article_folder_title" type="text">
 			<labels>
-				<label mode="any">Titre du bulletin d'annonces</label>
+				<label mode="any">toutatice.label.article.folder.title</label>
 			</labels>
-			<translated>false</translated>
+			<translated>true</translated>
 			<fields>
 				<field>dc:title</field>
 			</fields>

@@ -20,7 +20,7 @@ window.onload = function(e) {
 				plugins : "lists,style,advlink,directionality,nonbreaking,xhtmlxtras,nuxeolink",
 
 				// Theme options
-				theme_advanced_buttons1 : "bold,italic,underline,strikethrough,sub,sup|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,forecolor,backcolor,|,nuxeolink,link,unlink",
+				theme_advanced_buttons1 : "bold,italic,underline,|,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,forecolor,backcolor,|,nuxeolink,link,unlink",
 
 				gecko_spellcheck : true,
 
