@@ -16,7 +16,7 @@
 				</template>
 			</templates>
 			<properties mode="create">
-				<property name="editorJs">tiny_mce/custom/tiny_mce_init_extrait.js</property>
+				<property name="editorJs">tinymce/custom/tiny_mce_init_extrait.js</property>
 			</properties>
 			<rows>
 				<row>
@@ -38,7 +38,7 @@
 					<widget>article_image</widget>
 				</row>
 				<row>
-					<widget>files</widget>
+					<layout>files</layout>
 				</row>
 				<row>
 					<widget>toutatice_showInMenu_widget</widget>
@@ -52,7 +52,7 @@
 				</template>
 			</templates>
 			<properties mode="edit">
-				<property name="editorJs">tiny_mce/custom/tiny_mce_init_extrait.js</property>
+				<property name="editorJs">tinymce/custom/tiny_mce_init_extrait.js</property>
 			</properties>
 			<rows>
 				<row>

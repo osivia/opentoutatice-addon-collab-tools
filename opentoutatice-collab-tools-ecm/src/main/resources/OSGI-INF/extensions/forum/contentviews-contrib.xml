@@ -52,7 +52,7 @@
 			<showRefreshCommand>true</showRefreshCommand>
 			<actions category="CURRENT_SELECTION_LIST" />
 			<actions category="cv_actions@cv_ContentForum" />
-			<resultLayouts>
+			<!-- <resultLayouts>
 				<layout name="cv_ContentForum@cvListingLayout" title="document_listing"
 					translateTitle="true" iconPath="/icons/document_listing_icon.png"
 					showCSVExport="true" />
@@ -62,6 +62,15 @@
 				<layout name="document_virtual_navigation_listing_ajax_icon_2_columns"
 					title="document_listing_icon_2_columns" translateTitle="true"
 					iconPath="/icons/document_listing_icon_2_columns_icon.png" />
+			</resultLayouts> -->
+			<resultLayouts>
+				<layout iconPath="/icons/document_listing_icon.png" name="document_listing_table"
+					showCSVExport="true" showEditColumns="true" showSpreadsheet="true"
+					title="document_listing" translateTitle="true" />
+				<layout iconPath="/icons/document_listing_icon_2_columns_icon.png"
+					name="document_listing_thumbnail" showEditRows="true"
+					showSlideshow="true" title="document_thumbnail_listing"
+					translateTitle="true" />
 			</resultLayouts>
 			<flags>
 				<flag>DOCUMENT_CONTENT</flag>
