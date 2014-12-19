@@ -38,7 +38,7 @@
 					<widget>article_image</widget>
 				</row>
 				<row>
-					<layout>files</layout>
+					<widget>files</widget>
 				</row>
 				<row>
 					<widget>toutatice_showInMenu_widget</widget>
