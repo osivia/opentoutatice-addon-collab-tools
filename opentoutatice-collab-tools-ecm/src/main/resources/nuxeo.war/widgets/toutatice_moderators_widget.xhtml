@@ -37,8 +37,8 @@
 				<f:selectItem
 					itemLabel="#{messages['label.forum.thread.moderated.no']}"
 					itemValue="false" />
-				<a4j:ajax ajaxSingle="true" 
-					event="onchange"
+				<a4j:ajax execute="@this" 
+					event="change"
 					render="ajaxModeratorPanel" />
 			</h:selectOneRadio>
 			
