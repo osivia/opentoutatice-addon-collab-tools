@@ -19,9 +19,9 @@
 	<dependencies>
 		<!-- Dependance sur la plate-forme opentoutatice -->
 		<package>open-toutatice:3.0.0-RC04</package>
-		<!-- Dépendance sur d'autres addons -->
-		<package>nuxeo-sites-blogs:1.0.0</package>
-		<package>nuxeo-agenda:1.0.0</package>
+		<!-- Dépendance sur d'autres addons 
+		<package>nuxeo-agenda:1.0.0</package> NON DISPO EN VERSION NUXEO 6.0! (ticket Jira ouvert: SUPNXP-12277)
+		-->
 	</dependencies>
 	<license>LGPL 2.1</license>
 	<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
