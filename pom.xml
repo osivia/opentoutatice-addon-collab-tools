@@ -12,12 +12,12 @@
 
 	<properties>
 		<nuxeo.version>6.0</nuxeo.version>
-		<nuxeo.opentoutatice.version>3.0.0-RC02</nuxeo.opentoutatice.version>
+		<nuxeo.opentoutatice.version>3.0.0-RC04</nuxeo.opentoutatice.version>
 	</properties>
 
 	<modules>
 	   <module>opentoutatice-collab-tools-ecm</module>
-	   <!-- <module>opentoutatice-collab-tools-marketplace</module> --> 
+	   <module>opentoutatice-collab-tools-marketplace</module> 
 	</modules>
 
 	<build>
@@ -34,6 +34,16 @@
 			      	</configuration>
 			</plugin>
 		</plugins>			
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.nuxeo.build</groupId>
+					<artifactId>ant-assembly-maven-plugin</artifactId>
+					<version>2.0.1</version>
+					<extensions>true</extensions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<scm>
