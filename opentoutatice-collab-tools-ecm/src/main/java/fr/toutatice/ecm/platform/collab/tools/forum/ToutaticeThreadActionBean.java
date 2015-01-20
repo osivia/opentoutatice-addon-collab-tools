@@ -18,11 +18,12 @@
 package fr.toutatice.ecm.platform.collab.tools.forum;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jboss.seam.ScopeType;
-import org.jboss.seam.annotations.Create;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
@@ -33,127 +34,166 @@ import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.international.StatusMessage;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.Filter;
 import org.nuxeo.ecm.core.api.NuxeoGroup;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
+import org.nuxeo.ecm.core.api.model.Property;
+import org.nuxeo.ecm.core.api.model.PropertyException;
 import org.nuxeo.ecm.core.api.security.SecurityConstants;
 import org.nuxeo.ecm.platform.forum.web.ThreadActionBean;
-import org.nuxeo.ecm.platform.ui.web.util.SeamComponentCallHelper;
 import org.nuxeo.ecm.webapp.helpers.EventManager;
 import org.nuxeo.ecm.webapp.helpers.EventNames;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+import fr.toutatice.ecm.platform.collab.tools.constants.CollabToolsConstants;
 import fr.toutatice.ecm.platform.core.constants.ExtendedSeamPrecedence;
+import fr.toutatice.ecm.platform.core.helper.ToutaticeDocumentHelper;
 
 @Name("threadAction")
 @Scope(ScopeType.CONVERSATION)
 @Install(precedence = ExtendedSeamPrecedence.TOUTATICE)
 public class ToutaticeThreadActionBean extends ThreadActionBean {
 
-    private static final long serialVersionUID = 1L;
-    
-    protected String firstMessage;
+	private static final long serialVersionUID = 1L;
 
-    @In(create = true, required = false)
-    protected FacesMessages facesMessages;
+	private static final Log log = LogFactory.getLog(ToutaticeThreadActionBean.class);
 
-    @In(create = true)
-    protected EventManager eventManager;
+	protected String firstMessage;
 
-    /** Indicates if we have to get DocumentModel value of attribute moderated */
-    private boolean isModeratedFilled;
+	@In(create = true, required = false)
+	protected FacesMessages facesMessages;
 
-    /** Indicates if we have to get DocumentModel value of attribute selectedModerators */
-    private boolean isSelectedModeratorsFilled;
+	@In(create = true)
+	protected EventManager eventManager;
 
-    @Override
-    protected DocumentModel getThreadModel() throws ClientException {
-        DocumentModel currentChangeableDocument = navigationContext.getChangeableDocument();
-        this.title = currentChangeableDocument.getTitle();
-        this.description = (String) currentChangeableDocument.getPropertyValue("dc:description");
-        this.firstMessage = (String) currentChangeableDocument.getPropertyValue("ttcth:message");
+	/** Indicates if we have to get DocumentModel value of attribute moderated */
+	private boolean isModeratedFilled;
 
-        DocumentModel threadModel = super.getThreadModel();
-        threadModel.setPropertyValue("ttcth:message", this.firstMessage);
-        
-        return threadModel;
-    }
+	/** Indicates if we have to get DocumentModel value of attribute selectedModerators */
+	private boolean isSelectedModeratorsFilled;
 
-    @Override
-    public boolean isModerated() {
-        if (!isModeratedFilled) {
-            DocumentModel thread = navigationContext.getCurrentDocument();
-            try {
-                this.moderated = super.isThreadModerated(thread);
-                isModeratedFilled = true;
-            } catch (ClientException e) {
-                this.moderated = false;
-            }
-        }
-        return this.moderated;
-    }
+	@Override
+	protected DocumentModel getThreadModel() throws ClientException {
+		DocumentModel currentChangeableDocument = navigationContext.getChangeableDocument();
+		this.title = currentChangeableDocument.getTitle();
+		this.description = (String) currentChangeableDocument.getPropertyValue("dc:description");
+		this.firstMessage = (String) currentChangeableDocument.getPropertyValue("ttcth:message");
 
-    @Override
-    public List<String> getSelectedModerators() {
-        if (!isSelectedModeratorsFilled) {
-            this.selectedModerators = super.getModerators();
-            if(this.selectedModerators == null){
-                this.selectedModerators = new ArrayList<String>();
-            }
-            isSelectedModeratorsFilled = true;
-        }
-        return this.selectedModerators;
-    }
+		DocumentModel threadModel = super.getThreadModel();
+		threadModel.setPropertyValue("ttcth:message", this.firstMessage);
 
-    public String addThread(String viewId) throws ClientException {
-        super.addThread();
-        return viewId;
-    }
+		return threadModel;
+	}
 
-    public String updateThread() throws ClientException {
-        DocumentModel currentDocument = navigationContext.getCurrentDocument();
+	@Override
+	public boolean isModerated() {
+		if (!isModeratedFilled) {
+			DocumentModel thread = navigationContext.getCurrentDocument();
+			try {
+				this.moderated = super.isThreadModerated(thread);
+				isModeratedFilled = true;
+			} catch (ClientException e) {
+				this.moderated = false;
+			}
+		}
+		return this.moderated;
+	}
 
-        currentDocument.setProperty(schema, "moderated", moderated);
-        List<String> sM = getSelectedModerators();
+	public boolean canBeModerated() {
+		boolean status = false;
 
-        if (!moderated) {
-            sM.clear();
-        } else {
-            // We automatically add administrators (with prefix) as moderators
-            if (!sM.contains(NuxeoGroup.PREFIX + SecurityConstants.ADMINISTRATORS)) {
-                sM.add(NuxeoGroup.PREFIX + SecurityConstants.ADMINISTRATORS);
-            }
+		try {
+			DocumentModel currDoc = navigationContext.getCurrentDocument();
+			@SuppressWarnings("unchecked")
+			Map<String, Property> properties = ToutaticeDocumentHelper.getPropertiesParentDoc(currDoc.getCoreSession(), 
+					currDoc, 
+					Arrays.asList(new String[] {CollabToolsConstants.CST_DOC_XPATH_FORUM_CAN_MODERATE}), 
+					new Filter() {
 
-            // We can also remove Administrator since his group is added
-            if (sM.contains(NuxeoPrincipal.PREFIX + SecurityConstants.ADMINISTRATOR)) {
-                sM.remove(NuxeoPrincipal.PREFIX + SecurityConstants.ADMINISTRATOR);
-            }
-        }
-        setSelectedModerators(sM);
-        currentDocument.setProperty(schema, "moderators", this.selectedModerators);
+				private static final long serialVersionUID = 1L;
 
-        // notifications avant
-        Events.instance().raiseEvent(EventNames.BEFORE_DOCUMENT_CHANGED, currentDocument);
+				@Override
+				public boolean accept(DocumentModel docModel) {
+					return CollabToolsConstants.CST_DOC_TYPE_FORUM.equals(docModel.getType());
+				}
+			}, 
+			true, 
+			true);
 
-        // sauvegarde
-        currentDocument = documentManager.saveDocument(currentDocument);
+			if (null != properties && properties.containsKey(CollabToolsConstants.CST_DOC_XPATH_FORUM_CAN_MODERATE)) {
+				Property property = properties.get(CollabToolsConstants.CST_DOC_XPATH_FORUM_CAN_MODERATE);
+				status = (Boolean) property.getValue();
+			}
+		} catch (PropertyException e) {
+			log.error("Failed to read the property 'forum_acaren:doProposeModeration', error: " + e.getMessage());
+		}
 
-        // notifications après
-        navigationContext.invalidateCurrentDocument();
-        facesMessages.add(StatusMessage.Severity.INFO, resourcesAccessor.getMessages().get("document_modified"),
-                resourcesAccessor.getMessages().get(currentDocument.getType()));
-        EventManager.raiseEventsOnDocumentChange(currentDocument);
-        return navigationContext.navigateToDocument(currentDocument, "after-edit");
-    }
+		return status;
+	}
 
-    public String updateThread(String viewId) throws ClientException {
-        updateThread();
-        return viewId;
-    }
+	@Override
+	public List<String> getSelectedModerators() {
+		if (!isSelectedModeratorsFilled) {
+			this.selectedModerators = super.getModerators();
+			if(this.selectedModerators == null){
+				this.selectedModerators = new ArrayList<String>();
+			}
+			isSelectedModeratorsFilled = true;
+		}
+		return this.selectedModerators;
+	}
 
-    @Observer(value = {EventNames.NEW_DOCUMENT_CREATED, EventNames.DOCUMENT_SELECTION_CHANGED}, create = false)
-    public void refresh() throws ClientException {
-        super.clean();
-        isModeratedFilled = false;
-        isSelectedModeratorsFilled = false;
-    }
+	public String addThread(String viewId) throws ClientException {
+		super.addThread();
+		return viewId;
+	}
+
+	public String updateThread() throws ClientException {
+		DocumentModel currentDocument = navigationContext.getCurrentDocument();
+
+		currentDocument.setProperty(schema, "moderated", moderated);
+		List<String> sM = getSelectedModerators();
+
+		if (!moderated) {
+			sM.clear();
+		} else {
+			// We automatically add administrators (with prefix) as moderators
+			if (!sM.contains(NuxeoGroup.PREFIX + SecurityConstants.ADMINISTRATORS)) {
+				sM.add(NuxeoGroup.PREFIX + SecurityConstants.ADMINISTRATORS);
+			}
+
+			// We can also remove Administrator since his group is added
+			if (sM.contains(NuxeoPrincipal.PREFIX + SecurityConstants.ADMINISTRATOR)) {
+				sM.remove(NuxeoPrincipal.PREFIX + SecurityConstants.ADMINISTRATOR);
+			}
+		}
+		setSelectedModerators(sM);
+		currentDocument.setProperty(schema, "moderators", this.selectedModerators);
+
+		// notifications avant
+		Events.instance().raiseEvent(EventNames.BEFORE_DOCUMENT_CHANGED, currentDocument);
+
+		// sauvegarde
+		currentDocument = documentManager.saveDocument(currentDocument);
+
+		// notifications après
+		navigationContext.invalidateCurrentDocument();
+		facesMessages.add(StatusMessage.Severity.INFO, resourcesAccessor.getMessages().get("document_modified"),
+				resourcesAccessor.getMessages().get(currentDocument.getType()));
+		EventManager.raiseEventsOnDocumentChange(currentDocument);
+		return navigationContext.navigateToDocument(currentDocument, "after-edit");
+	}
+
+	public String updateThread(String viewId) throws ClientException {
+		updateThread();
+		return viewId;
+	}
+
+	@Observer(value = {EventNames.NEW_DOCUMENT_CREATED, EventNames.DOCUMENT_SELECTION_CHANGED}, create = false)
+	public void refresh() throws ClientException {
+		super.clean();
+		isModeratedFilled = false;
+		isSelectedModeratorsFilled = false;
+	}
 
 }

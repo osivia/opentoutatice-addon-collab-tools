@@ -2,9 +2,9 @@
 
 <fragment version="1">
 
+	<require>org.nuxeo.ecm.platform.forum</require>
 	<require>fr.toutatice.ecm.platform.core</require>
 	<require>fr.toutatice.ecm.platform.web</require>
-	<require>org.nuxeo.ecm.platform.forum</require>
 
 	<extension target="faces-config#NAVIGATION">
 		<navigation-case>

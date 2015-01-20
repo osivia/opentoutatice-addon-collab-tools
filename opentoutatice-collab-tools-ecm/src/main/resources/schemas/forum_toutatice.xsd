@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nxs="http://www.nuxeo.org/ecm/project/schemas/ACRENNES2/forum_acaren" targetNamespace="http://www.nuxeo.org/ecm/project/schemas/ACRENNES2/forum_acaren">  
-  <!-- helper XSD definitions for list types -->  
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nxs="http://www.nuxeo.org/ecm/project/schemas/forum_toutatice" targetNamespace="http://www.nuxeo.org/ecm/project/schemas/forum_toutatice">  
+  <!-- helper XSD definitions for list types 
   <xs:complexType name="content"> 
     <xs:sequence> 
       <xs:element name="encoding" type="xs:string"/>  
@@ -31,5 +31,7 @@
     <xs:sequence> 
       <xs:element name="item" type="nxs:content" minOccurs="0" maxOccurs="unbounded"/> 
     </xs:sequence> 
-  </xs:complexType>  
+   </xs:complexType>  
+  -->  
+  <xs:element name="doProposeModeration" type="xs:boolean" default="false"/>
 </xs:schema>
