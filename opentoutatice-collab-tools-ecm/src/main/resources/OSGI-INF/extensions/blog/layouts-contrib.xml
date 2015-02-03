@@ -84,7 +84,7 @@
 			</rows>
 		</layout>
 
-		<!-- <layout name="layout@BlogPost-view">
+		<!-- FIXME <layout name="layout@BlogPost-view">
 			<templates>
 				<template mode="any">/layouts/layout_default_template.xhtml
 				</template>

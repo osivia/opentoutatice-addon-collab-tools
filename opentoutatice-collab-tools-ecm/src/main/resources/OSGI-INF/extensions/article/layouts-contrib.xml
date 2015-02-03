@@ -37,9 +37,9 @@
 				<row>
 					<widget>article_image</widget>
 				</row>
-				<!-- Wiating 6.0-HF03 <row>
+				<row>
 					<widget>files</widget>
-				</row> -->
+				</row>
 				<row>
 					<widget>toutatice_showInMenu_widget</widget>
 				</row>
@@ -73,9 +73,9 @@
 				<row>
 					<widget>article_image</widget>
 				</row>
-				<!-- Wiating 6.0-HF03 <row>
+				<row>
 					<widget>files</widget>
-				</row> -->
+				</row> 
 			</rows>
 		</layout>
 

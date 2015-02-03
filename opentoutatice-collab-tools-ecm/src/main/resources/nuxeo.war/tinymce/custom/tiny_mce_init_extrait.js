@@ -1,13 +1,13 @@
 var lang = 'fr';
 
-function createTinyMce(clazz) {
+function createTinyMceExtractBar(clazz) {
 	var textareas = document.getElementsByClassName(clazz);
 	for ( var index = 0; index < textareas.length; index++) {
 		tinyMCE.execCommand('mceAddEditor', false, textareas[index].id);
 	}
 }
 
-window.onload = function(e) {
+function createTinyMceExtract() {
 
 	tinyMCE
 			.init({
@@ -15,12 +15,12 @@ window.onload = function(e) {
 				mode : "specific_textareas",
 				language : "fr",
 				theme : "modern",
-				editor_selector : "mceExtrait",
+				editor_selector : "mceExtract",
 				editor_deselector : "disableMCEInit",
-				plugins : "lists,directionality,nonbreaking,nuxeolink",
+				plugins : ["nuxeolink link textcolor"],
 
 				// Theme options
-				theme_advanced_buttons1 : "bold,italic,underline,|,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,forecolor,backcolor,|,nuxeolink,link,unlink",
+				toolbar1 : "bold italic underline | strikethrough subscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | forecolor backcolor | nuxeolink link unlink",
 				menubar: false,
 
 				gecko_spellcheck : true,
@@ -29,6 +29,8 @@ window.onload = function(e) {
 				remove_script_host : false
 			});
 
-	createTinyMce("mceExtrait,disableMCEInit");
+	createTinyMceExtractBar("mceExtract,disableMCEInit");
 
 }
+
+window.addEventListener("load", createTinyMceExtract);

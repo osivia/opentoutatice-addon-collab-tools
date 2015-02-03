@@ -21,6 +21,11 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.nuxeo.ecm.platform</groupId>
+				<artifactId>nuxeo-agenda</artifactId>
+				<version>${nuxeo.hf.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

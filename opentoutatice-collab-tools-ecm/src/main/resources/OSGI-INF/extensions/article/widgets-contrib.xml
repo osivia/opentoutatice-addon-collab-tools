@@ -36,7 +36,7 @@
 				<field>annonce:resume</field>
 			</fields>
 			<properties widgetMode="edit">
-				<property name="editorSelector">mceExtrait</property>
+				<property name="editorSelector">mceExtract</property>
 				<property name="disableHtmlInit">true</property>
 			</properties>
 		</widget>
