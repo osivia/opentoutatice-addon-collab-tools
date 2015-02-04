@@ -24,6 +24,7 @@
 		<copy todir="${outdir}/marketplace/install/bundles">
 			<!-- Your bundles -->
 			<artifact:resolveFile key="opentoutatice-ecm.collab-tools:opentoutatice-collab-tools-ecm:${maven.project.version}:jar" />
+			<artifact:resolveFile key="org.nuxeo.ecm.platform:nuxeo-agenda:${nuxeo.hf.version}:jar" />
 		</copy>
 		
 		<zip destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip" basedir="${outdir}/marketplace" />
