@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.collab.tools.notifications.fetchinfos" version="1.0">
+
+	<require>fr.toutatice.ecm.platform.core.services.fetchinformation</require>
+	
+	<extension target="fr.toutatice.ecm.platform.core.services.fetchinformation"
+    	point="fetch_infos">
+    
+    	<fetchInfos providerService="fr.toutatice.ecm.platform.collab.tools.notifications.ToutaticeNotificationService" />
+    </extension>
+</component>
