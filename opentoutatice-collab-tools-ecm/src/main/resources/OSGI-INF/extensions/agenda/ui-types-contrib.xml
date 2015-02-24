@@ -3,33 +3,40 @@
 <component name="fr.toutatice.ecm.platform.web.ui.agenda.types">
 
 	<require>org.nuxeo.ecm.platform.types.TypeService</require>
+	<require>org.nuxeo.ecm.agenda.ecm.types</require>
 
 	<extension target="org.nuxeo.ecm.platform.types.TypeService"
 		point="types">
 
 		<type id="Agenda">
-            <label>Agenda</label>
-            <category>Collaborative</category>
-            <icon>/icons/folder.gif</icon>
-            <bigIcon>/icons/folder_100.png</bigIcon>
-            <description>Agenda</description>
-            <default-view>view_documents</default-view>
-            <layouts mode="any">
-                <layout>heading</layout>
-            </layouts>
-            <layouts mode="edit">
-                <layout>heading</layout>
-            </layouts>
-            <contentViews category="content">
-                <contentView showInExportView="false">cv_ContentOrderedReadNWrite
-                </contentView>
-            </contentViews>
-            <contentViews category="trash_content">
-                <contentView showInExportView="false">
-                    document_trash_content
-                </contentView>
-            </contentViews>
-        </type> 
+			<label>Agenda</label>
+			<category>Collaborative</category>
+			<icon>/icons/folder.gif</icon>
+			<bigIcon>/icons/folder_100.png</bigIcon>
+			<description>Agenda</description>
+			<default-view>view_documents</default-view>
+			<layouts mode="any">
+				<layout>heading</layout>
+			</layouts>
+			<layouts mode="edit">
+				<layout>heading</layout>
+			</layouts>
+			<contentViews category="content">
+				<contentView showInExportView="false">cv_ContentOrderedReadNWrite
+				</contentView>
+			</contentViews>
+			<contentViews category="trash_content">
+				<contentView showInExportView="false">
+					document_trash_content
+				</contentView>
+			</contentViews>
+		</type>
+
+		<type id="VEVENT">
+			<layouts mode="any">
+				<layout>ttc_vevent</layout>
+			</layouts>
+		</type>
 
 	</extension>
 

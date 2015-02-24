@@ -54,7 +54,7 @@ public class ToutaticeCTImageManagerActionsBean extends ToutaticeImageManagerAct
         
         try {
             DocumentModel currentDocument = navigationContext.getCurrentDocument();
-            if (!currentDocument.hasSchema(CollabToolsConstants.CST_DOC_SCHEMA_ANNONCE)) {
+            if (!currentDocument.hasSchema(CollabToolsConstants.CST_DOC_SCHEMA_ARTICLE)) {
                 return;
             }
             
