@@ -12,8 +12,8 @@
 
 	<properties>
 		<nuxeo.version>6.0</nuxeo.version>
-		<nuxeo.hf.version>6.0-HF04</nuxeo.hf.version>
-		<nuxeo.opentoutatice.version>3.0.0-SNAPSHOT</nuxeo.opentoutatice.version>
+		<nuxeo.hf.version>6.0-HF06</nuxeo.hf.version>
+		<nuxeo.opentoutatice.version>3.0.0-RC13</nuxeo.opentoutatice.version>
 	</properties>
 
 	<modules>
