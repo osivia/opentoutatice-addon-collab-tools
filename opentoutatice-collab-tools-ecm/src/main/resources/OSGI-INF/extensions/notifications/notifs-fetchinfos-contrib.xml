@@ -2,10 +2,12 @@
 <component name="fr.toutatice.ecm.collab.tools.notifications.fetchinfos" version="1.0">
 
 	<require>fr.toutatice.ecm.platform.core.services.fetchinformation</require>
+	<require>fr.toutatice.ecm.collab.tools.notifications.services</require>
 	
 	<extension target="fr.toutatice.ecm.platform.core.services.fetchinformation"
-    	point="fetch_infos">
+    	point="extended_fetch_infos">
     
     	<fetchInfos providerService="fr.toutatice.ecm.platform.collab.tools.notifications.ToutaticeNotificationService" />
+    	
     </extension>
 </component>
