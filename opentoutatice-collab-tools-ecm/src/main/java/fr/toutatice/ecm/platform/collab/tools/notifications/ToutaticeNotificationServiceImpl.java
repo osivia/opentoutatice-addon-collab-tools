@@ -221,7 +221,7 @@ public class ToutaticeNotificationServiceImpl implements ToutaticeNotificationSe
                     String id = us.getDocId();
                     if (!idsYetLogged.contains(id)) {
                         idsYetLogged.add(id);
-                        log.error("Document '" + id + "' doesn't exist anymore but its subscriptions still exist: delete 'bad' rows in usersubscription table.");
+                        log.error("Document '" + id + "' doesn't exist anymore but its subscriptions still exist: delete rows with docid='" + id + "' in usersubscription table.");
                         continue;
                     }
                 }
