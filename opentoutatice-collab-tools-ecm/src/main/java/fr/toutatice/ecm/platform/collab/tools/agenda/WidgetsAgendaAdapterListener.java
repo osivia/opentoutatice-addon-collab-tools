@@ -70,7 +70,6 @@ public class WidgetsAgendaAdapterListener implements EventListener {
 
     public void fillNxDateNTime(DocumentModel document, CoreSession session, String eventName) throws ParseException {
         boolean isChangeableDocument = DocumentEventTypes.DOCUMENT_CREATED.equals(eventName);
-        boolean toManage = false;
         
         Calendar ttcDateTimeStart = (GregorianCalendar) document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_BEGIN);
         document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_START, ttcDateTimeStart.getTime());
@@ -78,7 +77,7 @@ public class WidgetsAgendaAdapterListener implements EventListener {
         Calendar ttcDateTimeEnd = (GregorianCalendar) document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END);
         document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeEnd.getTime());
 
-        if (toManage && isChangeableDocument) {
+        if (isChangeableDocument) {
             session.saveDocument(document);
         }
 

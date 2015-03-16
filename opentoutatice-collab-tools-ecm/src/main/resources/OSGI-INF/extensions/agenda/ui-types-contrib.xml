@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<component name="fr.toutatice.ecm.platform.web.ui.agenda.types">
+<component name="fr.toutatice.ecm.platform.collab.tools.ui.agenda.types">
 
 	<require>org.nuxeo.ecm.platform.types.TypeService</require>
 	<require>org.nuxeo.ecm.agenda.ecm.types</require>
