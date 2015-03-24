@@ -20,6 +20,7 @@
 			<event>documentCreated</event>
 			<filters>
 				<doctype>BlogSite</doctype>
+				<condition>Document.isVersion() == false</condition>
 			</filters>
 		</handler>
 
