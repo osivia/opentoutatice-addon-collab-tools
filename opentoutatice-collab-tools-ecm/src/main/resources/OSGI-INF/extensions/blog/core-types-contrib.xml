@@ -12,7 +12,6 @@
 		<doctype name="BlogSite" extends="Document">
 			<schema name="common" />
 			<schema name="dublincore" />
-			<schema name="blogsite_acaren" />
 			<schema name="blog" />
 			<schema name="files" />
 			<schema name="webcontainer" />
@@ -27,7 +26,6 @@
 		</doctype>
 
 		<doctype name="BlogPost" extends="Document">
-			<schema name="blogpost_acaren" />
 			<schema name="dublincore" />
 			<schema name="common" />
 			<schema name="blogpost" />

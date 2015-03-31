@@ -51,9 +51,6 @@
 			<layouts mode="edit">
 				<layout>layout@BlogPost</layout>
 			</layouts>
-			<!-- <layouts mode="view">
-				<layout>layout@BlogPost-view</layout>
-			</layouts> -->
 			<layouts mode="view"/>
 		</type>
 

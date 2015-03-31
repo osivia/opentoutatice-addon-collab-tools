@@ -161,20 +161,6 @@
 			</fields>
 		</widget>
 
-<!-- 		<widget name="blogpost_view" type="layout">
-			<labels>
-				<label mode="any"></label>
-			</labels>
-			<translated>false</translated>
-			<fields>
-				<field></field>
-			</fields>
-			<properties widgetMode="view">
-				<property name="name">toutatice_webpage</property>
-				<property name="mode">view</property>
-			</properties>
-		</widget> -->
-
 		<widget name="contentRich" type="htmltext">
 			<translated>true</translated>
 			<fields>
