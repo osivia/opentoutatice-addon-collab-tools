@@ -3,15 +3,6 @@
 	name="fr.toutatice.ecm.collab.tools.notifications.portalnotificationss"
 	version="1.0">
 
-	<extension point="generalSettings"
-		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService">
-		<settings>
-			<serverPrefix>http://explorer.nuxeo.org/nuxeo//</serverPrefix>
-			<eMailSubjectPrefix></eMailSubjectPrefix>
-			<mailSessionJndiName>java:comp/env/Mail</mailSessionJndiName>
-		</settings>
-	</extension>
-
 	<extension point="notifications"
 		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService">
 
