@@ -48,6 +48,7 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/article/widgets-contrib.xml,
  OSGI-INF/extensions/article/customize-generic-ui-contrib.xml,
  OSGI-INF/extensions/agenda/core-types-contrib.xml,
+ OSGI-INF/extensions/agenda/lifecycle-contrib.xml,
  OSGI-INF/extensions/agenda/ui-types-contrib.xml,
  OSGI-INF/extensions/agenda/layouts-contrib.xml,
  OSGI-INF/extensions/agenda/events-listener-contrib.xml,
@@ -61,3 +62,4 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-operations-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-portalnotifications-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-services-contrib.xml
+ 
