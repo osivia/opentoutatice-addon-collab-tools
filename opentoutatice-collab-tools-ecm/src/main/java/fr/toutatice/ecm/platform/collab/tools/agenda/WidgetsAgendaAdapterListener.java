@@ -72,10 +72,14 @@ public class WidgetsAgendaAdapterListener implements EventListener {
         boolean isChangeableDocument = DocumentEventTypes.DOCUMENT_CREATED.equals(eventName);
         
         Calendar ttcDateTimeStart = (GregorianCalendar) document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_BEGIN);
-        document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_START, ttcDateTimeStart.getTime());
+        if (null != ttcDateTimeStart) {
+        	document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_START, ttcDateTimeStart.getTime());
+        }
 
         Calendar ttcDateTimeEnd = (GregorianCalendar) document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END);
-        document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeEnd.getTime());
+        if (null != ttcDateTimeEnd) {
+        	document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeEnd.getTime());
+        }
 
         if (isChangeableDocument) {
             session.saveDocument(document);
