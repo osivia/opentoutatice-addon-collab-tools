@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <component
-	name="fr.toutatice.ecm.collab.tools.notifications.portalnotificationss"
+	name="fr.toutatice.ecm.collab.tools.notifications.portalnotifications"
 	version="1.0">
 
 	<extension point="notifications"
@@ -15,10 +15,7 @@
 			template="modif"> <event name="documentModified" /> </notification> -->
 
 
-		<notification autoSubscribed="false" availableIn="all"
-			channel="email" enabled="false" name="Creation">
-			<event name="documentCreated" />
-		</notification>
+		<notification enabled="false" name="Creation" />
 
 		<notification autoSubscribed="false" availableIn="all"
 			channel="email" enabled="true" label="label.portal.notifications.create"

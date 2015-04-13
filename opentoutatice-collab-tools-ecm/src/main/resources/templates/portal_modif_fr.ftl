@@ -11,7 +11,9 @@
                     <tr>
                       <td style="background-color:#f7f7f7;border-bottom:1px dashed #e9ecef;padding:8px 20px;">
                         <p style="font-weight:bold;font-size:15px;margin:0;color:#000;">
-                        ${Runtime.getProperty('org.nuxeo.ecm.product.name')}</p>
+                            <a href="www.toutatice.fr">toutatice.fr</a>
+                        </p>
+
                       </td>
                     </tr>
                     <tr>
@@ -33,26 +35,21 @@
                               </tr>
                             </#if>
                             <tr>
-                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Author</td>
-                              <td style="border:1px solid #eee;color:#000;font-size:13px;"><a style="color:#22aee8;text-decoration:underline;word-wrap:break-word!important;" href="${userUrl}">
+                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Auteur</td>
+                              <td style="border:1px solid #eee;color:#000;font-size:13px;">
                               <#if principalAuthor?? && (principalAuthor.lastName!="" || principalAuthor.firstName!="")>
                               ${htmlEscape(principalAuthor.firstName)} ${htmlEscape(principalAuthor.lastName)} 
                               </#if>
-                               (${author})</a>
+                               (${author})
                               </td>
                             </tr>
                             <tr>
-                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Updated</td>
-                              <td style="border:1px solid #eee;color:#000;font-size:13px;">${dateTime?datetime?string("dd/MM/yyyy - HH:mm")}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Created</td>
+                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Créé le </td>
                               <td style="border:1px solid #eee;color:#000;font-size:13px;">${docCreated?datetime?string("dd/MM/yyyy - HH:mm")}
                               </td>
                             </tr>
                             <tr>
-                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Location</td>
+                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Emplacement</td>
                               <td style="border:1px solid #eee;color:#000;font-size:13px;">${docLocation}</td>
                             </tr>
                           </tbody>
@@ -62,7 +59,7 @@
                     <tr>
                       <td style="background-color:#f7f7f7;border-top:1px dashed #e9ecef;text-align:center;padding:8px 20px;">
                         <div style="font-size:12px;color:#bbb;">
-                        You received this notification because you subscribed to ${notification.name?lower_case} on this document or on one of its parents.</div>
+                        Vous recevez cette notification car vous avez indiqué vouloir suivre ce document ou un de ses parents. <a href="${baseUrl}/nxhome/default@view_home?tabIds=USER_CENTER%3ANotification">Cliquez-ici</a> pour gérer vos abonnements.</div>
                       </td>
                     </tr>
                   </tbody>
