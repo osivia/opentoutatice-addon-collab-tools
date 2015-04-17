@@ -6,17 +6,8 @@
 	<extension point="notifications"
 		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService">
 
-		<!-- <notification autoSubscribed="true" availableIn="Workspace" channel="email" 
-			enabled="true" label="label.nuxeo.notifications.subscriptions.updated" name="Subscriptions 
-			updated" subject="New subscription" template="subscriptionsUpdated"> <event 
-			name="subscriptionAssigned" /> </notification> <notification autoSubscribed="false" 
-			availableIn="Workspace" channel="email" enabled="true" label="label.nuxeo.notifications.modif" 
-			name="Modification" subject="${docTitle} has been modified by ${author}" 
-			template="modif"> <event name="documentModified" /> </notification> -->
-
-
 		<notification enabled="false" name="Creation" />
-
+		
 		<notification autoSubscribed="false" availableIn="all"
 			channel="email" enabled="true" label="label.portal.notifications.create"
 			name="PortalCreation" subject="Un nouveau document ${docTitle} a été ajouté par ${principalAuthor.firstName} ${principalAuthor.lastName}"
@@ -24,40 +15,9 @@
 			<event name="documentCreated" />
 			<event name="documentImported" />
 		</notification>
-
-
-		<!--
-		<notification autoSubscribed="false" availableIn="all"
-			channel="email" enabled="false" name="Modification">
-			<event name="documentModified" />
-		</notification>
- <notification autoSubscribed="true" availableIn="Section" channel="email" 
-			enabled="true" label="label.nuxeo.notifications.publication" name="Publication" 
-			subject="Document published" template="publish"> <event name="documentPublicationApproved" 
-			/> <event name="documentPublicationRejected" /> <event name="documentPublished" 
-			/> </notification> <notification autoSubscribed="false" availableIn="Section" 
-			channel="email" enabled="true" label="label.nuxeo.notifications.publication" 
-			name="PublicationOnClient" subject="Document published" template="publish"> 
-			<event name="documentPublicationApproved" /> <event name="documentPublished" 
-			/> </notification> <notification autoSubscribed="false" availableIn="Workspace" 
-			channel="email" enabled="true" label="label.nuxeo.notifications.workflow" 
-			name="Workflow Change" subject="Workflow event" template="workflow"> <event 
-			name="workflowNewProcessStarted" /> <event name="workflowProcessEnded" /> 
-			<event name="workflowProcessCanceled" /> <event name="workflowAbandoned" 
-			/> <event name="workflowTaskCompleted" /> <event name="workflowTaskRejected" 
-			/> <event name="workflowTaskAssigned" /> </notification> <notification autoSubscribed="false" 
-			availableIn="Workspace" channel="email" enabled="true" label="label.nuxeo.notifications.appReviewStarted" 
-			name="Approbation review started" subject="Review started for ${docTitle}" 
-			template="aprobationWorkflowStarted"> <event name="workflowNewProcessStarted" 
-			/> </notification> <notification autoSubscribed="true" availableIn="Workspace" 
-			channel="email" enabled="true" label="label.nuxeo.notifications.taskAssigned" 
-			name="Task assigned" subject="Task Assigned for ${docTitle}" template="workflowTaskAssigned"> 
-			<event name="workflowTaskAssigned" /> </notification> <notification autoSubscribed="true" 
-			availableIn="all" channel="email" enabled="true" label="label.nuxeo.notifications.email.document" 
-			name="Email document" subject="${subject}" template="emailDocument"> <event 
-			name="emailDocumentSend" /> </notification> -->
+		
 	</extension>
-
+	
 	<extension point="templates"
 		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService">
 
