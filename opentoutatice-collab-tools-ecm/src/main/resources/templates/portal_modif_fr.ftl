@@ -11,7 +11,7 @@
                     <tr>
                       <td style="background-color:#f7f7f7;border-bottom:1px dashed #e9ecef;padding:8px 20px;">
                         <p style="font-weight:bold;font-size:15px;margin:0;color:#000;">
-                            <a href="www.toutatice.fr">toutatice.fr</a>
+                            <a href="${portalHost}">toutatice.fr</a>
                         </p>
 
                       </td>
