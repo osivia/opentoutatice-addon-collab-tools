@@ -169,10 +169,10 @@ public class ToutaticeNotificationServiceImpl implements ToutaticeNotificationSe
                     tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
 
                     // Then, get group subscriptions
-                    for (String group : currentUser.getAllGroups()) {
-                        paramMap.put("userId", NuxeoGroup.PREFIX + group);
-                        tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
-                    }
+//                    for (String group : currentUser.getAllGroups()) {
+//                        paramMap.put("userId", NuxeoGroup.PREFIX + group);
+//                        tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
+//                    }
 
 
                     if (isSubsInheritDocument(coreSession, tempSubscriptions, currentDocument)) {
