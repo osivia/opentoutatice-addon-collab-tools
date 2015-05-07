@@ -38,7 +38,7 @@
 			</layouts>
 			<layouts mode="view" />
 			<contentViews category="content">
-				<contentView showInExportView="false">cv_ContentReadNWrite
+				<contentView showInExportView="false">cv_ContentOrderedReadNWrite
 				</contentView>
 			</contentViews>
 			<contentViews category="trash_content">
