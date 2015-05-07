@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.web.article.actions">
+
+	<require>org.nuxeo.ecm.platform.actions.ActionService</require>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+
+		<action id="annonce-create" label="Nouvel article" enabled="true"
+			order="30" type="link" immediate="false"
+			link="#{operationActionBean.doOperation('annonce-create')}">
+			<category>SUBVIEW_UPPER_LIST</category>
+			<filter id="filter@annonce-create">
+				<rule grant="true">
+					<permission>AddChildren</permission>
+					<type>AnnonceFolder</type>
+				</rule>
+			</filter>
+		</action>
+
+		<action id="view_comments">
+			<filter id="annoncefolder.deny.view_comments">
+				<rule grant="false">
+					<type>AnnonceFolder</type>
+				</rule>
+			</filter>
+		</action>
+
+		<!-- Stamp creation -->
+		<action id="TOUTATICE_IMAGES_CREATE_HEAD" label="toutatice.label.images.create.head"
+			link="#{ImageManagerActions.createHeadImage}">
+			<category>TOUTATICE_IMAGES_TAB_CREATE</category>
+			<properties>
+				<property name="confirmMessage">toutatice.label.images.confirm.head.creation
+				</property>
+				<property name="styleClass">toutaticeUploadImageGadget
+				</property>
+			</properties>
+			<filter-id>isAnnonce</filter-id>
+		</action>
+
+	</extension>
+
+</component>

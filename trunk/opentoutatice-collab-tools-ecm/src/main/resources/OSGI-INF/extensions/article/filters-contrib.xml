@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.core.article.filters">
+
+	<require>org.nuxeo.ecm.platform.actions.ActionService</require>
+	<require>fr.toutatice.ecm.platform.web.filters</require>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="filters">
+
+		<filter id="create" append="true">
+			<rule grant="false">
+				<type>Annonce</type>
+			</rule>
+		</filter>
+
+		<!-- Pour ne pas faire apparaître le widget 
+		     summary_note_text lié à la présence du 
+		     schéma note -->
+		<filter id="hasNote" append="true">
+			<rule grant="false">
+				<type>Annonce</type>
+			</rule>
+		</filter>
+		
+		<filter id="isAnnonce">
+			<rule grant="true">
+				<type>Annonce</type>
+			</rule>
+		</filter>
+
+	</extension>
+
+</component>

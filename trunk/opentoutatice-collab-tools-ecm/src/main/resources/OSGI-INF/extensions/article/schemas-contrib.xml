@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<component name="fr.toutatice.ecm.platform.core.article.schemas">
+
+	<require>org.nuxeo.ecm.core.schema.TypeService</require>
+
+	<extension target="org.nuxeo.ecm.core.schema.TypeService"
+		point="schema">
+			
+		<schema name="annoncefolder" prefix="annoncefolder" src="schemas/annoncefolder.xsd"/>
+		<schema name="annonce" prefix="annonce" src="schemas/annonce.xsd"/>
+
+	</extension>
+
+</component>

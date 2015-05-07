@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<component
+	name="fr.toutatice.ecm.collab.tools.notifications.portalnotifications"
+	version="1.0">
+
+	<extension point="notifications"
+		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService">
+
+		<notification enabled="false" name="Creation" />
+		
+		<notification autoSubscribed="false" availableIn="all"
+			channel="email" enabled="true" label="label.portal.notifications.create"
+			name="PortalCreation" subject="Un nouveau document ${docTitle} a été ajouté par ${principalAuthor.firstName} ${principalAuthor.lastName}"
+			template="portal_modif">
+			<event name="documentCreated" />
+			<event name="documentImported" />
+		</notification>
+		
+	</extension>
+	
+	<extension point="templates"
+		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService">
+
+		<template name="portal_modif" src="templates/portal_modif_fr.ftl" />
+
+	</extension>
+
+</component>

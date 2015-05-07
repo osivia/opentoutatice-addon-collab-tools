@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<component name="fr.toutatice.ecm.platform.core.agenda.actions">
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+
+		<action id="create-agenda-event" label="toutatice.label.agenda.create.event" enabled="true"
+			order="0" type="link" immediate="true"
+			link="#{documentActions.createDocument('VEVENT')}">
+			<category>SUBVIEW_UPPER_LIST</category>
+			<filter id="filter@event-create">
+				<rule grant="true">
+					<permission>AddChildren</permission>
+					<type>Agenda</type>
+				</rule>
+			</filter>
+		</action>
+
+	</extension>
+	
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="filters">
+
+		<filter id="create" append="true">
+			<rule grant="false">
+				<type>Agenda</type>
+			</rule>
+		</filter>
+
+	</extension>
+
+</component>
