@@ -18,7 +18,7 @@
 	</platforms>
 	<dependencies>
 		<!-- Dependance sur la plate-forme opentoutatice -->
-		<package>open-toutatice:3.0.0-RC17</package>
+		<package>open-toutatice:3.0.0-RC20</package>
 		<!-- Dépendance sur d'autres addons --> 
 		<package>nuxeo-agenda:1.2.0</package>
 	</dependencies>
