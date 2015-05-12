@@ -2,7 +2,12 @@
 <package type="addon" name="open-toutatice-addons-collab-tools" version="@VERSION@">
 	<title>Addon to leverage the collaboration tools</title>
 	<description>
-		<p>Adds new document types such as the BlogSite, FAQ...</p>
+		<p>Adds new document types such as the BlogSite, FAQ...
+		
+		   Main features :
+			* compatibility with nx 6.0 / opentoutatice 3.0
+			* Mail notification more integrated and new operations for subscribe to all notifications on a document
+		</p>
 	</description>
 	<home-page>http://www.toutatice.fr</home-page>
 	<vendor>Academie de Rennes</vendor>
@@ -18,7 +23,7 @@
 	</platforms>
 	<dependencies>
 		<!-- Dependance sur la plate-forme opentoutatice -->
-		<package>open-toutatice:3.0.0-RC20</package>
+		<package>open-toutatice:3.0.0</package>
 		<!-- Dépendance sur d'autres addons --> 
 		<package>nuxeo-agenda:1.2.0</package>
 	</dependencies>
