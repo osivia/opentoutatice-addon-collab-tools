@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<component name="fr.toutatice.ecm.platform.core.contextuallink.doctypes">
+
+	<require>org.nuxeo.ecm.core.schema.TypeService</require>
+	<require>fr.toutatice.ecm.platform.core.schemas</require>
+	<require>fr.toutatice.ecm.platform.core.doctypes</require>
+
+	<extension target="org.nuxeo.ecm.core.schema.TypeService"
+		point="doctype">
+		
+		<doctype name="DocumentUrlContainer" extends="OrderedFolder">
+			<facet name="SpaceContent" />
+			<facet name="SpaceNavigationItem" />
+		</doctype>
+
+	</extension>
+
+	<extension target="org.nuxeo.ecm.platform.types.TypeService"
+		point="types">
+		
+		<type id="DocumentUrlContainer">
+			<subtypes>
+				<type>ContextualLink</type>
+				<type>DocumentUrlContainer</type>
+			</subtypes>
+		</type>
+		
+		<type id="Workspace">
+			<subtypes>
+				<type>DocumentUrlContainer</type>
+			</subtypes>
+		</type>
+		
+		<type id="PortalSite">
+			<subtypes>
+				<type>DocumentUrlContainer</type>
+			</subtypes>
+		</type>
+
+	</extension>
+
+</component>

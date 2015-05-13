@@ -61,5 +61,9 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-fetchinfos-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-operations-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-portalnotifications-contrib.xml,
- OSGI-INF/extensions/notifications/notifs-services-contrib.xml
- 
+ OSGI-INF/extensions/notifications/notifs-services-contrib.xml,
+ OSGI-INF/extensions/contextualLink/actions-contrib.xml,
+ OSGI-INF/extensions/contextualLink/core-types-contrib.xml,
+ OSGI-INF/extensions/contextualLink/layouts-contrib.xml,
+ OSGI-INF/extensions/contextualLink/lifecycle-contrib.xml,
+ OSGI-INF/extensions/contextualLink/ui-types-contrib.xml,
