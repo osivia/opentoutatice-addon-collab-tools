@@ -23,6 +23,7 @@
 			<!-- FIXME: facet utile? -->
 			<facet name="SuperSpace" />
 			<facet name="Space" />
+			<facet name="TTCAttachableImages" />
 		</doctype>
 
 		<doctype name="BlogPost" extends="Document">
@@ -36,6 +37,7 @@
 			<facet name="Versionable" />
 			<facet name="HasRelatedText" />
 			<facet name="TTCPortalConfigurable" />
+			<facet name="TTCAttachableImages" />
 		</doctype>
 
 	</extension>
