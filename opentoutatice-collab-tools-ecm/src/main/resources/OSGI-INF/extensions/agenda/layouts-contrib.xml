@@ -18,6 +18,7 @@
 					<widget>vevent_location</widget>
 				</row>
 				<row>
+				    <widget>vevent_all_day</widget>
 					<widget>vevent_dtstart</widget>
 					<widget>vevent_dtend</widget>
 				</row>
@@ -37,6 +38,18 @@
 
 	<extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
 		point="widgets">
+		
+		<widget name="vevent_all_day" type="checkbox">
+            <labels>
+                <label mode="any">toutatice.label.event.all.day</label>
+            </labels>
+            <fields>
+                <field>vevent:allDay</field>
+            </fields>
+            <properties mode="any">
+                <property name="currentDocument">value</property>
+            </properties>
+        </widget>
 
 		<widget name="event_object" type="htmltext">
 			<labels>

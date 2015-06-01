@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -107,20 +108,34 @@ public class WidgetsAgendaAdapterListener implements EventListener {
         }
 
         private void fromTTCToNxDate() {
+            Boolean allDay = (Boolean) this.document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_ALL_DAY);
+            if (allDay != null) {
+                this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_ALL_DAY, allDay);
+            }
+
             Calendar ttcDateTimeStart = (GregorianCalendar) this.document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_BEGIN);
             if (null != ttcDateTimeStart) {
                 this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_START, ttcDateTimeStart.getTime());
             }
 
-            Calendar ttcDateTimeEnd = (GregorianCalendar) this.document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END);
-            if (null != ttcDateTimeEnd) {
-                this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeEnd.getTime());
+            if (BooleanUtils.isTrue(allDay) && null != ttcDateTimeStart) {
+                this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeStart.getTime());
+            } else {
+                Calendar ttcDateTimeEnd = (GregorianCalendar) this.document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END);
+                if (null != ttcDateTimeEnd) {
+                    this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeEnd.getTime());
+                }
             }
         }
         
         private void fromNxToTTCDate(){
             SimpleDateFormat formatDate = new SimpleDateFormat(DATE_FORMAT);
             SimpleDateFormat formatTime = new SimpleDateFormat(TIME_FORMAT);
+            
+            Boolean allDay = (Boolean) this.document.getPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_ALL_DAY);
+            if(allDay != null){
+                this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_ALL_DAY, allDay);
+            }
             
             Calendar nxDateTimeStart = (GregorianCalendar) this.document.getPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_START);
             if (null != nxDateTimeStart) {
@@ -139,20 +154,27 @@ public class WidgetsAgendaAdapterListener implements EventListener {
                 
             }
 
+            if (BooleanUtils.isTrue(allDay) && nxDateTimeStart != null) {
+                Date ttcDateTimeBegin = nxDateTimeStart.getTime();
+                this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END, ttcDateTimeBegin);
+
+                String dateBegin = formatDate.format(ttcDateTimeBegin);
+                this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_END, dateBegin);
+            }
             Calendar nxDateTimeEnd = (GregorianCalendar) this.document.getPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END);
             if (null != nxDateTimeEnd) {
-                
+
                 Date ttcDateTimeEnd = nxDateTimeEnd.getTime();
                 this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END, ttcDateTimeEnd);
-                
+
                 String dateEnd = formatDate.format(ttcDateTimeEnd);
                 this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_END, dateEnd);
-                
+
                 String timeEnd = formatTime.format(ttcDateTimeEnd);
-                if(StringUtils.isNotBlank(timeEnd)){
+                if (StringUtils.isNotBlank(timeEnd)) {
                     this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_TIME_END, timeEnd);
                 }
-                
+
             }
         }
         
