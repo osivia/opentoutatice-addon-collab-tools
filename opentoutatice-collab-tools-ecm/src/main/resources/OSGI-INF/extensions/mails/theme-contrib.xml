@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.collab.tools.mails.theme">
+
+	<require>org.nuxeo.theme.services.ThemeService</require>
+
+	<extension target="org.nuxeo.theme.services.ThemeService"
+		point="applications">
+
+		<application root="${org.nuxeo.ecm.contextPath}"
+			template-engine="jsf-facelets">
+			
+			<view id="/mails/confirm_mail_sending.xhtml">
+                <theme>toutatice/popup</theme>
+            </view>   
+			
+			<view id="/document_notif_email.xhtml">
+				<theme>toutatice/popup</theme>
+			</view>			
+		</application>
+	</extension>
+
+
+</component>

@@ -67,3 +67,6 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/contextualLink/layouts-contrib.xml,
  OSGI-INF/extensions/contextualLink/lifecycle-contrib.xml,
  OSGI-INF/extensions/contextualLink/ui-types-contrib.xml,
+ OSGI-INF/extensions/mails/theme-contrib.xml,
+ OSGI-INF/extensions/mails/widget-contrib.xml
+ 

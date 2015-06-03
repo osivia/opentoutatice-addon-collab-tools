@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<nxthemes:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:nxthemes="http://nuxeo.org/nxthemes"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:nxdir="http://nuxeo.org/nxdirectory"
+	xmlns:nxu="http://nuxeo.org/nxweb/util"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:nxd="http://nuxeo.org/nxweb/document"
+	xmlns:nxl="http://nuxeo.org/nxforms/layout"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:nxh="http://nuxeo.org/nxweb/html">
+
+	<ui:define name="page title">
+		<h:outputText
+			value="#{nuxeoApplicationName} - #{messages['title.email.document']}" />
+	</ui:define>
+
+	<ui:define name="stylesheets">
+		<link href="#{baseURL}/css/custom-popup.min.css" type="text/css"
+			rel="stylesheet" />
+	</ui:define>
+
+	<ui:define name="header_scripts">
+
+		<script type="text/javascript"
+			src="#{baseURL}tinymce/custom/tiny_mce_init_extrait.js" />
+
+		<script type="text/javascript">
+			function closeFancyBox() {
+				parent.jQuery.fancybox.close();
+			}
+		</script>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<div class="container">
+
+			<h:panelGroup rendered="#{currentDocument.version}">
+				<div class="form-group">
+					<h3>
+						<h:outputText
+							value="#{nxd:titleOrId(versionedActions.sourceDocument)}" />
+						(version
+						<h:outputText value=" #{currentDocument.uid.major_version}" />
+						.
+						<h:outputText value="#{currentDocument.uid.minor_version}" />
+						)
+					</h3>
+				</div>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{!currentDocument.version}">
+				<div class="form-group">
+					<h3>
+						<h:outputText
+							value="Partager le document '#{nxd:titleOrId(currentDocument)}'" />
+					</h3>
+				</div>
+			</h:panelGroup>
+
+			<ui:include src="/incl/pv_message_banner.xhtml" />
+
+
+			<h:form class="form form-horizontal">
+
+				<div class="form-group required">
+					<label class="col-sm-3 control-label">Destinataire(s)</label>
+					<div class="col-sm-9">
+						<nxl:widgetType name="emailRecipients" mode="edit"
+							value="#{emailNotifSenderAction.recipients}" required="true" />
+					</div>
+				</div>
+
+				<div class="form-group required">
+					<label class="col-sm-3 control-label">Objet</label>
+
+					<div class="col-sm-9">
+						<h:inputText value="#{emailNotifSenderAction.mailSubject}"
+							required="true" class="form-control"
+							binding="#{field.simpleComponent}">
+						</h:inputText>
+						<h:message class="errorMessage"
+							for="#{field.getSimpleComponentClientId()}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Contenu</label>
+					<div class="col-sm-9">
+						<nxu:editor id="nxu_editor" rendered="true" required="false"
+							editorSelector="mceExtract" disableHtmlInit="true"
+							value="#{emailNotifSenderAction.mailContent}" />
+					</div>
+				</div>
+
+				<nav class="navbar navbar-default navbar-fixed-bottom">
+				<div class="container-fluid">
+					<div class="col-sm-offset-3">
+
+						<c:choose>
+							<c:when test="#{webActions.isInPortalViewContext()}">
+
+								<nxh:commandLink value="#{messages['command.email.send']}"
+									class="btn btn-primary navbar-btn fancyframe_refresh"
+									action="#{emailNotifSenderAction.redirect('confirm_mail_sending')}" />
+
+							</c:when>
+
+							<c:otherwise>
+
+								<h:commandButton value="#{messages['command.email.send']}"
+									styleClass="btn btn-primary navbar-btn"
+									action="#{emailNotifSenderAction.redirect('confirm_mail_sending')}"
+									limitRender="true" />
+
+							</c:otherwise>
+						</c:choose>
+
+					</div>
+				</div>
+				</nav>
+
+				<h:inputHidden id="fromUrl" value="#{pageBean.fromUrl}" />
+
+			</h:form>
+			<div class="pv-footer"></div>
+		</div>
+
+	</ui:define>
+</nxthemes:composition>

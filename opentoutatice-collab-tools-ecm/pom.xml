@@ -23,6 +23,11 @@
 			<artifactId>opentoutatice-ecm-platform-web</artifactId>
 			<version>${nuxeo.opentoutatice.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.nuxeo.ecm.platform</groupId>
+			<artifactId>nuxeo-platform-notification-web</artifactId>
+			<version>${nuxeo.version}</version>
+		</dependency>		
 	</dependencies>
 
 	<build>
