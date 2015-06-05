@@ -17,7 +17,7 @@
 
 	<modules>
 	   <module>opentoutatice-collab-tools-ecm</module>
-	   <module>opentoutatice-collab-tools-marketplace</module> 
+	   <!-- <module>opentoutatice-collab-tools-marketplace</module> --> 
 	</modules>
 
 	<build>
