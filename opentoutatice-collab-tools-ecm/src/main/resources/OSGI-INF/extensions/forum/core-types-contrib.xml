@@ -19,6 +19,7 @@
 
 		<doctype name="Thread" append="true">
 			<schema name="thread_toutatice" />
+			<facet name="TTCAttachableImages" />
 		</doctype>
 
 	</extension>
