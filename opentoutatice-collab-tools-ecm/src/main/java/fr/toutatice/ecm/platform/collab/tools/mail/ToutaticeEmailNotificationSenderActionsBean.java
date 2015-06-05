@@ -139,7 +139,7 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
     public String send(String viewId) {
         String view = super.send();
         if (view != null) {
-            pageBean.setNotificationKey("success_mail_send");
+            pageBean.setNotificationKey("SUCCESS_MAIL_SENT");
             view = viewId;
         }
         return view;
