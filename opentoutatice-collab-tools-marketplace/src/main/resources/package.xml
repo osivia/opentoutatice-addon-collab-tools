@@ -25,7 +25,7 @@
 		<!-- Dependance sur la plate-forme opentoutatice -->
 		<package>open-toutatice:3.1.0-SNAPSHOT</package>
 		<!-- Dépendance sur d'autres addons --> 
-		<package>nuxeo-agenda:1.2.0</package>
+		<!-- <package>nuxeo-agenda:1.2.1</package> -->
 	</dependencies>
 	<license>LGPL 2.1</license>
 	<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
