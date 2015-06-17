@@ -47,7 +47,7 @@ import fr.toutatice.ecm.platform.service.portalviews.adapter.WidgetsAdapterServi
  *
  */
 public class WidgetsAgendaAdapterListener implements EventListener {
-    
+
     public static final String DATE_FORMAT = "dd/MM/yyyy";
     public static final String TIME_FORMAT = "HH:mm";
 
@@ -68,10 +68,10 @@ public class WidgetsAgendaAdapterListener implements EventListener {
                 CoreSession session = ctx.getCoreSession();
                 if (document != null && !document.isImmutable()) {
                     if (document.hasSchema(CollabToolsConstants.CST_DOC_SCHEMA_EVENT) && document.hasSchema(ToutaticeNuxeoStudioConst.CST_DOC_SCHEMA_TTC_EVENT)) {
-                        
-                            DateNTimeSilentFiller runner = new DateNTimeSilentFiller(session, document, eventName);
-                            runner.silentRun(false);
-                       
+
+                        DateNTimeSilentFiller runner = new DateNTimeSilentFiller(session, document, eventName);
+                        runner.silentRun(false);
+
                     }
                 }
             }
@@ -93,10 +93,10 @@ public class WidgetsAgendaAdapterListener implements EventListener {
         @Override
         public void run() throws ClientException {
             boolean isChangeableDocument = DocumentEventTypes.DOCUMENT_CREATED.equals(eventName);
-            
+
             WidgetsAdapterService waService = Framework.getService(WidgetsAdapterService.class);
 
-            if(waService.isInPortalViewContext()){
+            if (waService.isInPortalViewContext()) {
                 fromTTCToNxDate();
             } else {
                 fromNxToTTCDate();
@@ -118,49 +118,38 @@ public class WidgetsAgendaAdapterListener implements EventListener {
                 this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_START, ttcDateTimeStart.getTime());
             }
 
-            if (BooleanUtils.isTrue(allDay) && null != ttcDateTimeStart) {
-                this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeStart.getTime());
-            } else {
-                Calendar ttcDateTimeEnd = (GregorianCalendar) this.document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END);
-                if (null != ttcDateTimeEnd) {
-                    this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeEnd.getTime());
-                }
+            Calendar ttcDateTimeEnd = (GregorianCalendar) this.document.getPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END);
+            if (null != ttcDateTimeEnd) {
+                this.document.setPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END, ttcDateTimeEnd.getTime());
             }
         }
-        
-        private void fromNxToTTCDate(){
+
+        private void fromNxToTTCDate() {
             SimpleDateFormat formatDate = new SimpleDateFormat(DATE_FORMAT);
             SimpleDateFormat formatTime = new SimpleDateFormat(TIME_FORMAT);
-            
+
             Boolean allDay = (Boolean) this.document.getPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_ALL_DAY);
-            if(allDay != null){
+            if (allDay != null) {
                 this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_ALL_DAY, allDay);
             }
-            
+
             Calendar nxDateTimeStart = (GregorianCalendar) this.document.getPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_START);
             if (null != nxDateTimeStart) {
-                
+
                 Date ttcDateTimeBegin = nxDateTimeStart.getTime();
                 this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_BEGIN, ttcDateTimeBegin);
-                
+
                 String dateBegin = formatDate.format(ttcDateTimeBegin);
                 this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_BEGIN, dateBegin);
-                
+
                 String timeBegin = formatTime.format(ttcDateTimeBegin);
-                if(StringUtils.isNotBlank(timeBegin)){
+                if (StringUtils.isNotBlank(timeBegin)) {
                     this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_TIME_BEGIN, timeBegin);
                 }
-                
-                
+
+
             }
 
-            if (BooleanUtils.isTrue(allDay) && nxDateTimeStart != null) {
-                Date ttcDateTimeBegin = nxDateTimeStart.getTime();
-                this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_TIME_END, ttcDateTimeBegin);
-
-                String dateBegin = formatDate.format(ttcDateTimeBegin);
-                this.document.setPropertyValue(ToutaticeNuxeoStudioConst.CST_DOC_XPATH_TTC_EVT_DATE_END, dateBegin);
-            }
             Calendar nxDateTimeEnd = (GregorianCalendar) this.document.getPropertyValue(CollabToolsConstants.CST_DOC_XPATH_EVENT_END);
             if (null != nxDateTimeEnd) {
 
@@ -177,7 +166,7 @@ public class WidgetsAgendaAdapterListener implements EventListener {
 
             }
         }
-        
+
     }
 
 }
