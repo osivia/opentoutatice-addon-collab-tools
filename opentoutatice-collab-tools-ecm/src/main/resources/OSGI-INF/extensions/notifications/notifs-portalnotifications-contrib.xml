@@ -103,13 +103,21 @@
 		<!-- Send mail -->
 		<template name="emailDocument" src="templates/emailDocument_fr.ftl" />
 	</extension>
+	
+	<extension
+        target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+        point="notificationListenerVeto">
+        
+        <veto name="toutaticeNotificationsVeto" class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadNotificationsVeto" />
+        
+    </extension>
     
-      <extension
+    <extension
         target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
         point="notificationListenerHook">
         
         <hookListener name="ttcThreadPostNotification" class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadPostNotificationListener" />
         
-       </extension>
+    </extension>
 
 </component>
