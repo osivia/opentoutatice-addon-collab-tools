@@ -22,7 +22,7 @@
 	</platforms>
 	<dependencies>
 		<!-- Dependance sur la plate-forme opentoutatice -->
-		<package>open-toutatice:3.1.1</package>
+		<package>open-toutatice:3.1.2</package>
 		<!-- Dépendance sur d'autres addons --> 
 		<!-- <package>nuxeo-agenda:1.2.1</package> -->
 	</dependencies>

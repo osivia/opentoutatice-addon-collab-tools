@@ -12,7 +12,7 @@
 
 	<properties>
 		<nuxeo.version>6.0-HF11</nuxeo.version>
-		<nuxeo.opentoutatice.version>3.1.1</nuxeo.opentoutatice.version>
+		<nuxeo.opentoutatice.version>3.1.2</nuxeo.opentoutatice.version>
 	</properties>
 
 	<modules>
