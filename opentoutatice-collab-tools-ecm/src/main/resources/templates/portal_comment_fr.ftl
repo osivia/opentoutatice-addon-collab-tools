@@ -31,7 +31,7 @@
                             
                             <tr>
                               <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Commentaire </td>
-                              <td style="border:1px solid #eee;color:#000;font-size:13px;">${htmlEscape(comment_text)}
+                              <td style="border:1px solid #eee;color:#000;font-size:13px;">${htmlEscape(comment)}
                               </td>
                             </tr>                            
 
