@@ -11,8 +11,8 @@
                     <tr>
                       <td style="background-color:#f7f7f7;border-bottom:1px dashed #e9ecef;padding:8px 20px;">
                         <p style="font-weight:bold;font-size:15px;margin:0;color:#000;">
-                            <a href="${portalHost}">${shortPortalHost}</a>
-                        </p>
+							<a href="${portalHost}">${shortPortalHost}</a>
+						</p>
 
                       </td>
                     </tr>
@@ -44,8 +44,8 @@
                               </td>
                             </tr>
                             <tr>
-                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Créé le </td>
-                              <td style="border:1px solid #eee;color:#000;font-size:13px;">${docCreated?datetime?string("dd/MM/yyyy - HH:mm")}
+                              <td style="border:1px solid #eee;color:#888;font-size:13px;white-space:nowrap;">Mise à jour le </td>
+                              <td style="border:1px solid #eee;color:#000;font-size:13px;">${dateTime?datetime?string("dd/MM/yyyy - HH:mm")}
                               </td>
                             </tr>
                             <tr>
@@ -59,7 +59,7 @@
                     <tr>
                       <td style="background-color:#f7f7f7;border-top:1px dashed #e9ecef;text-align:center;padding:8px 20px;">
                         <div style="font-size:12px;color:#bbb;">
-                        Vous recevez cette notification car vous avez indiqué vouloir suivre ce document ou un de ses parents. <a href="${baseUrl}/nxhome/default@view_home?tabIds=USER_CENTER%3ANotification">Cliquez-ici</a> pour gérer vos abonnements.</div>
+						Vous recevez cette notification car vous avez indiqué vouloir suivre ce document ou un de ses parents. <a href="${baseUrl}/nxhome/default@view_home?tabIds=USER_CENTER%3ANotification">Cliquez-ici</a> pour gérer vos abonnements.</div>
                       </td>
                     </tr>
                   </tbody>

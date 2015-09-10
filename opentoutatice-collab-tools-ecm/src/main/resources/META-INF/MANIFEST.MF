@@ -51,6 +51,7 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/agenda/lifecycle-contrib.xml,
  OSGI-INF/extensions/agenda/ui-types-contrib.xml,
  OSGI-INF/extensions/agenda/layouts-contrib.xml,
+ OSGI-INF/extensions/agenda/events-listener-contrib.xml,
  OSGI-INF/extensions/agenda/actions-contrib.xml,
  OSGI-INF/extensions/agenda/widgets-adapter-contrib.xml,
  OSGI-INF/extensions/automation/chains-contrib.xml,
@@ -60,5 +61,14 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-fetchinfos-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-operations-contrib.xml,
  OSGI-INF/extensions/notifications/notifs-portalnotifications-contrib.xml,
- OSGI-INF/extensions/notifications/notifs-services-contrib.xml
+ OSGI-INF/extensions/notifications/notifs-services-contrib.xml,
+ OSGI-INF/extensions/contextualLink/actions-contrib.xml,
+ OSGI-INF/extensions/contextualLink/core-types-contrib.xml,
+ OSGI-INF/extensions/contextualLink/layouts-contrib.xml,
+ OSGI-INF/extensions/contextualLink/lifecycle-contrib.xml,
+ OSGI-INF/extensions/contextualLink/ui-types-contrib.xml,
+ OSGI-INF/extensions/mails/theme-contrib.xml,
+ OSGI-INF/extensions/mails/widget-contrib.xml,
+ OSGI-INF/extensions/mails/actions-contrib.xml
+ 
  

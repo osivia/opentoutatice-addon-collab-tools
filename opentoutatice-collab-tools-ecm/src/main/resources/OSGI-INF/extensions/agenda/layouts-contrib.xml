@@ -18,6 +18,7 @@
 					<widget>vevent_location</widget>
 				</row>
 				<row>
+				    <widget>vevent_all_day</widget>
 					<widget>vevent_dtstart</widget>
 					<widget>vevent_dtend</widget>
 				</row>
@@ -28,6 +29,9 @@
 					<widget>description</widget>
 				</row>
 				<row>
+					<widget>event_participants</widget>
+				</row>				
+				<row>
 					<widget>files</widget>
 				</row>
 			</rows>
@@ -37,6 +41,18 @@
 
 	<extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
 		point="widgets">
+		
+		<widget name="vevent_all_day" type="checkbox">
+            <labels>
+                <label mode="any">toutatice.label.event.all.day</label>
+            </labels>
+            <fields>
+                <field>vevent:allDay</field>
+            </fields>
+            <properties mode="any">
+                <property name="currentDocument">value</property>
+            </properties>
+        </widget>
 
 		<widget name="event_object" type="htmltext">
 			<labels>
@@ -47,6 +63,34 @@
 				<field>note:note</field>
 			</fields>
 		</widget>
+		
+	
+		<widget name="event_participants" type="multipleUsersSuggestionWithPermission">
+            <labels>
+                <label mode="any">toutatice.label.agenda.event.participants
+                </label>
+            </labels>
+            <helpLabels>
+                <label mode="edit">
+                    toutatice.label.agenda.event.participants
+                </label>
+            </helpLabels>
+            <translated>true</translated>
+            <fields>
+                <field>vevent:participants</field>
+            </fields>
+            <properties widgetMode="edit">
+                <property name="documentId">#{currentDocument.id}</property>
+                <property name="orderable">true</property>
+                <property name="permission">Read</property>
+                <property name="searchType">USER_TYPE</property>
+                <property name="placeholder">label.security.search</property>
+                <property name="width">70%</property>
+                <property name="prefixed">true</property>
+                <property name="required">false</property>
+            </properties>
+        </widget>
+		
 		
 		<!-- For PortalView -->
 		<widget name="pv_event_object" type="htmltext">

@@ -30,6 +30,7 @@
 			<facet name="Versionable" />
 			<facet name="Publishable" />
 			<facet name="HasRelatedText" />
+			<facet name="TTCAttachableImages" />
 		</doctype>
 
 	</extension>
