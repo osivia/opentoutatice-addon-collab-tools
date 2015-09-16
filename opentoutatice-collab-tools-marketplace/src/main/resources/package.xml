@@ -23,7 +23,7 @@
 	</platforms>
 	<dependencies>
 		<!-- Dependance sur la plate-forme opentoutatice -->
-		<package>open-toutatice:3.1.3-RC01</package>
+		<package>open-toutatice:3.1.2</package>
 		<!-- Dépendance sur les hotfixes -->
         <package>nuxeo-6.0-HF19:1.0.0</package>
 		<!-- Dépendance sur d'autres addons --> 
