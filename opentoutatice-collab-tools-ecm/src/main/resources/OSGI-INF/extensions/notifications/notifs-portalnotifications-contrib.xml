@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<component
+	name="fr.toutatice.ecm.collab.tools.notifications.portalnotifications"
+	version="1.0">
+
+
+	<require>fr.toutatice.ecm.platform.local.publishing.notifications
+	</require>
+
+	<extension
+		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+		point="notifications">
+
+		<!-- ========= désactivation des notifications core ========= -->
+		<notification name="Approbation review started" enabled="false">
+			<event name="workflowNewProcessStarted" />
+		</notification>
+
+		<!-- <notification name="Subscriptions updated" channel="email" enabled="true" 
+			availableIn="Workspace" autoSubscribed="true" template="subscriptionsUpdated" 
+			subject="Abonnement à une notification" label="label.nuxeo.notifications.subscriptions.updated"> 
+			<event name="subscriptionAssigned" /> </notification> -->
+
+		<notification name="Modification" channel="email"
+			enabled="true" availableIn="Workspace" autoSubscribed="false"
+			template="portal_modification" subject="Le document ${docTitle} a été modifié"
+			label="label.nuxeo.notifications.modif">
+			<event name="documentModified" />
+		</notification>
+
+
+		<notification name="Creation" channel="email" enabled="true"
+			availableIn="Workspace" autoSubscribed="false" template="portal_creation"
+			subject="Le document ${docTitle} a été ajouté" label="label.nuxeo.notifications.create">
+			<event name="documentCreated" />
+			<event name="documentImported" />
+		</notification>
+
+		<notification name="Task assigned" enabled="false">
+			<event name="workflowTaskAssigned" />
+		</notification>
+		<notification name="Task assigned" channel="email"
+			enabled="true" availableIn="Workspace" subject="Tâche assignée sur ${docTitle}"
+			autoSubscribed="true" template="workflowTaskAssigned"
+			templateExpr="NotificationContext['taskInstance'].getVariable('taskNotificationTemplate')"
+			label="label.nuxeo.notifications.appReviewStarted">
+			<event name="workflowTaskAssigned" />
+		</notification>
+
+		<notification name="Workflow Change" enabled="false" />
+
+		<notification name="CommentPublication" enabled="false">
+			<event name="commentPublished" />
+		</notification>
+
+		<notification name="CommentAdded" channel="email"
+			enabled="true" availableIn="all"
+			subject="Un commentaire a été ajouté sur le document ${docTitle}"
+			autoSubscribed="false" template="portal_comment" label="notifications.name.CommentAdded">
+			<event name="commentAdded" />
+		</notification>
+
+
+
+
+		<!-- ========= Activation de la notification custom ========= -->
+
+		<!-- Notifications associées à un abonnement sur les workflow (généraliste) -->
+
+		<notification name="Forum comment publication" channel="email"
+			enabled="true" availableIn="Forum" autoSubscribed="true" template="workflow"
+			subject="Notification de modération de commentaire" label="label.nuxeo.notifications.workflow">
+			<event name="ForumCommentPublication" />
+		</notification>
+
+
+
+	</extension>
+
+	<extension
+		target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+		point="templates">
+
+		<!-- <template name="subscriptionsUpdated" src="templates/subscriptionsUpdated_fr.ftl" 
+			/> -->
+		<template name="modif" src="templates/modif_fr.ftl" />
+		<!-- <template name="create" src="templates/create_fr.ftl" /> <template 
+			name="auto" src="templates/auto_fr.ftl" /> -->
+		<!-- <template name="workflow" src="templates/workflow_fr.ftl" /> <template 
+			name="reviewWorkflow" src="templates/reviewWorkflow_fr.ftl" /> <template 
+			name="commonWorkflow" src="templates/workflow_fr.ftl" /> <template name="emailDocument" 
+			src="templates/emailDocument_fr.ftl" /> -->
+
+		<template name="workflowTaskAssigned" src="templates/workflowTaskAssigned_fr.ftl" />
+
+		<template name="commentAdded" src="templates/commentAdded_fr.ftl" />
+
+		<!-- notifs front office -->
+		<template name="portal_creation" src="templates/portal_creation_fr.ftl" />
+		<template name="portal_modification" src="templates/portal_modification_fr.ftl" />
+		<template name="portal_comment" src="templates/portal_comment_fr.ftl" />
+
+		<!-- Send mail -->
+		<template name="emailDocument" src="templates/emailDocument_fr.ftl" />
+	</extension>
+	
+	<extension
+        target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+        point="notificationListenerVeto">
+        
+        <veto name="toutaticeNotificationsVeto" class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadNotificationsVeto" />
+        
+    </extension>
+    
+    <extension
+        target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+        point="notificationListenerHook">
+        
+        <hookListener name="ttcThreadPostNotification" class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadPostNotificationListener" />
+        
+    </extension>
+
+</component>

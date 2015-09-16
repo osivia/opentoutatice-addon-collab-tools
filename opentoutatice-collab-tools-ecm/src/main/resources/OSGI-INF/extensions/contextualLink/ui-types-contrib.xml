@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<component name="fr.toutatice.ecm.platform.web.ui.contextuallink.types">
+
+	<require>org.nuxeo.ecm.platform.types.TypeService</require>
+
+	<extension target="org.nuxeo.ecm.platform.types.TypeService"
+		point="types">
+		
+
+		<type id="DocumentUrlContainer">
+			<label>Classeur de liens</label>
+			<category>Collaborative</category>
+			<icon>/icons/url-folder.gif</icon>
+			<bigIcon>/icons/url-folder.gif</bigIcon>
+			<icon-expanded>/icons/url-folder_open.gif</icon-expanded>
+			<description>Dossier permettant de créer uniquement des documents
+				liens
+			</description>
+			<default-view>view_documents</default-view>
+			<layouts mode="any">
+				<layout>heading</layout>
+			</layouts>
+			<layouts mode="create">
+				<layout>layout@DocumentUrlContainer-create</layout>
+			</layouts>
+			<layouts mode="edit">
+				<layout>layout@DocumentUrlContainer-edit</layout>
+			</layouts>
+			<layouts mode="view" />
+			<contentViews category="CVTAB@StudioOnlineDocs">
+				<contentView showInExportView="false">cv_ContentOnlineList
+				</contentView>
+			</contentViews>
+			<contentViews category="CVTAB@StudioWorkingDocs">
+				<contentView showInExportView="false">cv_ContentOrderedReadNWrite
+				</contentView>
+			</contentViews>
+			<contentViews category="content">
+				<contentView showInExportView="false">cv_ContentOrderedReadNWrite_NIPS
+				</contentView>
+			</contentViews>
+			<contentViews category="trash_content">
+				<contentView showInExportView="false">document_trash_content
+				</contentView>
+			</contentViews>
+		</type>
+		
+
+	</extension>
+
+
+</component>

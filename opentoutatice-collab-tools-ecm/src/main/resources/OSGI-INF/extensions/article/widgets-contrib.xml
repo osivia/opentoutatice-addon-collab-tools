@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.web.article.widgets">
+
+	<require>org.nuxeo.ecm.platform.forms.layout.WebLayoutManager</require>
+	<require>fr.toutatice.ecm.platform.web.widgets</require>
+
+	<extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
+		point="widgets">
+
+		<widget name="article_title" type="text">
+			<labels>
+				<label mode="any">toutatice.label.title</label>
+			</labels>
+			<translated>true</translated>
+			<fields>
+				<field>dc:title</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="styleClass">dataInputText</property>
+				<property name="required">true</property>
+				<property name="disabled">false</property>
+			</properties>
+		</widget>
+
+		<widget name="article_extrait" type="htmltext">
+			<labels>
+				<label mode="any">toutatice.label.extract</label>
+			</labels>
+			<helpLabels>
+				<label mode="any">Les extraits sont des résumés facultatifs de vos
+					articles, écrits à la main.
+				</label>
+			</helpLabels>
+			<translated>true</translated>
+			<fields>
+				<field>annonce:resume</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="editorSelector">mceExtract</property>
+				<property name="disableHtmlInit">true</property>
+			</properties>
+		</widget>
+		
+		<widget name="article_extrait_summary" type="summary_content_type">
+			<labels>
+				<label mode="view">toutatice.label.extract</label>
+			</labels>
+			<helpLabels>
+				<label mode="view">Les extraits sont des résumés facultatifs de vos
+					articles, écrits à la main.
+				</label>
+			</helpLabels>
+			<translated>true</translated>
+			<fields>
+				<field>annonce:resume</field>
+				<field>annonce:resume_mime_type</field>
+			</fields>
+			<properties widgetMode="view">
+				<property name="cssClass">note_content_block</property>
+			</properties>
+		</widget>
+
+		<widget name="article_content" type="richtext_with_mimetype">
+			<labels>
+				<label mode="any">toutatice.label.content</label>
+			</labels>
+			<translated>true</translated>
+			<fields>
+				<field>note:note</field>
+				<field>note:mime_type</field>
+			</fields>
+			<properties widgetMode="any">
+				<property name="editorSelector">mceEditor</property>
+				<property name="required">true</property>
+			</properties>
+		</widget>
+		
+		<widget name="article_content_summary" type="summary_content_type">
+			<labels>
+				<label mode="view">toutatice.label.content</label>
+			</labels>
+			<translated>true</translated>
+			<fields>
+				<field>note:note</field>
+				<field>note:mime_type</field>
+			</fields>
+			<properties mode="view">
+				<property name="cssClass">note_content_block</property>
+			</properties>
+		</widget>
+
+		<widget name="article_image" type="file">
+			<labels>
+				<label mode="any">toutatice.label.article.header.picture</label>
+			</labels>
+			<helpLabels>
+				<label mode="any">Déposez une image pour illustrer votre annonce.
+				</label>
+			</helpLabels>
+			<translated>true</translated>
+			<fields>
+				<field>annonce:image</field>
+				<field>annonce:image/filename</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="required">false</property>
+				<property name="iconRendered">false</property>
+			</properties>
+			<properties widgetMode="view">
+				<property name="template">/widgets/toutatice_image_widget.xhtml
+				</property>
+			</properties>
+		</widget>
+		
+		<widget name="article_image_summary" type="summary_picture_type">
+			<labels>
+				<label mode="any">toutatice.label.article.header.picture</label>
+			</labels>
+			<helpLabels>
+				<label mode="any">Déposez une image pour illustrer votre annonce.
+				</label>
+			</helpLabels>
+			<translated>true</translated>
+			<fields>
+				<field>annonce:image</field>
+				<field>annonce:image/filename</field>
+			</fields>
+		</widget>
+
+
+
+		<widget name="article_folder_title" type="text">
+			<labels>
+				<label mode="any">toutatice.label.article.folder.titleTitre du bulletin d'articles</label>
+			</labels>
+			<translated>false</translated>
+			<fields>
+				<field>dc:title</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="styleClass">dataInputText</property>
+				<property name="required">true</property>
+				<property name="disabled">false</property>
+			</properties>
+		</widget>
+
+		<widget name="article_folder_title" type="text">
+			<labels>
+				<label mode="any">toutatice.label.article.folder.title</label>
+			</labels>
+			<translated>true</translated>
+			<fields>
+				<field>dc:title</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="styleClass">dataInputText</property>
+				<property name="required">true</property>
+				<property name="disabled">false</property>
+			</properties>
+		</widget>
+
+	</extension>
+
+
+</component>

@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.web.blog.widgets">
+
+	<require>org.nuxeo.ecm.platform.forms.layout.WebLayoutManager</require>
+
+	<extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
+		point="widgets">
+
+		<widget name="blogcontainer" type="layout">
+			<labels>
+				<label mode="any"></label>
+			</labels>
+			<translated>false</translated>
+			<fields>
+				<field></field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="name">toutatice_blogcontainer</property>
+				<property name="mode">edit</property>
+			</properties>
+			<properties widgetMode="view">
+				<property name="name">toutatice_blogcontainer</property>
+				<property name="mode">view</property>
+			</properties>
+		</widget>
+
+		<widget name="blog_name" type="text">
+			<translated>true</translated>
+			<fields>
+				<field>dc:title</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="required">true</property>
+				<property name="styleClass">dataInputText</property>
+				<property name="validator">
+					#{siteActions.validateBlogTitle}
+				</property>
+			</properties>
+		</widget>
+
+		<widget name="blog_url" type="template">
+			<widgetModes>
+				<mode value="any">view</mode>
+			</widgetModes>
+			<translated>true</translated>
+			<fields>
+				<field>webc:url</field>
+			</fields>
+			<properties mode="any">
+				<property name="template">
+					/widgets/blog_url_widget_template.xhtml
+				</property>
+			</properties>
+		</widget>
+
+		<widget name="email" type="text">
+			<translated>true</translated>
+			<fields>
+				<field>webc:email</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="required">true</property>
+				<property name="styleClass">dataInputText</property>
+			</properties>
+		</widget>
+
+		<widget name="baseline" type="text">
+			<translated>true</translated>
+			<fields>
+				<field>webc:baseline</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="styleClass">dataInputText</property>
+			</properties>
+		</widget>
+
+		<widget name="toutatice_logo" type="template">
+			<labels>
+				<label mode="any">toutatice.label.logo</label>
+			</labels>
+			<translated>true</translated>
+			<fields>
+				<field>webc:logo</field>
+				<field>webc:logo/filename</field>
+			</fields>
+			<properties mode="any">
+				<property name="template">
+					/widgets/toutatice_image_widget.xhtml
+				</property>
+			</properties>
+		</widget>
+
+		<widget name="welcomeText" type="htmltext">
+			<translated>true</translated>
+			<fields>
+				<field>webc:welcomeText</field>
+			</fields>
+		</widget>
+
+		<widget name="welcomeMedia" type="file">
+			<translated>true</translated>
+			<fields>
+				<field>webc:welcomeMedia</field>
+			</fields>
+		</widget>
+
+		<widget name="useCaptcha" type="checkbox">
+			<translated>true</translated>
+			<fields>
+				<field>webc:useCaptcha</field>
+			</fields>
+		</widget>
+
+		<widget name="moderationType" type="template">
+			<translated>true</translated>
+			<fields>
+				<field>webc:moderationType</field>
+			</fields>
+			<properties mode="any">
+				<property name="template">
+					/widgets/moderation_type_widget_template.xhtml
+				</property>
+			</properties>
+		</widget>
+
+
+		<widget name="blogpost_title" type="text">
+			<labels>
+				<label mode="any">Titre du billet</label>
+			</labels>
+			<translated>false</translated>
+			<fields>
+				<field>dc:title</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="required">true</property>
+				<property name="disabled">false</property>
+			</properties>
+		</widget>
+
+		<widget name="blogpost_content" type="htmltext">
+			<labels>
+				<label mode="any">Billet</label>
+			</labels>
+			<translated>false</translated>
+			<fields>
+				<field>webp:content</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="required">false</property>
+			</properties>
+		</widget>
+		
+		<widget name="blogpost_content_summary" type="summary_content_type">
+			<labels>
+				<label mode="any">Contenu</label>
+			</labels>
+			<translated>false</translated>
+			<fields>
+				<field>webp:content</field>
+			</fields>
+		</widget>
+
+		<widget name="contentRich" type="htmltext">
+			<translated>true</translated>
+			<fields>
+				<field>webp:content</field>
+			</fields>
+			<widgetModes>
+				<mode value="any">
+					#{layoutValue.webpage.isRichtext ? 'edit' :
+					'hidden'}
+				</mode>
+				<mode value="view">view</mode>
+			</widgetModes>
+		</widget>
+
+		<widget name="contentWiki" type="textarea">
+			<translated>true</translated>
+			<fields>
+				<field>webp:content</field>
+			</fields>
+			<widgetModes>
+				<mode value="any">
+					#{layoutValue.webpage.isRichtext ? 'hidden' :
+					'edit'}
+				</mode>
+				<mode value="create">hidden</mode>
+			</widgetModes>
+			<properties widgetMode="edit">
+				<property name="rows">15</property>
+			</properties>
+		</widget>
+
+	</extension>
+
+</component>

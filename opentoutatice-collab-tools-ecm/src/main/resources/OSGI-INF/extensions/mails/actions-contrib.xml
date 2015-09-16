@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.collab.tools.mails.actions">
+
+	<require>org.nuxeo.ecm.platform.actions.ActionService</require>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+
+		<action id="ToutaticeSendNotificationEmail" enabled="true" order="17"
+			label="action.email.document" icon="/icons/mail.gif" type="fancybox">
+			<category>DOCUMENT_UPPER_ACTION</category>
+			<filter-id>not_anonymous</filter-id>
+			<filter-id>not_version</filter-id>
+			<properties>
+				<property name="iframe">#{baseURL}document_notif_email.faces?conversationId=#{org.jboss.seam.core.manager.currentConversationId}
+				</property>
+			</properties>
+		</action>
+
+	</extension>
+
+</component>
+

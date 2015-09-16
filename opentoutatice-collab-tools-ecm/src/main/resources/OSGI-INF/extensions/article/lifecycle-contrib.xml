@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="fr.toutatice.ecm.platform.core.lifecycle.article.contrib">
+
+	<require>org.nuxeo.ecm.core.lifecycle.LifeCycleService</require>
+	<require>fr.toutatice.ecm.platform.core.lifecycle.contrib</require>
+
+	<extension target="org.nuxeo.ecm.core.lifecycle.LifeCycleService"
+		point="types">
+
+		<types>
+			<type name="AnnonceFolder">default_toutatice</type>
+			<type name="Annonce">default_toutatice</type>
+		</types>
+
+	</extension>
+
+</component>
