@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<component
+    name="fr.toutatice.ecm.collab.tools.notifications.contrib"
+    version="1.0">
+
+    <require>org.nuxeo.ecm.platform.notification.service.NotificationContrib</require>
+    <require>org.nuxeo.ecm.platform.notification.document.routing.NotificationContrib</require>
+    <require>fr.toutatice.ecm.platform.local.publishing.notifications
+    </require>
+
+    <extension
+        target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+        point="notifications">
+
+        <notification name="Forum comment publication" channel="email"
+            enabled="true" availableIn="Forum" autoSubscribed="true" template="workflow"
+            subject="Notification de modération de commentaire" label="label.nuxeo.notifications.workflow">
+            <event name="ForumCommentPublication" />
+        </notification>
+
+    </extension>
+    
+        <extension
+        target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+        point="templates">
+
+        <!-- Send mail -->
+        <template name="emailDocument" src="templates/emailDocument_fr.ftl" />
+        
+    </extension>
+
+    <extension
+        target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+        point="notificationListenerVeto">
+        
+        <veto name="threadNotificationsVeto"
+            class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadNotificationsVeto" />
+
+    </extension>
+
+    <extension
+        target="org.nuxeo.ecm.platform.ec.notification.service.NotificationService"
+        point="notificationListenerHook">
+
+        <hookListener name="ttcThreadPostNotification"
+            class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadPostNotificationListener" />
+
+    </extension>
+
+</component>
