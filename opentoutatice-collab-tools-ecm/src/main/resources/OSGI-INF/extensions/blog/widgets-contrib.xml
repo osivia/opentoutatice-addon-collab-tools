@@ -65,6 +65,9 @@
 		</widget>
 
 		<widget name="baseline" type="text">
+		    <labels>
+                <label mode="any">label.widget.toutatice_blogcontainer.baseline</label>
+            </labels>
 			<translated>true</translated>
 			<fields>
 				<field>webc:baseline</field>
