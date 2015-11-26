@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.collab.tools.userprofile.vocabularies">
+
+	<!-- Vocabulaire permettant de lister les entités organisationnelles possibles pour une personne (champ "ou" de la fiche annuaire) -->
+	<extension target="org.nuxeo.ecm.directory.sql.SQLDirectoryFactory"
+		point="directories">
+
+		<directory name="organizationalUnit">
+			<schema>vocabulary</schema>
+			<dataSource>java:/nxsqldirectory</dataSource>
+			<table>organizationalUnit</table>
+			<idField>id</idField>
+			<autoincrementIdField>false</autoincrementIdField>
+			<createTablePolicy>on_missing_columns</createTablePolicy>
+			<dataFile>vocabularies/organizationalUnit.csv</dataFile>
+			<cacheTimeout>3600</cacheTimeout>
+			<cacheMaxSize>1000</cacheMaxSize>
+		</directory>
+
+	</extension>
+
+	<extension target="org.nuxeo.ecm.directory.ui.DirectoryUIManager"
+		point="directories">
+		<directory name="organizationalUnit" layout="vocabulary" sortField="ordering" />
+	</extension>
+
+</component>
