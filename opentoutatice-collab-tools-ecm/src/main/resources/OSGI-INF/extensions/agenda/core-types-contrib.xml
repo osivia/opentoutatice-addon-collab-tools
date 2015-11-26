@@ -19,6 +19,7 @@
 		</doctype>
 
 		<doctype name="VEVENT" append="true">
+			<facet name="TTCAttachableImages" />
 			<schema name="toutatice_event" />
 			<schema name="note" />
 			<schema name="files" />
