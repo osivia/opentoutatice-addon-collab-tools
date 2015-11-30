@@ -3,10 +3,11 @@
 	<title>Addon to leverage the collaboration tools</title>
 	<description>
 		<p>Adds new document types such as the BlogSite, FAQ...
-		
-		   Main features :
-			* fix #4074	
-            * Mail sending (share)
+		      
+		   Evolutions:
+		    * Simplified PortalViews: new definitions of layouts and widgets
+			* Basic users definitions added
+			* Some notifications moved to portal notifications addon
 		</p>
 	</description>
 	<home-page>http://www.toutatice.fr</home-page>
@@ -23,7 +24,7 @@
 	</platforms>
 	<dependencies>
 		<!-- Dependance sur la plate-forme opentoutatice -->
-		<package>open-toutatice:3.1.2</package>
+		<package>open-toutatice:3.2.0-RC01</package>
 		<!-- Dépendance sur les hotfixes -->
         <package>nuxeo-6.0-HF19:1.0.0</package>
 		<!-- Dépendance sur d'autres addons --> 
