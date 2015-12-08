@@ -5,14 +5,14 @@
 	<extension target="org.nuxeo.ecm.directory.sql.SQLDirectoryFactory"
 		point="directories">
 
-		<directory name="organizationalUnit">
+		<directory name="organization">
 			<schema>vocabulary</schema>
 			<dataSource>java:/nxsqldirectory</dataSource>
-			<table>organizationalUnit</table>
+			<table>organization</table>
 			<idField>id</idField>
 			<autoincrementIdField>false</autoincrementIdField>
 			<createTablePolicy>on_missing_columns</createTablePolicy>
-			<dataFile>vocabularies/organizationalUnit.csv</dataFile>
+			<dataFile>vocabularies/organization.csv</dataFile>
 			<cacheTimeout>3600</cacheTimeout>
 			<cacheMaxSize>1000</cacheMaxSize>
 		</directory>
@@ -21,7 +21,7 @@
 
 	<extension target="org.nuxeo.ecm.directory.ui.DirectoryUIManager"
 		point="directories">
-		<directory name="organizationalUnit" layout="vocabulary" sortField="ordering" />
+		<directory name="organization" layout="vocabulary" sortField="ordering" />
 	</extension>
 
 </component>
