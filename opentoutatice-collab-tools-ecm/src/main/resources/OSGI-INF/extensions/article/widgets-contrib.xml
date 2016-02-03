@@ -71,7 +71,7 @@
 				<field>note:mime_type</field>
 			</fields>
 			<properties widgetMode="any">
-				<property name="editorSelector">mceEditor</property>
+				<property name="editorSelector">mceSimpleEditorResponsive</property>
 				<property name="required">true</property>
 			</properties>
 		</widget>
