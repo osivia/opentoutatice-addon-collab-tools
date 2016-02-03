@@ -18,10 +18,12 @@ function createTinyMceExtract() {
 				editor_selector : "mceExtract",
 				editor_deselector : "disableMCEInit",
 				plugins : ["nuxeolink link textcolor"],
+				content_css: "/nuxeo/css/toutatice-popup.min.css?" + new Date().getTime(),
 
 				// Theme options
 				toolbar1 : "bold italic underline | strikethrough subscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | forecolor backcolor | nuxeolink link unlink",
 				menubar: false,
+				statusbar: false,
 
 				gecko_spellcheck : true,
 
