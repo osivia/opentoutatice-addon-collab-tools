@@ -12,12 +12,9 @@
 
 		<layout name="layout@Annonce-create">
 			<templates>
-				<template mode="create">/layouts/ottc_editor_js_layout_default_template.xhtml
+				<template mode="create">/layouts/layout_default_template.xhtml
 				</template>
 			</templates>
-			<properties mode="create">
-				<property name="editorJs">tinymce/custom/tiny_mce_init_extrait.js</property>
-			</properties>
 			<rows>
 				<row>
 					<widget>article_title</widget>
@@ -48,12 +45,9 @@
 
 		<layout name="layout@Annonce-edit">
 			<templates>
-				<template mode="edit">/layouts/ottc_editor_js_layout_default_template.xhtml
+				<template mode="edit">/layouts/layout_default_template.xhtml
 				</template>
 			</templates>
-			<properties mode="edit">
-				<property name="editorJs">tinymce/custom/tiny_mce_init_extrait.js</property>
-			</properties>
 			<rows>
 				<row>
 					<widget>article_title</widget>

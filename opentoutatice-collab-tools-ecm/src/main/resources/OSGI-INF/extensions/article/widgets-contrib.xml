@@ -22,7 +22,7 @@
 			</properties>
 		</widget>
 
-		<widget name="article_extrait" type="htmltext">
+		<widget name="article_extrait" type="ttc_richtext_with_mimetype">
 			<labels>
 				<label mode="any">toutatice.label.extract</label>
 			</labels>
@@ -36,8 +36,10 @@
 				<field>annonce:resume</field>
 			</fields>
 			<properties widgetMode="edit">
-				<property name="editorSelector">mceExtract</property>
-				<property name="disableHtmlInit">true</property>
+                <property name="editorSelector">mceExtract</property>
+                <property name="disableHTMLInit">true</property>
+                <property name="alternateTinyMCEjs">tinymce/custom/tiny_mce_init_extrait.js</property>
+                <property name="showFormat">false</property>
 				<property name="pvOverride">false</property>
 			</properties>
 		</widget>
@@ -61,7 +63,7 @@
 			</properties>
 		</widget>
 
-		<widget name="article_content" type="richtext_with_mimetype">
+		<widget name="article_content" type="ttc_richtext_with_mimetype">
 			<labels>
 				<label mode="any">toutatice.label.content</label>
 			</labels>
@@ -70,8 +72,9 @@
 				<field>note:note</field>
 				<field>note:mime_type</field>
 			</fields>
-			<properties widgetMode="any">
+			<properties widgetMode="edit">
 				<property name="editorSelector">mceSimpleEditorResponsive</property>
+				<property name="disableHTMLInit">true</property>
 				<property name="required">true</property>
 			</properties>
 		</widget>

@@ -62,6 +62,10 @@
 			<fields>
 				<field>note:note</field>
 			</fields>
+			<properties widgetMode="edit">
+                <property name="editorSelector">mceSimpleEditorResponsive</property>
+                <property name="disableHtmlInit">true</property>
+            </properties>
 		</widget>
 		
 	

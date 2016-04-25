@@ -98,6 +98,10 @@
 			<fields>
 				<field>webc:welcomeText</field>
 			</fields>
+			<properties mode="edit">
+                <property name="disableHtmlInit">true</property>
+                <property name="editorSelector">mceSimpleEditorResponsive</property>
+            </properties>
 		</widget>
 
 		<widget name="welcomeMedia" type="file">
@@ -149,9 +153,11 @@
 			<fields>
 				<field>webp:content</field>
 			</fields>
-			<properties widgetMode="edit">
-				<property name="required">false</property>
-			</properties>
+			<properties mode="edit">
+                <property name="disableHtmlInit">true</property>
+                <property name="editorSelector">mceSimpleEditorResponsive</property>
+                <property name="required">false</property>
+            </properties>
 		</widget>
 		
 		<widget name="blogpost_content_summary" type="summary_content_type">
@@ -176,6 +182,10 @@
 				</mode>
 				<mode value="view">view</mode>
 			</widgetModes>
+			<properties mode="edit">
+                <property name="disableHtmlInit">true</property>
+                <property name="editorSelector">mceSimpleEditorResponsive</property>
+            </properties>
 		</widget>
 
 		<widget name="contentWiki" type="textarea">

@@ -73,6 +73,9 @@
 				<property name="cssClass">note_content_block</property>
 				<property name="translatedHtml">#{noteActions.translateImageLinks(field_0)}
 				</property>
+				<property name="editorSelector">mceSimpleEditorResponsive</property>
+                <property name="disableHTMLInit">true</property>
+                <property name="showFormat">false</property>
 			</properties>
 		</widget>
 		
