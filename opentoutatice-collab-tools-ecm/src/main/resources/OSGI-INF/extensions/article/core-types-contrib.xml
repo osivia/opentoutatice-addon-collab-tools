@@ -74,6 +74,11 @@
 				<type>AnnonceFolder</type>
 			</subtypes>
 		</type>
+		<type id="Room">
+			<subtypes>
+				<type>AnnonceFolder</type>
+			</subtypes>
+		</type>		
 
 	</extension>
 

@@ -32,6 +32,12 @@
 				<type>Forum</type>
 			</subtypes>
 		</type>
+		
+		<type id="Room">
+			<subtypes>
+				<type>Forum</type>
+			</subtypes>
+		</type>		
 
 		<type id="Forum">
 			<subtypes>

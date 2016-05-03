@@ -53,6 +53,11 @@
 				<type>FaqFolder</type>
 			</subtypes>
 		</type>
+		<type id="Room">
+			<subtypes>
+				<type>FaqFolder</type>
+			</subtypes>
+		</type>		
 		<type id="Folder">
 			<subtypes>
 				<type>FaqFolder</type>

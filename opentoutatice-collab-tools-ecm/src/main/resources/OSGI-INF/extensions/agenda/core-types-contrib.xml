@@ -47,6 +47,12 @@
 				<type>Agenda</type>
 			</subtypes>
 		</type>
+		
+		<type id="Room">
+			<subtypes>
+				<type>Agenda</type>
+			</subtypes>
+		</type>
 
 		<type id="Agenda">
 			<subtypes>
