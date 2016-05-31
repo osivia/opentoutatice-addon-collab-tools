@@ -26,6 +26,7 @@
 		
 		<type id="Room">
 			<subtypes>
+				<type>Room</type>
 				<type>Folder</type>
 				<type>PictureBook</type>
 			</subtypes>
