@@ -2,12 +2,12 @@
 <package type="addon" name="open-toutatice-addons-collab-tools" version="@VERSION@">
 	<title>Addon to leverage the collaboration tools</title>
 	<description>
-		<p>Adds new document types such as the BlogSite, FAQ...
+		<p>Adds new collaboratives document types such as the BlogSite, FAQ...
 		      
-		   Evolutions:
-		    * Simplified PortalViews: new definitions of layouts and widgets
-			* Basic users definitions added
-			* Some notifications moved to portal notifications addon
+		   _____________________________________________________________________
+		   
+		    Main new features:
+		    * Room document type
 		</p>
 	</description>
 	<home-page>http://www.toutatice.fr</home-page>
@@ -24,7 +24,7 @@
 	</platforms>
 	<dependencies>
 		<!-- Dependance sur la plate-forme opentoutatice -->
-		<package>open-toutatice:3.2.2-RC12</package>
+		<package>open-toutatice:3.2.2</package>
 		<!-- Dépendance sur les hotfixes -->
         <package>nuxeo-6.0-HF21:1.0.0</package>
 		<!-- Dépendance sur d'autres addons --> 
