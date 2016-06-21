@@ -38,7 +38,7 @@ import org.nuxeo.ecm.platform.ec.notification.NotificationListenerHook;
 public class ThreadPostNotificationListener implements NotificationListenerHook {
 
     /**
-     * Set varaible comment with post value
+     * Set variable comment with post value
      * in case of Threads posts.
      */
     @Override

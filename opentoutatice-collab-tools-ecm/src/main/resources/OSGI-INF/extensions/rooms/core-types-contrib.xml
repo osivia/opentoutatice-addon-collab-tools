@@ -10,7 +10,9 @@
 	<extension target="org.nuxeo.ecm.core.schema.TypeService"
 		point="doctype">
 
-		<doctype name="Room" extends="Workspace" />
+		<doctype name="Room" extends="Workspace">
+		      <prefetch>webc:url</prefetch>
+		</doctype>
 
 	</extension>
 

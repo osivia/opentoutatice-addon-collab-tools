@@ -22,7 +22,7 @@ import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
-import fr.toutatice.ecm.platform.core.services.fetchinformation.FetchInformationProvider;
+import fr.toutatice.ecm.platform.core.services.infos.provider.DocumentInformationsProvider;
 
 /**
  * Service for managing notifications
@@ -30,7 +30,7 @@ import fr.toutatice.ecm.platform.core.services.fetchinformation.FetchInformation
  * @author lbillon
  * 
  */
-public interface ToutaticeNotificationService extends FetchInformationProvider {
+public interface DocumentNotificationInfosProvider extends DocumentInformationsProvider {
 
 	/**
 	 * Subscribe to all notifications on the document

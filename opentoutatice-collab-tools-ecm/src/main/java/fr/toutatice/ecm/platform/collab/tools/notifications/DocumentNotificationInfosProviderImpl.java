@@ -46,9 +46,9 @@ import fr.toutatice.ecm.platform.core.helper.ToutaticeDocumentHelper;
  * @author lbillon
  * 
  */
-public class ToutaticeNotificationServiceImpl implements ToutaticeNotificationService {
+public class DocumentNotificationInfosProviderImpl implements DocumentNotificationInfosProvider {
 
-    private static final Log log = LogFactory.getLog(ToutaticeNotificationServiceImpl.class);
+    private static final Log log = LogFactory.getLog(DocumentNotificationInfosProviderImpl.class);
 
     private static final String SUBSCRIPTION_STATUS = "subscription_status";
 

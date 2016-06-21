@@ -44,7 +44,7 @@ public class AllNotificationsUnsubscribe {
 	@OperationMethod
 	public void run(DocumentModel document) throws ClientException, ClassNotFoundException {
 
-		ToutaticeNotificationService service = Framework.getService(ToutaticeNotificationService.class);
+		DocumentNotificationInfosProvider service = Framework.getService(DocumentNotificationInfosProvider.class);
 
 		service.unsubscribe(session, document);
 	}
