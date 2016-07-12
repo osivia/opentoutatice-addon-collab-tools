@@ -42,10 +42,10 @@
 			<description></description>
 			<default-view>view_documents</default-view>
 			<layouts mode="create">
-				<layout>layout@Thread</layout>
+				<layout>layout@Thread-create</layout>
 			</layouts>
 			<layouts mode="edit">
-				<layout>layout@Thread</layout>
+				<layout>layout@Thread-edit</layout>
 			</layouts>
 			<layouts mode="view">
 				<layout>layout@Thread-view</layout>

@@ -56,16 +56,20 @@
             </properties>
         </widget>        
         
-        <widget name="thread_file" type="file">
-            <labels>
-                <label mode="any">Fichier</label>
-            </labels>
-            <translated>true</translated>
-            <fields>
-                <field>file:content</field>
-        		<field>file:filename</field>
-            </fields>
-        </widget>        
+        <widget name="thread_file" type="template">
+		      <labels>
+		        <label mode="any">Pièce jointe</label>
+		      </labels>
+		      <translated>false</translated>
+		      <fields>
+		        <field>file:content</field>
+		        <field>file:filename</field>
+		      </fields>
+		      <properties mode="any">
+		        <property name="template">/widgets/extended_file_widget.xhtml</property>
+		      </properties>
+	    </widget>
+  
 
 		<widget name="moderator_layout" type="layout">
 			<labels>
