@@ -17,8 +17,9 @@
 		</doctype>
 
 		<doctype name="Thread" append="true">
-			<schema name="thread_toutatice" />
 			<facet name="TTCAttachableImages" />
+			<schema name="thread_toutatice" />
+			<schema name="file" />
 		</doctype>
 		
 		<!-- comment schema added to be coherent with CommentManagerImpl#updateAuthor.
