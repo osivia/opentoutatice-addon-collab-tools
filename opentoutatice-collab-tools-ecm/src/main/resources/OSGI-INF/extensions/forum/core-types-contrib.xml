@@ -12,14 +12,14 @@
 		<doctype name="Forum" extends="Document">
 			<schema name="common" />
 			<schema name="dublincore" />
-			<!-- <schema name="forum_acaren" />-->
 			<facet name="Folderish" />
 			<facet name="SpaceContent" />
 		</doctype>
 
 		<doctype name="Thread" append="true">
-			<schema name="thread_toutatice" />
 			<facet name="TTCAttachableImages" />
+			<schema name="thread_toutatice" />
+			<schema name="file" />
 		</doctype>
 
 	</extension>

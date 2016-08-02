@@ -57,7 +57,7 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
     @In(create = true)
     transient UserManager userManager;
     
-    /** To keep data in cofirm portal view. */
+    /** To keep data in confirm portal view. */
     protected List<String> savedRecipients;
     /** To resolve converter problem on hidden input in confirm portal view */
 
