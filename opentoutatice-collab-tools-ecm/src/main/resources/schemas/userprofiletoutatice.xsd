@@ -9,5 +9,7 @@
   <xs:element name="mobile" type="xs:string"/>
   <xs:element name="profession" type="xs:string"/>
  
+ <!-- CGU -->
+ <xs:element name="terms_of_use_agreement" type="xs:integer" default="0" />
   
 </xs:schema>
