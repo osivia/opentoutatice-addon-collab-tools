@@ -53,7 +53,18 @@
                 <property name="required">true</property>
             </properties>
         </widget>        
-
+        
+        <widget name="thread_file" type="file">
+            <labels>
+                <label mode="any">Pièce jointe</label>
+            </labels>
+            <translated>false</translated>
+            <fields>
+		        <field>file:content</field>
+		        <field>file:filename</field>
+		      </fields>
+        </widget>        
+        
 		<widget name="moderator_layout" type="layout">
 			<labels>
 				<label mode="any">Gestion de la modération</label>

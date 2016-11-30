@@ -12,13 +12,25 @@
 		<doctype name="Forum" extends="Document">
 			<schema name="common" />
 			<schema name="dublincore" />
-			<!-- <schema name="forum_acaren" />-->
 			<facet name="Folderish" />
 			<facet name="SpaceContent" />
 		</doctype>
 
 		<doctype name="Thread" append="true">
+			<facet name="TTCAttachableImages" />
 			<schema name="thread_toutatice" />
+			<schema name="file" />
+		</doctype>
+		
+		<!-- comment schema added to be coherent with CommentManagerImpl#updateAuthor.
+			 Furthermore, if not and if parent of Post created is Post,
+			 this parent is get in system session and we don't have good author informations.
+			(cf CommentManagerImpl#createComment(DocumentModel docModel, DocumentModel parent, DocumentModel child) 
+			
+			Prefetch is added to avoid error on remove Post (as comment schema is added) -->
+		<doctype name="Post" append="true">
+			<schema name="comment" />
+			<prefetch>comment.author, comment.text, comment.creationDate</prefetch>
 		</doctype>
 
 	</extension>

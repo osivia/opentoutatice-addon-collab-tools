@@ -28,5 +28,10 @@ public interface CollabToolsConstants {
     String CST_DOC_SCHEMA_EVENT = "vevent";
     String CST_DOC_XPATH_EVENT_START = CST_DOC_SCHEMA_EVENT + ":dtstart";
     String CST_DOC_XPATH_EVENT_END = CST_DOC_SCHEMA_EVENT + ":dtend";
+    
+    String THREAD_TYPE = "Thread";
+    String POST_TYPE = "Post";
+    String TTC_THREAD_SCHEMA = "thread_toutatice";
+    String TTC_THREAD_NB_COMMENTS_XPATH = "ttcth:nbComments";
 
 }
