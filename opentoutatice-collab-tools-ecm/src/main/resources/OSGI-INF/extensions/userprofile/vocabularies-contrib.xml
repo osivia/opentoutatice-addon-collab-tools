@@ -16,12 +16,28 @@
 			<cacheTimeout>3600</cacheTimeout>
 			<cacheMaxSize>1000</cacheMaxSize>
 		</directory>
+		
+		<directory name="ottc_socialnetworks">
+			<schema>vocabulary</schema>
+			<dataSource>java:/nxsqldirectory</dataSource>
+			<cacheTimeout>3600</cacheTimeout>
+			<cacheMaxSize>1000</cacheMaxSize>
+			<idField>id</idField>
+			<autoincrementIdField>false</autoincrementIdField>
+			<!-- <createTablePolicy>on_missing_columns</createTablePolicy> -->
+			<createTablePolicy>always</createTablePolicy>
+			<table>vocabulary_ottc_socialnetworks</table>
+			<dataFile>vocabularies/toutatice-socialnetworks.csv</dataFile>
+		</directory>
 
 	</extension>
 
 	<extension target="org.nuxeo.ecm.directory.ui.DirectoryUIManager"
 		point="directories">
+		
 		<directory name="organization" layout="vocabulary" sortField="ordering" />
+		<directory name="ottc_socialnetworks" layout="vocabulary" sortField="label" />
+		
 	</extension>
 
 </component>
