@@ -348,9 +348,9 @@
                 <row>
                     <widget>thread_message</widget>
                 </row>      
-                <row>
-                    <widget>file</widget>
-                </row>           
+				<row>
+					<widget>files</widget>
+				</row>  
 				<!-- not yet implemented portal side <row>
 					<widget>moderator_layout</widget>
 				</row> -->

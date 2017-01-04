@@ -43,6 +43,9 @@
 				<row>
 					<widget>content_question_response</widget>
 				</row>
+				<row>
+					<widget>files</widget>
+				</row>				
 			</rows>
 		</layout>
 

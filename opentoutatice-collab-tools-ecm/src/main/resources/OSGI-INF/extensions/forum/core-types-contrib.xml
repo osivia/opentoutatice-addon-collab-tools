@@ -20,6 +20,7 @@
 			<facet name="TTCAttachableImages" />
 			<schema name="thread_toutatice" />
 			<schema name="file" />
+			<schema name="files" />
 		</doctype>
 
 	</extension>
