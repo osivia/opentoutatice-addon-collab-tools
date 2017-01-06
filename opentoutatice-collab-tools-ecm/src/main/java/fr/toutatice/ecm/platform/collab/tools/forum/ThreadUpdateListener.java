@@ -4,7 +4,11 @@
 package fr.toutatice.ecm.platform.collab.tools.forum;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
@@ -16,6 +20,7 @@ import org.nuxeo.ecm.core.event.EventListener;
 import org.nuxeo.ecm.core.event.impl.DocumentEventContext;
 import org.nuxeo.ecm.platform.comment.api.CommentEvents;
 import org.nuxeo.ecm.platform.comment.api.CommentManager;
+import org.nuxeo.ecm.platform.forum.web.api.ThreadAdapter;
 import org.nuxeo.runtime.api.Framework;
 
 import fr.toutatice.ecm.platform.collab.tools.constants.CollabToolsConstants;
@@ -46,59 +51,67 @@ public class ThreadUpdateListener implements EventListener {
 	public void handleEvent(Event event) throws ClientException {
 		
 		String eventName = event.getName();
-		
-		if (CommentEvents.COMMENT_ADDED.equals(eventName)
-				|| CommentEvents.COMMENT_REMOVED.equals(eventName)) {
 
-			if (event.getContext() instanceof DocumentEventContext) {
-				DocumentEventContext docCtx = (DocumentEventContext) event.getContext();
-				DocumentModel sourceDocument = docCtx.getSourceDocument();
+
+		if (event.getContext() instanceof DocumentEventContext) {
+			DocumentEventContext docCtx = (DocumentEventContext) event.getContext();
+			DocumentModel sourceDocument = docCtx.getSourceDocument();
+			
+			if (sourceDocument != null) {
 				
-				if (sourceDocument != null) {
-					
-					CoreSession session = sourceDocument.getCoreSession();
-					
-					if(CollabToolsConstants.THREAD_TYPE.equals(sourceDocument.getType())) {
-						updateNbAnswersOfThread(eventName, sourceDocument,
-								session);
-					} else if (CollabToolsConstants.POST_TYPE.equals(sourceDocument.getType())){
-						DocumentModel thread = getCommentManager().getThreadForComment(sourceDocument);
-						updateNbAnswersOfThread(eventName, thread, session);
-					}
-
+				CoreSession session = sourceDocument.getCoreSession();
+				
+				if(CollabToolsConstants.THREAD_TYPE.equals(sourceDocument.getType())) {
+					updateAnswersOfThread(eventName, sourceDocument,
+							session);
+				} else if (CollabToolsConstants.POST_TYPE.equals(sourceDocument.getType())){
+					DocumentModel thread = getCommentManager().getThreadForComment(sourceDocument);
+					updateAnswersOfThread(eventName, thread, session);
 				}
-			}
 
+			}
 		}
-		
 	}
 	
 	/**
-	 * Updates the numbers of Thread answers.
+	 * Updates the datas about Thread answers.
 	 * 
 	 * @param eventName
-	 * @param thread
+	 * @param doc
 	 * @param session
 	 */
-	private void updateNbAnswersOfThread(String eventName,
-			DocumentModel thread, CoreSession session) {
+	private void updateAnswersOfThread(String eventName,
+			DocumentModel doc, CoreSession session) {
 
 		// To force reload of Posts
 		session.save();
-		List<DocumentModel> nbAnswers = getCommentManager().getComments(thread);
+				
+		// -------------
 		
-		// Update number of comments on Thread in unrestricted way cause user who add Post may not have Write permission  on Thread.
-		// In case of deleted Post, the Thread is considered as not modified (so saved in silent way).
-		if(CommentEvents.COMMENT_REMOVED.equals(eventName)){
-			thread.setPropertyValue(CollabToolsConstants.TTC_THREAD_NB_COMMENTS_XPATH, nbAnswers.size());
-			ToutaticeDocumentHelper.saveDocumentSilently(session, thread, true);
-		} else {
-			UnrestrictedPropertySetter propertySetter = new UnrestrictedPropertySetter(session,thread.getRef(),
-					CollabToolsConstants.TTC_THREAD_NB_COMMENTS_XPATH, nbAnswers.size());
-			propertySetter.runUnrestricted();
-			// Contributors and modification date are updated by DublincoreListener
-			// (it uses originating user)
+		List<DocumentModel> answers = getCommentManager().getComments(doc);
+		
+		Serializable lastCommentAuthor = doc.getPropertyValue("dc:creator");
+		GregorianCalendar lastCommentDate = (GregorianCalendar) doc.getPropertyValue("dc:created");
+		for(DocumentModel answer : answers) {
+			Serializable author = answer.getPropertyValue("post:author");
+			
+			GregorianCalendar creationDate = (GregorianCalendar) answer.getPropertyValue("post:creationDate");
+			
+			if(lastCommentDate == null || lastCommentDate.before(creationDate)) {
+				lastCommentDate = creationDate;
+				lastCommentAuthor = author;
+			}
 		}
+		
+		Map<String, Serializable> properties = new HashMap<String, Serializable>();
+		properties.put(CollabToolsConstants.TTC_THREAD_NB_COMMENTS_XPATH, answers.size());
+		properties.put(CollabToolsConstants.TTC_THREAD_LAST_COMMENT_DATE_XPATH, lastCommentDate);
+		properties.put(CollabToolsConstants.TTC_THREAD_LAST_COMMENT_AUTHOR_XPATH, lastCommentAuthor);
+		
+		UnrestrictedPropertySetter propertySetter = new UnrestrictedPropertySetter(session,doc.getRef(),
+				properties);
+		propertySetter.runUnrestricted();
+
 	}
 	
 	/**
@@ -111,24 +124,26 @@ public class ThreadUpdateListener implements EventListener {
 	protected class UnrestrictedPropertySetter extends UnrestrictedSessionRunner {
 
 		DocumentRef docRef;
+		
+		Map<String, Serializable> properties;
 
-		String xpath;
-
-		Serializable value;
 
 		protected UnrestrictedPropertySetter(CoreSession session,
-				DocumentRef docRef, String xpath, Serializable value) {
+				DocumentRef docRef, Map<String, Serializable> properties) {
 			super(session);
 			this.docRef = docRef;
-			this.xpath = xpath;
-			this.value = value;
+			this.properties = properties;
 		}
 
 		@Override
 		public void run() throws ClientException {
 			DocumentModel doc = session.getSourceDocument(docRef);
 			if (doc != null) {
-				doc.setPropertyValue(xpath, value);
+				for(Map.Entry<String, Serializable> property : properties.entrySet()) {
+
+					doc.setPropertyValue(property.getKey(), property.getValue());
+				}
+				
 				session.saveDocument(doc);
 			}
 

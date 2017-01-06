@@ -32,6 +32,10 @@ public interface CollabToolsConstants {
     String THREAD_TYPE = "Thread";
     String POST_TYPE = "Post";
     String TTC_THREAD_SCHEMA = "thread_toutatice";
+    
     String TTC_THREAD_NB_COMMENTS_XPATH = "ttcth:nbComments";
+    String TTC_THREAD_LAST_COMMENT_AUTHOR_XPATH = "ttcth:lastCommentAuthor";
+    String TTC_THREAD_LAST_COMMENT_DATE_XPATH = "ttcth:lastCommentDate";
+    
 
 }

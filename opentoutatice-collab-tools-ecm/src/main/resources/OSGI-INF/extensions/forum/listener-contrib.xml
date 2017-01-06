@@ -12,10 +12,11 @@
 		</documentation>
 		
 		<listener name="ottcThreadUpdateListener" async="false"
-			postCommit="false"
+			postCommit="true"
             enabled="true"
 			class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadUpdateListener"
-			priority="100">
+			priority="200">
+			<event>documentCreated</event>
 			<event>commentAdded</event>
 			<event>commentRemoved</event>
 		</listener>
