@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema targetNamespace="http://www.nuxeo.core/ecm/schemas/userprofiletoutatice/"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:nxs="http://www.nuxeo.core/ecm/schemas/userprofiletoutatice/" >
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nxs="http://www.nuxeo.core/ecm/schemas/userprofiletoutatice/">
 
-  
-  <xs:element name="bio" type="xs:string"/>
-  <xs:element name="mobile" type="xs:string"/>
-  <xs:element name="profession" type="xs:string"/>
- 
- <!-- CGU -->
- <xs:element name="terms_of_use_agreement" type="xs:integer" default="0" />
-  
+
+	<xs:element name="bio" type="xs:string" />
+	<xs:element name="mobile" type="xs:string" />
+	<xs:element name="profession" type="xs:string" />
+
+	<!-- News -->
+    <xs:element name="newsSubscription" type="xs:boolean" default="true" />
+    
+	<!-- CGU -->
+	<xs:element name="terms_of_use_agreement" type="xs:integer" default="0" />
+
 </xs:schema>
