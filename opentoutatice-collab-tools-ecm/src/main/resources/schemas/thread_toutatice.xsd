@@ -6,5 +6,7 @@
 
 	<xs:element name="message" type="xs:string" />
 	<xs:element name="nbComments" type="xs:integer" default="0" />
+	<xs:element name="lastCommentAuthor" type="xs:string" />
+	<xs:element name="lastCommentDate" type="xs:date" />
 
 </xs:schema>

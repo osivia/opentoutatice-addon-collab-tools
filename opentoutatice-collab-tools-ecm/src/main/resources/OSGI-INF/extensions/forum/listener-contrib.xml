@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<component name="fr.toutatice.ecm.platform.core.forum.listener">
+
+    <require>org.nuxeo.ecm.core.event.EventServiceComponent</require>
+
+	<extension target="org.nuxeo.ecm.core.event.EventServiceComponent"
+		point="listener">
+
+		<documentation>
+			Update Thread on added, removed Post.
+		</documentation>
+		
+		<listener name="ottcThreadUpdateListener" async="false"
+			postCommit="true"
+            enabled="true"
+			class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadUpdateListener"
+			priority="200">
+			<event>documentCreated</event>
+			<event>commentAdded</event>
+			<event>commentRemoved</event>
+		</listener>
+
+	</extension>
+
+</component>
+
+
