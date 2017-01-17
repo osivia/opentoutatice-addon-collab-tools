@@ -49,9 +49,6 @@ public class ThreadUpdateListener implements EventListener {
 	 */
 	@Override
 	public void handleEvent(Event event) throws ClientException {
-		
-		String eventName = event.getName();
-
 
 		if (event.getContext() instanceof DocumentEventContext) {
 			DocumentEventContext docCtx = (DocumentEventContext) event.getContext();
@@ -62,11 +59,11 @@ public class ThreadUpdateListener implements EventListener {
 				CoreSession session = sourceDocument.getCoreSession();
 				
 				if(CollabToolsConstants.THREAD_TYPE.equals(sourceDocument.getType())) {
-					updateAnswersOfThread(eventName, sourceDocument,
+					updateAnswersOfThread(sourceDocument,
 							session);
 				} else if (CollabToolsConstants.POST_TYPE.equals(sourceDocument.getType())){
 					DocumentModel thread = getCommentManager().getThreadForComment(sourceDocument);
-					updateAnswersOfThread(eventName, thread, session);
+					updateAnswersOfThread(thread, session);
 				}
 
 			}
@@ -80,7 +77,7 @@ public class ThreadUpdateListener implements EventListener {
 	 * @param doc
 	 * @param session
 	 */
-	private void updateAnswersOfThread(String eventName,
+	public void updateAnswersOfThread(
 			DocumentModel doc, CoreSession session) {
 
 		// To force reload of Posts
