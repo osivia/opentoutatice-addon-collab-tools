@@ -90,14 +90,19 @@ public class ThreadUpdateListener implements EventListener {
 		Serializable lastCommentAuthor = doc.getPropertyValue("dc:creator");
 		GregorianCalendar lastCommentDate = (GregorianCalendar) doc.getPropertyValue("dc:created");
 		for(DocumentModel answer : answers) {
-			Serializable author = answer.getPropertyValue("post:author");
+		    // Test for old Nx compatibility
+		    if(answer.hasSchema("post")){
+		    
+    			Serializable author = answer.getPropertyValue("post:author");
+    			
+    			GregorianCalendar creationDate = (GregorianCalendar) answer.getPropertyValue("post:creationDate");
+    			
+    			if(lastCommentDate == null || lastCommentDate.before(creationDate)) {
+    				lastCommentDate = creationDate;
+    				lastCommentAuthor = author;
+    			}
 			
-			GregorianCalendar creationDate = (GregorianCalendar) answer.getPropertyValue("post:creationDate");
-			
-			if(lastCommentDate == null || lastCommentDate.before(creationDate)) {
-				lastCommentDate = creationDate;
-				lastCommentAuthor = author;
-			}
+		    }
 		}
 		
 		Map<String, Serializable> properties = new HashMap<String, Serializable>();
