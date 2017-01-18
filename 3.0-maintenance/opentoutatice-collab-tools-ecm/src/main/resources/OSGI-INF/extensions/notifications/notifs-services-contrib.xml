@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.collab.tools.notifications.services">
+	<service>
+		<provide interface="fr.toutatice.ecm.platform.collab.tools.notifications.ToutaticeNotificationService" />
+	</service>
+	<implementation	class="fr.toutatice.ecm.platform.collab.tools.notifications.ToutaticeNotificationServiceImpl" />
+</component>

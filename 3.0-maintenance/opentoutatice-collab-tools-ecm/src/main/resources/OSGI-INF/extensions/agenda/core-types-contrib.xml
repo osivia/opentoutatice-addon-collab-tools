@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.platform.core.agenda.doctypes">
+
+	<require>org.nuxeo.ecm.core.schema.TypeService</require>
+	<require>fr.toutatice.ecm.platform.core.schemas</require>
+	<require>fr.toutatice.ecm.platform.core.doctypes</require>
+
+	<extension target="org.nuxeo.ecm.core.schema.TypeService"
+		point="doctype">
+
+		<doctype name="Agenda" extends="OrderedFolder">
+			<facet name="SpaceContent" />
+		</doctype>
+
+		<doctype name="VEVENT" append="true">
+			<schema name="toutatice_event" />
+			<schema name="note" />
+			<schema name="files" />
+		</doctype>
+
+	</extension>
+
+	<extension target="org.nuxeo.ecm.platform.types.TypeService"
+		point="types">
+
+		<type id="PortalSite">
+			<subtypes>
+				<type>Agenda</type>
+			</subtypes>
+		</type>
+
+		<type id="PortalPage">
+			<subtypes>
+				<type>Agenda</type>
+			</subtypes>
+		</type>
+
+		<type id="Workspace">
+			<subtypes>
+				<type>Agenda</type>
+			</subtypes>
+		</type>
+
+		<type id="Agenda">
+			<subtypes>
+				<type>VEVENT</type>
+			</subtypes>
+		</type>
+
+	</extension>
+
+</component>
