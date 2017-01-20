@@ -56,6 +56,7 @@
 
 		<type id="Forum">
 			<subtypes>
+			    <type>Forum</type>
 				<type>Thread</type>
 			</subtypes>
 		</type>
