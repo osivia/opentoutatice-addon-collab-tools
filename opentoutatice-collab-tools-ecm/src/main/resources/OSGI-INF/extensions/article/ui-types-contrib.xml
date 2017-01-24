@@ -8,7 +8,7 @@
 		point="types">
 
 		<type id="Annonce">
-			<label>Article</label>
+			<label>Annonce</label>
 			<category>SimpleDocument</category>
 			<icon>/icons/annonce_16.png</icon>
 			<bigIcon>/icons/annonce_100.png</bigIcon>
@@ -24,7 +24,7 @@
 		</type>
 
 		<type id="AnnonceFolder">
-			<label>Bulletin d'articles</label>
+			<label>AnnonceFolder</label>
 			<category>Collaborative</category>
 			<icon>/icons/annonceFolder_16.png</icon>
 			<bigIcon>/icons/annonceFolder_100.png</bigIcon>

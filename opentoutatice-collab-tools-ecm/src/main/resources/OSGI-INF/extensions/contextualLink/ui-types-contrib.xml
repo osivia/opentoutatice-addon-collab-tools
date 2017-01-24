@@ -9,7 +9,7 @@
 		
 
 		<type id="DocumentUrlContainer">
-			<label>Classeur de liens</label>
+			<label>DocumentUrlContainer</label>
 			<category>Collaborative</category>
 			<icon>/icons/url-folder.gif</icon>
 			<bigIcon>/icons/url-folder.gif</bigIcon>

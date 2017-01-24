@@ -38,7 +38,7 @@
 		</type>
 
 		<type id="BlogPost">
-			<label>blog post</label>
+			<label>BlogPost</label>
 			<category>SimpleDocument</category>
 			<icon>/icons/blogpage.png</icon>
 			<bigIcon>/icons/blogpage_100.png</bigIcon>

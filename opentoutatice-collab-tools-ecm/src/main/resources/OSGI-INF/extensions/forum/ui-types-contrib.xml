@@ -35,7 +35,7 @@
 		</type>
 
 		<type id="Thread">
-			<label>Fil de discussion</label>
+			<label>Thread</label>
 			<category>SimpleDocument</category>
 			<icon>/icons/forum_thread.gif</icon>
 			<bigIcon>/icons/forum_thread.gif</bigIcon>

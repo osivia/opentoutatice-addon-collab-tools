@@ -8,7 +8,7 @@
 		point="types">
 
 		<type id="Room">
-			<label>Salle</label>
+			<label>Room</label>
 			<category>Collaborative</category>
 			<icon>/icons/boardroom-icon.png</icon>
 			<bigIcon>/icons/boardroom-icon.png</bigIcon>

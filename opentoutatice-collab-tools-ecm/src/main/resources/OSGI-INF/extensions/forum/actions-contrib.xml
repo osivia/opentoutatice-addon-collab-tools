@@ -8,6 +8,8 @@
 
 	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
 		point="actions">
+		
+		<action id="newForumThread" enabled="false" />
 
 		<!-- Redéfini l'onglet d'affichage du contenu (conversions présentes) pour 
 			corriger un souci de gestion de la liste de selection. Utilisation d'un élément 

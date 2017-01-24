@@ -8,7 +8,7 @@
 		point="types">
 
 		<type id="FaqFolder" >
-			<label>FAQ</label>
+			<label>FaqFolder</label>
 			<category>Collaborative</category>
 			<icon>/icons/faq-folder-16.png</icon>
 			<bigIcon>/icons/faq-folder-100.png</bigIcon>
@@ -34,7 +34,7 @@
 		</type>
 
 		<type id="Question">
-			<label>Question - réponse</label>
+			<label>Question</label>
 			<category>SimpleDocument</category>
 			<icon>/icons/question-16.png</icon>
 			<bigIcon>/icons/question-100.png</bigIcon>
