@@ -20,6 +20,15 @@ function createTinyMceExtract() {
 				plugins : ["nuxeolink link textcolor"],
 				content_css: "/nuxeo/css/toutatice-popup.min.css?" + new Date().getTime(),
 
+				valid_elements: "strong/b,em,sub,u,p[style],ol,ul,li,blockquote,span[style],a[href]",
+				valid_styles: {
+					'p': 'text-align,padding-left',
+					'span': 'text-decoration,color,background-color'
+				},
+				
+				relative_urls : true,
+				document_base_url : baseURL,
+
 				// Theme options
 				toolbar1 : "bold italic underline | strikethrough subscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | forecolor backcolor | nuxeolink link unlink",
 				menubar: false,
@@ -27,8 +36,16 @@ function createTinyMceExtract() {
 
 				gecko_spellcheck : true,
 
-				relative_urls : false,
-				remove_script_host : false
+//				setup: function(editor) {
+//			        editor.on('submit', function(e) {
+//			            var nbChars = editor.getContent({format : 'raw'}).lenght;
+//			            if(nbChars > 300){
+//			            	confirm("Too big!");
+//			            }
+//			        });
+//			    }
+
+
 			});
 
 	createTinyMceExtractBar("mceExtract,disableMCEInit");

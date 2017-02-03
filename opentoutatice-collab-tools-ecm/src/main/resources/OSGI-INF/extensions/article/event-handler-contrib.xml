@@ -9,14 +9,14 @@
 	<extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent"
 		point="event-handlers">
 
-		<handler chainId="annonce-update">
-			<event>documentCreated</event>
+		<handler chainId="annonce-aboutToCreate">
+			<event>aboutToCreate</event>
 			<filters>
 				<doctype>Annonce</doctype>
 			</filters>
 		</handler>
 
-		<handler chainId="head-image-resizing">
+		<handler chainId="annonce-beforeUpdate">
 			<event>beforeDocumentModification</event>
 			<filters>
 				<doctype>Annonce</doctype>
