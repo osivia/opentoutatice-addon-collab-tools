@@ -12,7 +12,7 @@
 		</documentation>
 		
 		<listener name="ottcThreadUpdateListener" async="false"
-			postCommit="true"
+			postCommit="false"
             enabled="true"
 			class="fr.toutatice.ecm.platform.collab.tools.forum.ThreadUpdateListener"
 			priority="200">
