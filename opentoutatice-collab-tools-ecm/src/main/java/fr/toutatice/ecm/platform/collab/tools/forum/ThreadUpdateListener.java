@@ -87,7 +87,7 @@ public class ThreadUpdateListener implements EventListener {
      * @param thread
      * @param session
      */
-    private void updateAnswersOfThread(DocumentModel thread, CoreSession session) {
+    public void updateAnswersOfThread(DocumentModel thread, CoreSession session) {
 
         // To force reload of Posts
         session.save();
