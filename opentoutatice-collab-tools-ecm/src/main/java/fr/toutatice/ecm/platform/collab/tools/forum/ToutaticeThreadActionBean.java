@@ -18,11 +18,11 @@
 package fr.toutatice.ecm.platform.collab.tools.forum;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.jboss.seam.ScopeType;
-import org.jboss.seam.annotations.Create;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
@@ -35,9 +35,10 @@ import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.NuxeoGroup;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
+import org.nuxeo.ecm.core.api.model.DocumentPart;
+import org.nuxeo.ecm.core.api.model.Property;
 import org.nuxeo.ecm.core.api.security.SecurityConstants;
 import org.nuxeo.ecm.platform.forum.web.ThreadActionBean;
-import org.nuxeo.ecm.platform.ui.web.util.SeamComponentCallHelper;
 import org.nuxeo.ecm.webapp.helpers.EventManager;
 import org.nuxeo.ecm.webapp.helpers.EventNames;
 
@@ -49,8 +50,6 @@ import fr.toutatice.ecm.platform.core.constants.ExtendedSeamPrecedence;
 public class ToutaticeThreadActionBean extends ThreadActionBean {
 
     private static final long serialVersionUID = 1L;
-    
-    protected String firstMessage;
 
     @In(create = true, required = false)
     protected FacesMessages facesMessages;
@@ -66,14 +65,30 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
 
     @Override
     protected DocumentModel getThreadModel() throws ClientException {
-        DocumentModel currentChangeableDocument = navigationContext.getChangeableDocument();
-        this.title = currentChangeableDocument.getTitle();
-        this.description = (String) currentChangeableDocument.getPropertyValue("dc:description");
-        this.firstMessage = (String) currentChangeableDocument.getPropertyValue("ttcth:message");
+        // Fill with form
+        DocumentModel changeableDocument = navigationContext.getChangeableDocument();
 
         DocumentModel threadModel = super.getThreadModel();
-        threadModel.setPropertyValue("ttcth:message", this.firstMessage);
-        
+
+        // Fill ~empty threadModel with changeableDocument
+        DocumentPart[] parts = changeableDocument.getParts();
+        if (parts != null) {
+
+            for (DocumentPart part : parts) {
+                if (!part.isScalar()) {
+                    Collection<Property> properties = part.getChildren();
+
+                    Iterator<Property> iterator = properties.iterator();
+                    while (iterator.hasNext()) {
+                        Property property = iterator.next();
+                        threadModel.setPropertyValue(property.getPath(), property.getValue());
+                    }
+                } else {
+                    threadModel.setPropertyValue(part.getPath(), part.getValue());
+                }
+            }
+        }
+
         return threadModel;
     }
 
@@ -95,7 +110,7 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
     public List<String> getSelectedModerators() {
         if (!isSelectedModeratorsFilled) {
             this.selectedModerators = super.getModerators();
-            if(this.selectedModerators == null){
+            if (this.selectedModerators == null) {
                 this.selectedModerators = new ArrayList<String>();
             }
             isSelectedModeratorsFilled = true;
