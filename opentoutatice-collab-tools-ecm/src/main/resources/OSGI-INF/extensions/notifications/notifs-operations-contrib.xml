@@ -6,6 +6,7 @@
     
     <operation class="fr.toutatice.ecm.platform.collab.tools.notifications.AllNotificationsSubscribe" />
     <operation class="fr.toutatice.ecm.platform.collab.tools.notifications.AllNotificationsUnsubscribe" />
+    <operation class="fr.toutatice.ecm.platform.collab.tools.notifications.GetUserSubscriptions" />
     
 	
   </extension>

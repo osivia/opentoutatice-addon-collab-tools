@@ -18,6 +18,8 @@
  */
 package fr.toutatice.ecm.platform.collab.tools.notifications;
 
+import java.util.List;
+
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -49,5 +51,13 @@ public interface DocumentNotificationInfosProvider extends DocumentInformationsP
 	 * @throws ClassNotFoundException
 	 */
 	void unsubscribe(CoreSession coreSession, DocumentModel currentDocument) throws ClientException, ClassNotFoundException;
+
+	/**
+	 * Return a list of documents followed by the current user
+	 * 
+	 * @param coreSession
+	 * @return list of followed documents
+	 */
+	List<DocumentModel> getUserSubscriptions(CoreSession coreSession);
 
 }
