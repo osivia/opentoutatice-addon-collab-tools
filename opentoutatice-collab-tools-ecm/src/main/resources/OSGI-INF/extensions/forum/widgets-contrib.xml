@@ -54,7 +54,21 @@
                 <property name="disableHtmlInit">true</property>
                 <property name="editorSelector">mceSimpleEditorResponsive</property>
             </properties>
-        </widget>        
+        </widget>
+        
+		<widget name="answers_forbidden" type="checkbox">
+			<labels>
+				<label mode="any">Clôturer le sujet</label>
+			</labels>
+			<translated>true</translated>
+			<fields>
+				<field>ttc:commentsForbidden</field>
+			</fields>
+			<properties widgetMode="edit">
+				<property name="immediate">true</property>
+			</properties>
+		 
+		</widget>        
 
 		<widget name="moderator_layout" type="layout">
 			<labels>
