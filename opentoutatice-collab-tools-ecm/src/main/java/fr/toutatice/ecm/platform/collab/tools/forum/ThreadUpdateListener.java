@@ -18,6 +18,7 @@ import org.nuxeo.ecm.core.api.event.DocumentEventTypes;
 import org.nuxeo.ecm.core.event.Event;
 import org.nuxeo.ecm.core.event.EventListener;
 import org.nuxeo.ecm.core.event.impl.DocumentEventContext;
+import org.nuxeo.ecm.platform.comment.api.CommentConstants;
 import org.nuxeo.ecm.platform.comment.api.CommentEvents;
 import org.nuxeo.ecm.platform.comment.api.CommentManager;
 import org.nuxeo.runtime.api.Framework;
@@ -65,7 +66,11 @@ public class ThreadUpdateListener implements EventListener {
                     // Answer, comment of answer
                     boolean isCommentAddedOrRemoved = (CommentEvents.COMMENT_ADDED.equals(eventName) || CommentEvents.COMMENT_REMOVED.equals(eventName));
                     if (isCommentAddedOrRemoved) {
-                        updateAnswersOfThread(srcDoc, session);
+                        // Check if comment type is Post
+                        DocumentModel comment = (DocumentModel) docCtx.getProperty(CommentConstants.COMMENT_DOCUMENT);
+                        if ("Post".equals(comment.getType())) {
+                            updateAnswersOfThread(srcDoc, session);
+                        }
                     }
                 }
             }
