@@ -37,9 +37,6 @@
 				<row>
 					<widget>files</widget>
 				</row>
-				<row>
-					<widget>toutatice_showInMenu_widget</widget>
-				</row>
 			</rows>
 		</layout>
 
@@ -70,9 +67,6 @@
 				<row>
 					<widget>files</widget>
 				</row> 
-				<row>
-                    <widget>toutatice_showInMenu_widget</widget>
-                </row>
 			</rows>
 		</layout>
 
@@ -87,9 +81,6 @@
 				</row>
 				<row>
 					<widget>description</widget>
-				</row>
-				<row>
-					<widget>toutatice_showInMenu_widget</widget>
 				</row>
 			</rows>
 
@@ -108,9 +99,6 @@
 				<row>
 					<widget>description</widget>
 				</row>
-				<row>
-                    <widget>toutatice_showInMenu_widget</widget>
-                </row>
 			</rows>
 		</layout>
 
