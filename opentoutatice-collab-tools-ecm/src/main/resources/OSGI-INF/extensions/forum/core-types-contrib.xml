@@ -19,7 +19,6 @@
 		<doctype name="Thread" append="true">
 			<facet name="TTCAttachableImages" />
 			<schema name="thread_toutatice" />
-			<schema name="file" />
 			<schema name="files" />
 			
 		</doctype>
@@ -32,9 +31,8 @@
 			Prefetch is added to avoid error on remove Post (as comment schema is added) -->
 		<doctype name="Post" append="true">
 			<schema name="comment" />
+			<schema name="files" />
 			<prefetch>comment.author, comment.text, comment.creationDate</prefetch>			
-			
-			
 		</doctype>
 
 	</extension>

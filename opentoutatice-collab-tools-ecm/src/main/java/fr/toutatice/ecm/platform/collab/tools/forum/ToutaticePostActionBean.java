@@ -21,6 +21,7 @@ package fr.toutatice.ecm.platform.collab.tools.forum;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jboss.seam.ScopeType;
@@ -42,7 +43,24 @@ import fr.toutatice.ecm.platform.core.constants.ExtendedSeamPrecedence;
 @Install(precedence = ExtendedSeamPrecedence.TOUTATICE)
 public class ToutaticePostActionBean extends PostActionBean {
 
-	private static final long serialVersionUID = 1L;
+    /** Post's Blobs (files schema). */
+    private List<Map<String, Serializable>> blobs = new ArrayList<>(0);
+
+    /**
+     * @return the blobs
+     */
+    public List<Map<String, Serializable>> getBlobs() {
+        return blobs;
+    }
+
+    /**
+     * @param blobs the blobs to set
+     */
+    public void setBlobs(List<Map<String, Serializable>> blobs) {
+        this.blobs = blobs;
+    }
+
+    private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unchecked")
 	@Override
