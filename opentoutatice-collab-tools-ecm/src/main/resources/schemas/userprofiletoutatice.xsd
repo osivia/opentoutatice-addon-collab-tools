@@ -7,6 +7,8 @@
 	<xs:element name="bio" type="xs:string" />
 	<xs:element name="mobile" type="xs:string" />
 	<xs:element name="profession" type="xs:string" />
+	<!-- #1506 - champ libre etablissement -->
+	<xs:element name="institution" type="xs:string" />
 
 	<!-- News -->
     <xs:element name="newsSubscription" type="xs:boolean" default="true" />

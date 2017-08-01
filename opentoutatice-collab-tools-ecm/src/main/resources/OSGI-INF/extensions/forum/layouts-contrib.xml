@@ -350,7 +350,11 @@
                 </row>      
 				<row>
 					<widget>files</widget>
-				</row>  
+				</row> 
+				<row>
+					<widget>answers_forbidden</widget>
+				</row>
+				
 				<!-- not yet implemented portal side <row>
 					<widget>moderator_layout</widget>
 				</row> -->

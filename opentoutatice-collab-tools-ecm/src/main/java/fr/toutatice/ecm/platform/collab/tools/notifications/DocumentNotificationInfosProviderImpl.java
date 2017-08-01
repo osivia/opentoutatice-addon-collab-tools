@@ -19,8 +19,10 @@ package fr.toutatice.ecm.platform.collab.tools.notifications;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -28,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.IdRef;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.ecm.core.model.NoSuchDocumentException;
 import org.nuxeo.ecm.platform.ec.notification.UserSubscription;
@@ -228,6 +231,37 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
         }
 
         return false;
+    }
+    
+    public List<DocumentModel> getUserSubscriptions(CoreSession coreSession) {
+        
+    	List<DocumentModel> documentsSubscribed = new ArrayList<DocumentModel>();
+    	
+        PlacefulService serviceBean = NotificationServiceHelper.getPlacefulServiceBean();
+        
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("userId", NuxeoPrincipal.PREFIX + coreSession.getPrincipal().getName());
+        
+        String className = serviceBean.getAnnotationRegistry().get(
+                NotificationService.SUBSCRIPTION_NAME);
+        String shortClassName = className.substring(className.lastIndexOf('.') + 1);
+        
+        List<Annotation> userSubscriptions = new ArrayList<Annotation>();
+        		
+        userSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(
+                paramMap, shortClassName));
+        
+        Set<IdRef> docIds = new HashSet<IdRef>();
+        
+        for(Annotation subscription : userSubscriptions) {
+        	
+        	UserSubscription us = (UserSubscription) subscription;
+        	docIds.add(new IdRef(us.getDocId()));
+        	
+        }
+                
+        
+		return coreSession.getDocuments(docIds.toArray(new IdRef[docIds.size()]));
     }
 
 }

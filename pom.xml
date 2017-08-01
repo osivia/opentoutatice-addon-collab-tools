@@ -47,6 +47,11 @@
 				<version>${nuxeo.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.nuxeo.ecm.platform</groupId>
+				<artifactId>nuxeo-user-notification</artifactId>
+				<version>${nuxeo.version}</version>
+			</dependency>			
+			<dependency>
 	            <groupId>org.nuxeo.ecm.webengine</groupId>
 	            <artifactId>nuxeo-webengine-sites-core-contrib</artifactId>
 	            <version>${nuxeo.version}</version>
