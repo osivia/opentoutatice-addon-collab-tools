@@ -88,7 +88,6 @@ public class ThreadUpdateListener implements EventListener {
     /**
      * Updates the datas about Thread answers.
      * 
-     * @param eventName
      * @param thread
      * @param session
      */
