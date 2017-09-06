@@ -19,7 +19,7 @@ import org.nuxeo.runtime.api.Framework;
 import org.nuxeo.webengine.sites.listeners.SiteActionListener;
 import org.nuxeo.webengine.sites.utils.SiteConstants;
 
-import fr.toutatice.ecm.platform.core.helper.ToutaticeQueryHelper;
+import fr.toutatice.ecm.platform.core.query.helper.ToutaticeQueryHelper;
 
 
 /**
