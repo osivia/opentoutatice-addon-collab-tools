@@ -19,10 +19,8 @@ package fr.toutatice.ecm.platform.collab.tools.notifications;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -30,8 +28,10 @@ import org.apache.commons.logging.LogFactory;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.DocumentModelList;
 import org.nuxeo.ecm.core.api.IdRef;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
+import org.nuxeo.ecm.core.api.impl.DocumentModelListImpl;
 import org.nuxeo.ecm.core.model.NoSuchDocumentException;
 import org.nuxeo.ecm.platform.ec.notification.UserSubscription;
 import org.nuxeo.ecm.platform.ec.notification.service.NotificationService;
@@ -233,9 +233,10 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
         return false;
     }
     
-    public List<DocumentModel> getUserSubscriptions(CoreSession coreSession) {
+    @Override
+    public DocumentModelList getUserSubscriptions(CoreSession coreSession) {
         
-    	List<DocumentModel> documentsSubscribed = new ArrayList<DocumentModel>();
+        DocumentModelList documentsSubscribed = new DocumentModelListImpl();
     	
         PlacefulService serviceBean = NotificationServiceHelper.getPlacefulServiceBean();
         
@@ -251,17 +252,20 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
         userSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(
                 paramMap, shortClassName));
         
-        Set<IdRef> docIds = new HashSet<IdRef>();
-        
         for(Annotation subscription : userSubscriptions) {
         	
-        	UserSubscription us = (UserSubscription) subscription;
-        	docIds.add(new IdRef(us.getDocId()));
-        	
+            try {
+                UserSubscription us = (UserSubscription) subscription;
+                DocumentModel subscribedDoc = coreSession.getDocument(new IdRef(us.getDocId()));
+
+                documentsSubscribed.add(subscribedDoc);
+            } catch (Exception e) {
+                log.error("[Deprecated subscription] : " + e.getLocalizedMessage());
+            }
+
         }
-                
         
-		return coreSession.getDocuments(docIds.toArray(new IdRef[docIds.size()]));
+        return documentsSubscribed;
     }
 
 }

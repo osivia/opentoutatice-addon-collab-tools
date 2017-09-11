@@ -18,15 +18,13 @@
  */
 package fr.toutatice.ecm.platform.collab.tools.notifications;
 
-import java.util.List;
-
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
 import org.nuxeo.ecm.automation.core.annotations.OperationMethod;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
-import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.DocumentModelList;
 import org.nuxeo.runtime.api.Framework;
 
 /**
@@ -44,7 +42,7 @@ public class GetUserSubscriptions {
 	protected CoreSession session;
 
 	@OperationMethod
-	public List<DocumentModel> run() throws ClientException {
+    public DocumentModelList run() throws ClientException {
 
 		DocumentNotificationInfosProvider service = Framework.getService(DocumentNotificationInfosProvider.class);
 
