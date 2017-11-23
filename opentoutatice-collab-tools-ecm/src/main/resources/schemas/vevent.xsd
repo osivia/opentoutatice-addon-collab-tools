@@ -6,7 +6,6 @@
   <xs:simpleType name="stringList"> 
     <xs:list itemType="xs:string"/> 
   </xs:simpleType>  
-
   <xs:element name="allDay" type="xs:boolean" default="false" />
 
   <xs:element name="dtstart" type="xs:dateTime" />
@@ -16,8 +15,8 @@
   <xs:element name="status" type="xs:string" default="CONFIRMED" />
   <xs:element name="transp" type="xs:string" default="OPAQUE" />
 
-  <xs:element name="participants" type="nxs:stringList"></xs:element>  
-
+  <xs:element name="participants" type="nxs:stringList"></xs:element>
+  <xs:element name="color" type="xs:string"></xs:element>  
   <!--
   build and description fields are bound respectively to dc:build and dc:description
   -->
