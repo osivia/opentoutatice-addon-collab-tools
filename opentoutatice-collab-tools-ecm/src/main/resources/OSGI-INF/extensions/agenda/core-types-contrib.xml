@@ -9,8 +9,6 @@
 	<extension target="org.nuxeo.ecm.core.schema.TypeService"
 		point="schema">
 		<schema name="vevent" prefix="vevent" src="schemas/vevent.xsd" override="true" />
-		<schema name="synchronization" prefix="sync" src="schemas/synchronization.xsd" />
-		<schema name="calendar" prefix="cal" src="schemas/calendar.xsd" />
 	</extension>
 
 	<extension target="org.nuxeo.ecm.core.schema.TypeService"
@@ -18,14 +16,13 @@
 
 		<doctype name="Agenda" extends="OrderedFolder">
 			<facet name="SpaceContent" />
-			<schema name="calendar" />
 		</doctype>
 
 		<doctype name="VEVENT" append="true">
 			<facet name="TTCAttachableImages" />
+			<schema name="toutatice_event" />
 			<schema name="note" />
 			<schema name="files" />
-			<schema name="synchronization" />
 		</doctype>
 
 	</extension>

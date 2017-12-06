@@ -94,6 +94,22 @@
                 <property name="required">false</property>
             </properties>
         </widget>
+		
+		
+		<!-- For PortalView -->
+		<widget name="pv_event_object" type="htmltext">
+            <labels>
+                <label mode="any">toutatice.label.agenda.event.object</label>
+            </labels>
+            <translated>true</translated>
+            <fields>
+                <field>note:note</field>
+            </fields>
+            <properties widgetMode="edit">
+                <property name="editorSelector">mceSimpleEditorResponsive</property>
+                <property name="disableHtmlInit">true</property>
+            </properties>
+        </widget>
 
 	</extension>
 
