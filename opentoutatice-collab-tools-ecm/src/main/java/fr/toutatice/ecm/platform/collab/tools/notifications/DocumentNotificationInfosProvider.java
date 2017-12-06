@@ -18,11 +18,10 @@
  */
 package fr.toutatice.ecm.platform.collab.tools.notifications;
 
-import java.util.List;
-
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.DocumentModelList;
 
 import fr.toutatice.ecm.platform.core.services.infos.provider.DocumentInformationsProvider;
 
@@ -58,6 +57,6 @@ public interface DocumentNotificationInfosProvider extends DocumentInformationsP
 	 * @param coreSession
 	 * @return list of followed documents
 	 */
-	List<DocumentModel> getUserSubscriptions(CoreSession coreSession);
+    DocumentModelList getUserSubscriptions(CoreSession coreSession);
 
 }
