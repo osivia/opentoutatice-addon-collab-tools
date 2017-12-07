@@ -59,7 +59,7 @@
             </operation>
 			<operation id="Document.SetProperty">
 				<param type="serializable" name="value">
-				    expr:Fn.defaultIfBlank(Document.getProperty("dc:description"), Fn.extractTextFromHTML(Document.getProperty("note:note")))
+				    expr:Fn.defaultIfBlank(Document.getProperty("dc:description"), Fn.truncateTextFromHTML(Document.getProperty("note:note"), 300))
 				</param>
 				<param type="string" name="xpath">dc:description</param>
 				<param type="boolean" name="save">false</param>
