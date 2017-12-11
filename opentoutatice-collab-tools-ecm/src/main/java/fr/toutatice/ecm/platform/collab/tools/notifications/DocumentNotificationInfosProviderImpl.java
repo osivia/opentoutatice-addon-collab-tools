@@ -205,9 +205,6 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
      */
     private boolean isSubsInheritDocument(CoreSession coreSession, List<Annotation> allSubscriptions, DocumentModel currentDoc) throws ClientException {
 
-        /* To do not generate "heavy" logs. */
-        List<String> idsYetLogged = new ArrayList<String>(0);
-
         for (Object obj : allSubscriptions) {
             UserSubscription us = (UserSubscription) obj;
             try {
@@ -220,14 +217,13 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
                     return true;
                 }
             } catch (ClientException de) {
-                /* Doc doesn't exist anymore (not found) */
+                // Doc doesn't exist anymore (not found)
                 if (de.getCause() instanceof NoSuchDocumentException) {
-                    String id = us.getDocId();
-                    if (!idsYetLogged.contains(id)) {
-                        idsYetLogged.add(id);
-                        log.error("Document '" + id + "' doesn't exist anymore but its subscriptions still exist: delete rows with docid='" + id
-                                + "' in usersubscription table.");
-                        continue;
+                    removeUserSubscription(coreSession, us);
+
+                    if (log.isDebugEnabled()) {
+                        log.debug("NoSuchDocumentException: subscription " + us.getNotification() + " on document " + us.getDocId() + "for user "
+                                + us.getUserId() + " removed");
                     }
                 }
             }
