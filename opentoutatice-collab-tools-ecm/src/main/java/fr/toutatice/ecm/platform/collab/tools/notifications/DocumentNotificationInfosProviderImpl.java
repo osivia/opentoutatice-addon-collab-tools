@@ -58,7 +58,7 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
     /**
      * A document has a state depending of the user who is browsing it
      */
-    public enum SubscriptionStatus {
+    public enum PinStatus {
         /** Default state : can subscribe */
         can_subscribe,
         /** Can unsubscribe if a subscription is already set */
@@ -72,7 +72,7 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
     @Override
     public void subscribe(CoreSession coreSession, DocumentModel currentDocument) {
 
-        if (getStatus(coreSession, currentDocument) == SubscriptionStatus.can_subscribe) {
+        if (getStatus(coreSession, currentDocument) == PinStatus.can_subscribe) {
             NotificationManager notificationManager = Framework.getService(NotificationManager.class);
 
             NuxeoPrincipal principal = (NuxeoPrincipal) coreSession.getPrincipal();
@@ -88,7 +88,7 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
     @Override
     public void unsubscribe(CoreSession coreSession, DocumentModel currentDocument) throws ClientException, ClassNotFoundException {
 
-        if (getStatus(coreSession, currentDocument) == SubscriptionStatus.can_unsubscribe) {
+        if (getStatus(coreSession, currentDocument) == PinStatus.can_unsubscribe) {
             NotificationManager notificationManager = Framework.getService(NotificationManager.class);
 
             NuxeoPrincipal principal = (NuxeoPrincipal) coreSession.getPrincipal();
@@ -122,9 +122,9 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
      * @return a status
      * @throws ClientException
      */
-    public SubscriptionStatus getStatus(CoreSession coreSession, DocumentModel currentDocument) throws ClientException {
+    public PinStatus getStatus(CoreSession coreSession, DocumentModel currentDocument) throws ClientException {
 
-        SubscriptionStatus status = SubscriptionStatus.no_subscriptions;
+        PinStatus status = PinStatus.no_subscriptions;
 
         // Not used in published spaces for the moment
         if (!ToutaticeDocumentHelper.isInPublishSpace(coreSession, currentDocument)) {
@@ -145,7 +145,7 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
                 }
 
                 if (subscriptionsForUserOnDocument.size() > 0) {
-                    status = SubscriptionStatus.can_unsubscribe;
+                    status = PinStatus.can_unsubscribe;
                 } else {
                     // then : test if subscriptions are enabled on parent documents through other subscriptions by the user or
                     // by its group.
@@ -178,10 +178,10 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
 
 
                     if (isSubsInheritDocument(coreSession, tempSubscriptions, currentDocument)) {
-                        status = SubscriptionStatus.has_inherited_subscriptions;
+                        status = PinStatus.has_inherited_subscriptions;
 
                     } else {
-                        status = SubscriptionStatus.can_subscribe;
+                        status = PinStatus.can_subscribe;
 
                     }
                 }
