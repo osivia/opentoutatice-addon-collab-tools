@@ -17,11 +17,16 @@
  */
 package fr.toutatice.ecm.platform.collab.tools.pins;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -37,10 +42,15 @@ import fr.toutatice.ecm.platform.core.helper.ToutaticeDocumentHelper;
 public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 
 	private static final String PIN_STATUS = "pin_status";
-	private static final String FACET_HAS_PINS = "HasPins";
-	private static final String LIST_PINS = "pin:listwebid";
+	private static final String FACET_SETS = "Sets";
+	private static final String LIST_WEBID_PROPERTY= "webids";
+	private static final String NAME_PROPERTY= "name";
 	private static final String SCHEMA_TOUTATICE = "toutatice";
-	private static final String WEBID = "ttc:webid";
+	private static final String WEBID_PROPERTY = "ttc:webid";
+	private static final String SETS_PROPERTY = "sets:sets";
+	private static final String SET_PROPERTY = "set";
+	private static final String SETS_SCHEMA = "sets";
+	private static final String PINS_PROPERTY = "pins";
 
 	/**
 	 * A document has a state depending of its parent workspace
@@ -57,55 +67,154 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 		cannot_pin;
 	};
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public void pin(CoreSession coreSession, DocumentModel currentDocument) {
 
 		if (getStatus(coreSession, currentDocument) == PinStatus.can_pin) {
+			//Get workspace
 			DocumentModel workspace = ToutaticeDocumentHelper.getWorkspace(coreSession, currentDocument, true);
-			String[] listPins = (String[]) workspace.getPropertyValue(LIST_PINS);
-			
-			String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID);
-			if (listPins != null)
+
+			//Get Sets schema
+			Map<String, Object> map = workspace.getProperties(SETS_SCHEMA);
+
+			//Get list of set
+			ArrayList<HashMap<String, Object>> listSets = (ArrayList) map.get(SETS_PROPERTY);
+
+			boolean pinSetExist = false;
+			String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID_PROPERTY);
+			int index = 0;
+
+			//Read throug the list of set to find the pin set
+			for(HashMap<String, Object> set : listSets)
 			{
-				String[] newListPins = new String[listPins.length+1];
-				for (int i=0; i<listPins.length; i++)
+				if (PINS_PROPERTY.equals(set.get(NAME_PROPERTY)))
 				{
-					newListPins[i] = listPins[i];
+					pinSetExist = true;
+					String[] listPins = (String[]) set.get(LIST_WEBID_PROPERTY);
+
+					if (listPins != null)
+					{
+						String[] newListPins = new String[listPins.length+1];
+						for (int i=0; i<listPins.length; i++)
+						{
+							newListPins[i] = listPins[i];
+						}
+						//Add the webid to the webids list
+						newListPins[listPins.length] = webid;
+						set.put(LIST_WEBID_PROPERTY, newListPins);
+
+						//Set the new set properties to the workspace
+						workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+index+"]", set);
+
+						//Save workspace silently
+						ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+					}
 				}
-				newListPins[listPins.length] = webid;
-				workspace.setPropertyValue(LIST_PINS, newListPins);
+				index++;
 			}
-			
-			ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+
+			if (!pinSetExist)
+			{
+				int pinSetIndex = 0;
+				if (listSets !=null)  pinSetIndex = listSets.size();
+				
+				//Init pin set properties
+				Map<String, Object> mapSet = new HashMap<>();
+				String[] webids = new String[1];
+				webids[0] = webid;
+				mapSet.put(NAME_PROPERTY, "pins");
+				mapSet.put(LIST_WEBID_PROPERTY, webids);
+
+				Map<String, String> mapSets = new HashMap<>();
+				try {
+					
+					mapSets.put(SET_PROPERTY, convertToJson(mapSet));
+					//Set the new set properties to the workspace
+					workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+pinSetIndex+"]", (Serializable) mapSets);
+
+					//Save workspace silently
+					ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
 		} else {
 			throw new ClientException("User can not pin this document");
 		}
 
 	}
 
+	/**
+	 * Convert object to Json
+	 * @param object
+	 * @return
+	 * @throws IOException
+	 */
+	private String convertToJson(Object object) throws IOException
+	{
+		// JSON object writer
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectWriter writer = mapper.writer();
+
+		return writer.writeValueAsString(object);
+	}
+
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public void unPin(CoreSession coreSession, DocumentModel currentDocument)
 			throws ClientException, ClassNotFoundException {
 
 		if (getStatus(coreSession, currentDocument) == PinStatus.can_unpin) {
+			//Get workspace
 			DocumentModel workspace = ToutaticeDocumentHelper.getWorkspace(coreSession, currentDocument, true);
-			String[] listPins = (String[]) workspace.getPropertyValue(LIST_PINS);
-			String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID);
+
+			//Get sets schema
+			Map<String, Object> map = workspace.getProperties(SETS_SCHEMA);
 			
-			if (listPins != null && listPins.length > 0)
+			//Get list of set
+			ArrayList<HashMap<String, Object>> listSets = (ArrayList) map.get(SETS_PROPERTY);
+
+			String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID_PROPERTY);
+			int index = 0;
+			
+			//Read throug the list of set to find the pin set
+			for(HashMap<String, Object> set : listSets)
 			{
-				String[] newListPins = new String[listPins.length-1];
-				int j = 0;
-				for (int i=0; i<listPins.length; i++)
+				if (PINS_PROPERTY.equals(set.get(NAME_PROPERTY)))
 				{
-					if (!StringUtils.equals(webid, (String) listPins[i]))
+					String[] listPins = (String[]) set.get(LIST_WEBID_PROPERTY);
+
+					if (listPins != null && listPins.length > 0)
 					{
-						newListPins[j] = listPins[i];
-						j++;
+						//Creation of a new list of webids of pin document without the current document's webid
+						String[] newListPins = new String[listPins.length-1];
+
+						int j = 0;
+						for (int i=0; i<listPins.length; i++)
+						{
+							if (!StringUtils.equals(webid, (String) listPins[i]))
+							{
+								newListPins[j] = listPins[i];
+								j++;
+							}
+						}
+						set.put(LIST_WEBID_PROPERTY, newListPins);
+
+						//Set the new set properties to the workspace
+						workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+index+"]", set);
+						
+						//Save workspace silently
+						ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
 					}
+
 				}
-				workspace.setPropertyValue(LIST_PINS, newListPins);
-				ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+				index++;
 			}
 		} else {
 			throw new ClientException("User can not unsubscribe to this document");
@@ -125,46 +234,50 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 	}
 
 	/**
-     * Evaluation status of subscription for the user and the document
-     * 
-     * @param coreSession
-     * @param currentDocument
-     * @return a status
-     * @throws ClientException
-     */
+	 * Evaluation status of pin for the document
+	 * 
+	 * @param coreSession
+	 * @param currentDocument
+	 * @return a status
+	 * @throws ClientException
+	 */
 	private PinStatus getStatus(CoreSession coreSession, DocumentModel currentDocument) throws ClientException {
 
 		PinStatus status = PinStatus.cannot_pin;
 
-		//1) tester si le workspace parent a la facet HasPins
-		//- si oui
-		//Tester si le document est déjà épinglé
-		// - si oui, retourner can_unpin
-		// - si non, retourner can_pin
+		// Test if workspace parent has Sets facet
+		//- if true
+		//   Test if document is already pin
+		//   - if true, return can_unpin
+		//   - if false, return can_pin
 		//
-		// - si non, retourner cannot_pin
+		//- if false, return cannot_pin
 
-		String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID);
+		String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID_PROPERTY);
 		if (StringUtils.isNotEmpty(webid))
 		{
 			DocumentModel workspace = ToutaticeDocumentHelper.getWorkspace(coreSession, currentDocument, true);
 			if (workspace != null)
 			{
 				Set<String> facetSet = workspace.getFacets();
-				boolean hasPinFacet = facetSet.contains(FACET_HAS_PINS);
-				if (hasPinFacet)
+				boolean hasSetsFacet = facetSet.contains(FACET_SETS);
+				if (hasSetsFacet)
 				{
-					String[] listPins = (String[]) workspace.getPropertyValue(LIST_PINS);
 					status = PinStatus.can_pin;
-					if (listPins!= null && listPins.length > 0)
+					Map<String, Object> map = workspace.getProperties(SETS_SCHEMA);
+					ArrayList<HashMap<String, Object>> listSets = (ArrayList) map.get(SETS_PROPERTY);
+					for(HashMap<String, Object> set : listSets)
 					{
-						
-						for (int i=0; i<listPins.length; i++)
+						if (PINS_PROPERTY.equals(set.get(NAME_PROPERTY)))
 						{
-							if (StringUtils.equals(webid, (String) listPins[i]))
+							String[] listPins = (String[]) set.get(LIST_WEBID_PROPERTY);
+							for (int i=0; i<listPins.length; i++)
 							{
-								status = PinStatus.can_unpin;
-								break;
+								if (StringUtils.equals(webid, (String) listPins[i]))
+								{
+									status = PinStatus.can_unpin;
+									break;
+								}
 							}
 						}
 					}

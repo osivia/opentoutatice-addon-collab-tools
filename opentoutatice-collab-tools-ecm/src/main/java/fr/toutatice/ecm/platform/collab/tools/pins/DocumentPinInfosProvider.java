@@ -8,8 +8,20 @@ import fr.toutatice.ecm.platform.core.services.infos.provider.DocumentInformatio
 
 public interface DocumentPinInfosProvider extends DocumentInformationsProvider {
 
+	/**
+	 * Pin a document
+	 * @param coreSession the session
+	 * @param currentDocument the document to pin
+	 */
 	void pin(CoreSession coreSession, DocumentModel currentDocument);
 	
+	/**
+	 * Unpin a document
+	 * @param coreSession the session
+	 * @param currentDocument the document to unpin
+	 * @throws ClientException
+	 * @throws ClassNotFoundException
+	 */
 	void unPin(CoreSession coreSession, DocumentModel currentDocument) throws ClientException, ClassNotFoundException;
 	
 }
