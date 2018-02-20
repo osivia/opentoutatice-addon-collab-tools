@@ -15,7 +15,7 @@
  * Contributors:
  * lbillon
  */
-package fr.toutatice.ecm.platform.collab.tools.pins;
+package fr.toutatice.ecm.platform.collab.tools.quickaccess;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -34,14 +34,14 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 import fr.toutatice.ecm.platform.core.helper.ToutaticeDocumentHelper;
 
 /**
- * impl of Pin service
+ * impl of QuickAccess service
  * 
  * @author jbarberet
  * 
  */
-public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
+public class DocumentQuickAccessInfosProviderImpl implements DocumentQuickAccessInfosProvider {
 
-	private static final String PIN_STATUS = "pin_status";
+	private static final String QUICK_ACCESS_STATUS = "quickAccess_status";
 	private static final String FACET_SETS = "Sets";
 	private static final String LIST_WEBID_PROPERTY= "webids";
 	private static final String NAME_PROPERTY= "name";
@@ -50,30 +50,30 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 	private static final String SETS_PROPERTY = "sets:sets";
 	private static final String SET_PROPERTY = "set";
 	private static final String SETS_SCHEMA = "sets";
-	private static final String PINS_PROPERTY = "pins";
+	private static final String QUICK_ACCESS_PROPERTY = "quickAccess";
 
 	/**
 	 * A document has a state depending of its parent workspace
 	 */
-	public enum PinStatus {
-		/** Default state : can pin */
-		can_pin,
-		/** Can unpin if a pin is already set */
-		can_unpin,
+	public enum QuickAccessStatus {
+		/** Default state : can add to quick access set */
+		can_add_to_quickaccess,
+		/** Can remove from quick access if a quick access is already set */
+		can_remove_from_quickaccess,
 		/**
-		 * Cases : Workspace parent hasn't HasPins facet, or the document is in a
-		 * Publication spaces or personal spaces and pin is not allowed
+		 * Cases : Workspace parent hasn't Set facet, or the document is in a
+		 * Publication spaces or personal spaces and quick access is not allowed
 		 */
-		cannot_pin;
+		cannot_add_to_quickaccess;
 	};
 
 	/**
      * {@inheritDoc}
      */
 	@Override
-	public void pin(CoreSession coreSession, DocumentModel currentDocument) {
+	public void addToQuickAccess(CoreSession coreSession, DocumentModel currentDocument) {
 
-		if (getStatus(coreSession, currentDocument) == PinStatus.can_pin) {
+		if (getStatus(coreSession, currentDocument) == QuickAccessStatus.can_add_to_quickaccess) {
 			//Get workspace
 			DocumentModel workspace = ToutaticeDocumentHelper.getWorkspace(coreSession, currentDocument, true);
 
@@ -81,69 +81,74 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 			Map<String, Object> map = workspace.getProperties(SETS_SCHEMA);
 
 			//Get list of set
-			ArrayList<HashMap<String, Object>> listSets = (ArrayList) map.get(SETS_PROPERTY);
+			ArrayList<Map<String, Object>> listSets = (ArrayList) map.get(SETS_PROPERTY);
 
-			boolean pinSetExist = false;
+			boolean quickAccessSetExist = false;
 			String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID_PROPERTY);
 			int index = 0;
 
-			//Read throug the list of set to find the pin set
-			for(HashMap<String, Object> set : listSets)
+			//Read throug the list of set to find the quickAccess set
+			for(Map<String, Object> set : listSets)
 			{
-				if (PINS_PROPERTY.equals(set.get(NAME_PROPERTY)))
+				if (QUICK_ACCESS_PROPERTY.equals(set.get(NAME_PROPERTY)))
 				{
-					pinSetExist = true;
-					String[] listPins = (String[]) set.get(LIST_WEBID_PROPERTY);
+					quickAccessSetExist = true;
+					String[] listQuickAccess = (String[]) set.get(LIST_WEBID_PROPERTY);
 
-					if (listPins != null)
+					if (listQuickAccess != null)
 					{
-						String[] newListPins = new String[listPins.length+1];
-						for (int i=0; i<listPins.length; i++)
+						String[] newListQuickAccess = new String[listQuickAccess.length+1];
+						for (int i=0; i<listQuickAccess.length; i++)
 						{
-							newListPins[i] = listPins[i];
+							newListQuickAccess[i] = listQuickAccess[i];
 						}
 						//Add the webid to the webids list
-						newListPins[listPins.length] = webid;
-						set.put(LIST_WEBID_PROPERTY, newListPins);
+						newListQuickAccess[listQuickAccess.length] = webid;
+						set.put(LIST_WEBID_PROPERTY, newListQuickAccess);
 
-						//Set the new set properties to the workspace
-						workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+index+"]", set);
-
-						//Save workspace silently
-						ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+//						//Set the new set properties to the workspace
+//						workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+index+"]", set);
+//
+//						//Save workspace silently
+//						ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
 					}
 				}
 				index++;
 			}
 
-			if (!pinSetExist)
+			if (!quickAccessSetExist)
 			{
-				int pinSetIndex = 0;
-				if (listSets !=null)  pinSetIndex = listSets.size();
+				int quickAccessSetIndex = 0;
+				if (listSets !=null)  quickAccessSetIndex = listSets.size();
 				
-				//Init pin set properties
+				//Init quickAccess set properties
 				Map<String, Object> mapSet = new HashMap<>();
 				String[] webids = new String[1];
 				webids[0] = webid;
-				mapSet.put(NAME_PROPERTY, "pins");
+				mapSet.put(NAME_PROPERTY, QUICK_ACCESS_PROPERTY);
 				mapSet.put(LIST_WEBID_PROPERTY, webids);
 
-				Map<String, String> mapSets = new HashMap<>();
-				try {
-					
-					mapSets.put(SET_PROPERTY, convertToJson(mapSet));
-					//Set the new set properties to the workspace
-					workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+pinSetIndex+"]", (Serializable) mapSets);
-
-					//Save workspace silently
-					ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				listSets.add(mapSet);
+//					//Set the new set properties to the workspace
+//					workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+quickAccessSetIndex+"]", (Serializable) mapSets);
+//
+//					//Save workspace silently
+//					ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+				
 			}
+			
+			Map<String, Object> mapToSave = new HashMap<>();
+			mapToSave.put(SETS_PROPERTY, listSets);
+		
+			//Set the new set properties to the workspace
+//				workspace.setPropertyValue(SETS_PROPERTY, (Serializable) listSets);
+			workspace.setProperties(SETS_SCHEMA, mapToSave);
 
+			//Save workspace silently
+			ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+			
 		} else {
-			throw new ClientException("User can not pin this document");
+			throw new ClientException("User can not add this document to quickaccess set");
 		}
 
 	}
@@ -167,10 +172,10 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
      * {@inheritDoc}
      */
 	@Override
-	public void unPin(CoreSession coreSession, DocumentModel currentDocument)
+	public void removeFromQuickAccess(CoreSession coreSession, DocumentModel currentDocument)
 			throws ClientException, ClassNotFoundException {
 
-		if (getStatus(coreSession, currentDocument) == PinStatus.can_unpin) {
+		if (getStatus(coreSession, currentDocument) == QuickAccessStatus.can_remove_from_quickaccess) {
 			//Get workspace
 			DocumentModel workspace = ToutaticeDocumentHelper.getWorkspace(coreSession, currentDocument, true);
 
@@ -183,28 +188,28 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 			String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID_PROPERTY);
 			int index = 0;
 			
-			//Read throug the list of set to find the pin set
+			//Read throug the list of set to find the quickAccess set
 			for(HashMap<String, Object> set : listSets)
 			{
-				if (PINS_PROPERTY.equals(set.get(NAME_PROPERTY)))
+				if (QUICK_ACCESS_PROPERTY.equals(set.get(NAME_PROPERTY)))
 				{
-					String[] listPins = (String[]) set.get(LIST_WEBID_PROPERTY);
+					String[] listQuickAccess = (String[]) set.get(LIST_WEBID_PROPERTY);
 
-					if (listPins != null && listPins.length > 0)
+					if (listQuickAccess != null && listQuickAccess.length > 0)
 					{
-						//Creation of a new list of webids of pin document without the current document's webid
-						String[] newListPins = new String[listPins.length-1];
+						//Creation of a new list of webids of quickAccess document without the current document's webid
+						String[] newListQuickAccess = new String[listQuickAccess.length-1];
 
 						int j = 0;
-						for (int i=0; i<listPins.length; i++)
+						for (int i=0; i<listQuickAccess.length; i++)
 						{
-							if (!StringUtils.equals(webid, (String) listPins[i]))
+							if (!StringUtils.equals(webid, (String) listQuickAccess[i]))
 							{
-								newListPins[j] = listPins[i];
+								newListQuickAccess[j] = listQuickAccess[i];
 								j++;
 							}
 						}
-						set.put(LIST_WEBID_PROPERTY, newListPins);
+						set.put(LIST_WEBID_PROPERTY, newListQuickAccess);
 
 						//Set the new set properties to the workspace
 						workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+index+"]", set);
@@ -217,7 +222,7 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 				index++;
 			}
 		} else {
-			throw new ClientException("User can not unsubscribe to this document");
+			throw new ClientException("User can not remove this document from quickaccess set");
 		}
 
 	}
@@ -228,30 +233,30 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 
 		Map<String, Object> infos = new HashMap<String, Object>();
 
-		infos.put(PIN_STATUS, getStatus(coreSession, currentDocument).toString());
+		infos.put(QUICK_ACCESS_STATUS, getStatus(coreSession, currentDocument).toString());
 
 		return infos;
 	}
 
 	/**
-	 * Evaluation status of pin for the document
+	 * Evaluation status of quickAccess for the document
 	 * 
 	 * @param coreSession
 	 * @param currentDocument
 	 * @return a status
 	 * @throws ClientException
 	 */
-	private PinStatus getStatus(CoreSession coreSession, DocumentModel currentDocument) throws ClientException {
+	private QuickAccessStatus getStatus(CoreSession coreSession, DocumentModel currentDocument) throws ClientException {
 
-		PinStatus status = PinStatus.cannot_pin;
+		QuickAccessStatus status = QuickAccessStatus.cannot_add_to_quickaccess;
 
 		// Test if workspace parent has Sets facet
 		//- if true
-		//   Test if document is already pin
-		//   - if true, return can_unpin
-		//   - if false, return can_pin
+		//   Test if document is already added in quickAccess set
+		//   - if true, return can_remove_from_quickaccess
+		//   - if false, return can_add_to_quickaccess
 		//
-		//- if false, return cannot_pin
+		//- if false, return cannot_add_to_quickaccess
 
 		String webid = (String) currentDocument.getProperty(SCHEMA_TOUTATICE, WEBID_PROPERTY);
 		if (StringUtils.isNotEmpty(webid))
@@ -263,19 +268,19 @@ public class DocumentPinInfosProviderImpl implements DocumentPinInfosProvider {
 				boolean hasSetsFacet = facetSet.contains(FACET_SETS);
 				if (hasSetsFacet)
 				{
-					status = PinStatus.can_pin;
+					status = QuickAccessStatus.can_add_to_quickaccess;
 					Map<String, Object> map = workspace.getProperties(SETS_SCHEMA);
 					ArrayList<HashMap<String, Object>> listSets = (ArrayList) map.get(SETS_PROPERTY);
 					for(HashMap<String, Object> set : listSets)
 					{
-						if (PINS_PROPERTY.equals(set.get(NAME_PROPERTY)))
+						if (QUICK_ACCESS_PROPERTY.equals(set.get(NAME_PROPERTY)))
 						{
-							String[] listPins = (String[]) set.get(LIST_WEBID_PROPERTY);
-							for (int i=0; i<listPins.length; i++)
+							String[] listQuickAccess = (String[]) set.get(LIST_WEBID_PROPERTY);
+							for (int i=0; i<listQuickAccess.length; i++)
 							{
-								if (StringUtils.equals(webid, (String) listPins[i]))
+								if (StringUtils.equals(webid, (String) listQuickAccess[i]))
 								{
-									status = PinStatus.can_unpin;
+									status = QuickAccessStatus.can_remove_from_quickaccess;
 									break;
 								}
 							}

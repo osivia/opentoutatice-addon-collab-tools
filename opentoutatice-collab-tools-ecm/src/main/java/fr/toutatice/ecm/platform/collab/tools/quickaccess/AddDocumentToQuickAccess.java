@@ -1,4 +1,4 @@
-package fr.toutatice.ecm.platform.collab.tools.pins;
+package fr.toutatice.ecm.platform.collab.tools.quickaccess;
 
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
@@ -10,10 +10,10 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.api.Framework;
 
 
-@Operation(id = PinDocument.ID, category = Constants.CAT_DOCUMENT, label = "Pin the document", description = "Pin the document")
-public class PinDocument {
+@Operation(id = AddDocumentToQuickAccess.ID, category = Constants.CAT_DOCUMENT, label = "Add the document to quickAccess set", description = "Add the document to quickAccess set")
+public class AddDocumentToQuickAccess {
 
-	public static final String ID = "Document.Pin";
+	public static final String ID = "Document.AddToQuickAccess";
 	
 	@Context
 	protected CoreSession session;
@@ -21,8 +21,8 @@ public class PinDocument {
 	@OperationMethod
 	public void run(DocumentModel document) throws ClientException {
 
-		DocumentPinInfosProvider service = Framework.getService(DocumentPinInfosProvider.class);
+		DocumentQuickAccessInfosProvider service = Framework.getService(DocumentQuickAccessInfosProvider.class);
 
-		service.pin(session, document);
+		service.addToQuickAccess(session, document);
 	}
 }

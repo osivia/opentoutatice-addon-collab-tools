@@ -73,8 +73,8 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/rooms/ui-types-contrib.xml,
  OSGI-INF/extensions/rooms/filters-contrib.xml,
  OSGI-INF/extensions/rooms/listener-contrib.xml,
- OSGI-INF/extensions/pins/pins-fetchinfos-contrib.xml,
- OSGI-INF/extensions/pins/pins-operations-contrib.xml,
- OSGI-INF/extensions/pins/pins-service-contrib.xml,
- OSGI-INF/extensions/pins/pins-types-contrib.xml
+ OSGI-INF/extensions/quickaccess/quickaccess-fetchinfos-contrib.xml,
+ OSGI-INF/extensions/quickaccess/quickaccess-operations-contrib.xml,
+ OSGI-INF/extensions/quickaccess/quickaccess-service-contrib.xml,
+ OSGI-INF/extensions/quickaccess/quickaccess-types-contrib.xml
  

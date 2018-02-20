@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<component name="fr.toutatice.ecm.platform.core.pins.doctypes">
+<component name="fr.toutatice.ecm.platform.core.quickaccess.doctypes">
 
 	<require>org.nuxeo.ecm.core.schema.TypeService</require>
 	<require>fr.toutatice.ecm.platform.core.schemas</require>

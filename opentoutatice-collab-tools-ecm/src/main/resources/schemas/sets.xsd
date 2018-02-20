@@ -5,7 +5,7 @@
 
 	<xs:complexType name="set"> 
 	    <xs:sequence>
-	    	<xs:element name="name" type="xs:string" default="pins"></xs:element>
+	    	<xs:element name="name" type="xs:string" default="quickAccess"></xs:element>
 	    	<xs:element name="webids" type="nxs:stringList"></xs:element>
 	    </xs:sequence>
     </xs:complexType>
@@ -16,7 +16,7 @@
 
   <xs:complexType name="sets">
   	<xs:sequence>
-  		<xs:element name="set" type="nxs:set" minOccurs="1" maxOccurs="unbounded" />
+  		<xs:element name="set" type="nxs:set" minOccurs="0" maxOccurs="unbounded" />
   	</xs:sequence>
   </xs:complexType>
 

@@ -1,4 +1,4 @@
-package fr.toutatice.ecm.platform.collab.tools.pins;
+package fr.toutatice.ecm.platform.collab.tools.quickaccess;
 
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
@@ -10,10 +10,10 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.api.Framework;
 
 
-@Operation(id = UnPinDocument.ID, category = Constants.CAT_DOCUMENT, label = "Unpin the document", description = "Unpin the document")
-public class UnPinDocument {
+@Operation(id = RemoveDocumentFromQuickAccess.ID, category = Constants.CAT_DOCUMENT, label = "Remove document from quick access set", description = "Remove document from quick access set")
+public class RemoveDocumentFromQuickAccess {
 
-	public static final String ID = "Document.UnPin";
+	public static final String ID = "Document.RemoveFromQuickAccess";
 	
 	@Context
 	protected CoreSession session;
@@ -21,8 +21,8 @@ public class UnPinDocument {
 	@OperationMethod
 	public void run(DocumentModel document) throws ClientException, ClassNotFoundException {
 
-		DocumentPinInfosProvider service = Framework.getService(DocumentPinInfosProvider.class);
+		DocumentQuickAccessInfosProvider service = Framework.getService(DocumentQuickAccessInfosProvider.class);
 
-		service.unPin(session, document);
+		service.removeFromQuickAccess(session, document);
 	}
 }

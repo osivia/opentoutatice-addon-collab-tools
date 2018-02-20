@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<component name="fr.toutatice.ecm.collab.tools.pins.infos.provider" version="1.0">
+<component name="fr.toutatice.ecm.collab.tools.quickaccess.infos.provider" version="1.0">
 
 	<require>fr.toutatice.ecm.platform.core.services.infos.provider</require>
 	
 	<extension target="fr.toutatice.ecm.platform.core.services.infos.provider"
     	point="extended_fetch_infos">
     
-    	<fetchInfos name="pinsInfosProvider" class="fr.toutatice.ecm.platform.collab.tools.pins.DocumentPinInfosProviderImpl" />
+    	<fetchInfos name="quickAccessInfosProvider" class="fr.toutatice.ecm.platform.collab.tools.quickaccess.DocumentQuickAccessInfosProviderImpl" />
     	
     </extension>
 </component>
