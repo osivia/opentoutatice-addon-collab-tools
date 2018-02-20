@@ -17,7 +17,6 @@
  */
 package fr.toutatice.ecm.platform.collab.tools.quickaccess;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,8 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -106,11 +103,11 @@ public class DocumentQuickAccessInfosProviderImpl implements DocumentQuickAccess
 						newListQuickAccess[listQuickAccess.length] = webid;
 						set.put(LIST_WEBID_PROPERTY, newListQuickAccess);
 
-//						//Set the new set properties to the workspace
-//						workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+index+"]", set);
-//
-//						//Save workspace silently
-//						ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+						//Set the new set properties to the workspace
+						workspace.setPropertyValue(SETS_PROPERTY+"/["+index+"]", (Serializable) set);
+
+						//Save workspace silently
+						ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
 					}
 				}
 				index++;
@@ -128,44 +125,18 @@ public class DocumentQuickAccessInfosProviderImpl implements DocumentQuickAccess
 				mapSet.put(NAME_PROPERTY, QUICK_ACCESS_PROPERTY);
 				mapSet.put(LIST_WEBID_PROPERTY, webids);
 
-				listSets.add(mapSet);
-//					//Set the new set properties to the workspace
-//					workspace.setPropertyValue(SETS_PROPERTY+"/"+SET_PROPERTY+"["+quickAccessSetIndex+"]", (Serializable) mapSets);
-//
-//					//Save workspace silently
-//					ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
+				//Set the new set properties to the workspace
+				workspace.setPropertyValue(SETS_PROPERTY+"/["+quickAccessSetIndex+"]", (Serializable) mapSet);
+
+				//Save workspace silently
+				ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
 				
 			}
-			
-			Map<String, Object> mapToSave = new HashMap<>();
-			mapToSave.put(SETS_PROPERTY, listSets);
-		
-			//Set the new set properties to the workspace
-//				workspace.setPropertyValue(SETS_PROPERTY, (Serializable) listSets);
-			workspace.setProperties(SETS_SCHEMA, mapToSave);
-
-			//Save workspace silently
-			ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
-			
+					
 		} else {
 			throw new ClientException("User can not add this document to quickaccess set");
 		}
 
-	}
-
-	/**
-	 * Convert object to Json
-	 * @param object
-	 * @return
-	 * @throws IOException
-	 */
-	private String convertToJson(Object object) throws IOException
-	{
-		// JSON object writer
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectWriter writer = mapper.writer();
-
-		return writer.writeValueAsString(object);
 	}
 
 	/**
