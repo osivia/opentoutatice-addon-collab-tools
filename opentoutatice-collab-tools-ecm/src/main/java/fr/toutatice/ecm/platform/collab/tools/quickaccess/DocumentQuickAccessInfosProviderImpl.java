@@ -125,8 +125,12 @@ public class DocumentQuickAccessInfosProviderImpl implements DocumentQuickAccess
 				mapSet.put(NAME_PROPERTY, QUICK_ACCESS_PROPERTY);
 				mapSet.put(LIST_WEBID_PROPERTY, webids);
 
+				listSets.add(mapSet);
+				Map<String, Object> mapToSave = new HashMap<>();
+				mapToSave.put(SETS_PROPERTY, listSets);
+			
 				//Set the new set properties to the workspace
-				workspace.setPropertyValue(SETS_PROPERTY+"/["+quickAccessSetIndex+"]", (Serializable) mapSet);
+				workspace.setProperties(SETS_SCHEMA, mapToSave);
 
 				//Save workspace silently
 				ToutaticeDocumentHelper.saveDocumentSilently(coreSession, workspace, true);
