@@ -40,6 +40,24 @@
 						<property name="permission">Read</property>
 						<property name="documentId">#{currentDocument.id}</property>
 						<property name="searchType">USER_GROUP_TYPE</property>
+						<property name="selectionFormatter">userformatter</property>						
+						<property name="suggestionFormatter">userformatter</property>
+						<property name="inlinejs">
+						<![CDATA[ function userformatter(entry) {
+							var markup = "";
+							if (entry.displayIcon && entry.type) {
+								if (entry.type == "USER_TYPE") {
+									markup += "<img src='" + window.nxContextPath + "/icons/user.png'/>";
+								}
+								else if (entry.type == "GROUP_TYPE") {
+									markup += "<img src='" + window.nxContextPath + "/icons/group.png'/>";  
+								}
+								markup += entry.displayLabel;
+								
+								return markup;
+							}
+						}]]>
+						</property>
 					</defaultValues>
 					<layouts mode="view">
 						<layout name="multipleUsersSuggestion_widget_type_properties_view">
