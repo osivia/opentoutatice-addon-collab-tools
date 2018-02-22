@@ -79,7 +79,7 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
             if (group != null) {
                 List<String> memberUsers = group.getMemberUsers();
                 int nbMembers = memberUsers != null ? memberUsers.size() : 0;
-                displayedGroups.put(group.getName(), nbMembers);
+                displayedGroups.put(group.getLabel(), nbMembers);
             }
         }
 
