@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://www.nuxeo.org/ecm/schemas/osivia/statistics"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:nxs="http://www.nuxeo.org/ecm/schemas/osivia/statistics">
+
+    <xs:include schemaLocation="base.xsd" />
+    
+    
+    <xs:complexType name="visits">
+        <xs:sequence>
+            <xs:element name="hits" type="xs:integer" />
+            <xs:element name="identifiers" type="nxs:stringList" />
+            <xs:element name="anonymous" type="xs:integer" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="period">
+        <xs:sequence>
+            <xs:element name="date" type="xs:string" />
+            <xs:element name="hits" type="xs:integer" />
+            <xs:element name="uniqueVisitors" type="xs:integer" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="periods">
+        <xs:sequence>
+            <xs:element name="period" type="nxs:period" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:element name="lastUpdate" type="xs:date" />
+    <xs:element name="days" type="nxs:periods" />
+    <xs:element name="months" type="nxs:periods" />
+    <xs:element name="dayVisits" type="nxs:visits" />
+    <xs:element name="monthVisits" type="nxs:visits" />
+    
+</xs:schema>
