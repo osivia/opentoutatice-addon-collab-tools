@@ -29,6 +29,7 @@ import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
+import org.nuxeo.ecm.core.api.DocumentSecurityException;
 import org.nuxeo.ecm.core.api.IdRef;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.ecm.core.api.impl.DocumentModelListImpl;
@@ -41,6 +42,7 @@ import org.nuxeo.ecm.platform.ec.placeful.interfaces.PlacefulService;
 import org.nuxeo.ecm.platform.notification.api.NotificationManager;
 import org.nuxeo.runtime.api.Framework;
 
+import fr.toutatice.ecm.platform.collab.tools.notifications.exception.DeleteUserSubscriptionException;
 import fr.toutatice.ecm.platform.core.helper.ToutaticeDocumentHelper;
 
 /**
@@ -171,10 +173,10 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
                     tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
 
                     // Then, get group subscriptions
-//                    for (String group : currentUser.getAllGroups()) {
-//                        paramMap.put("userId", NuxeoGroup.PREFIX + group);
-//                        tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
-//                    }
+                    // for (String group : currentUser.getAllGroups()) {
+                    // paramMap.put("userId", NuxeoGroup.PREFIX + group);
+                    // tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
+                    // }
 
 
                     if (isSubsInheritDocument(coreSession, tempSubscriptions, currentDocument)) {
@@ -203,9 +205,6 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
      */
     private boolean isSubsInheritDocument(CoreSession coreSession, List<Annotation> allSubscriptions, DocumentModel currentDoc) throws ClientException {
 
-        /* To do not generate "heavy" logs. */
-        List<String> idsYetLogged = new ArrayList<String>(0);
-
         for (Object obj : allSubscriptions) {
             UserSubscription us = (UserSubscription) obj;
             try {
@@ -218,13 +217,13 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
                     return true;
                 }
             } catch (ClientException de) {
-                /* Doc doesn't exist anymore (not found) */
+                // Doc doesn't exist anymore (not found)
                 if (de.getCause() instanceof NoSuchDocumentException) {
-                    String id = us.getDocId();
-                    if (!idsYetLogged.contains(id)) {
-                        idsYetLogged.add(id);
-                        log.error("Document '" + id + "' doesn't exist anymore but its subscriptions still exist: delete rows with docid='" + id + "' in usersubscription table.");
-                        continue;
+                    removeUserSubscription(coreSession, us);
+
+                    if (log.isDebugEnabled()) {
+                        log.debug("NoSuchDocumentException: subscription " + us.getNotification() + " on document " + us.getDocId() + "for user "
+                                + us.getUserId() + " removed");
                     }
                 }
             }
@@ -232,40 +231,89 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
 
         return false;
     }
-    
+
     @Override
     public DocumentModelList getUserSubscriptions(CoreSession coreSession) {
-        
+
         DocumentModelList documentsSubscribed = new DocumentModelListImpl();
-    	
+
         PlacefulService serviceBean = NotificationServiceHelper.getPlacefulServiceBean();
-        
+
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("userId", NuxeoPrincipal.PREFIX + coreSession.getPrincipal().getName());
-        
-        String className = serviceBean.getAnnotationRegistry().get(
-                NotificationService.SUBSCRIPTION_NAME);
-        String shortClassName = className.substring(className.lastIndexOf('.') + 1);
-        
-        List<Annotation> userSubscriptions = new ArrayList<Annotation>();
-        		
-        userSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(
-                paramMap, shortClassName));
-        
-        for(Annotation subscription : userSubscriptions) {
-        	
-            try {
-                UserSubscription us = (UserSubscription) subscription;
-                DocumentModel subscribedDoc = coreSession.getDocument(new IdRef(us.getDocId()));
 
+        String className = serviceBean.getAnnotationRegistry().get(NotificationService.SUBSCRIPTION_NAME);
+        String shortClassName = className.substring(className.lastIndexOf('.') + 1);
+
+        List<Annotation> userSubscriptions = new ArrayList<Annotation>();
+
+        userSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
+
+        for (Annotation subscription : userSubscriptions) {
+            UserSubscription us = (UserSubscription) subscription;
+            try {
+
+                DocumentModel subscribedDoc = coreSession.getDocument(new IdRef(us.getDocId()));
                 documentsSubscribed.add(subscribedDoc);
-            } catch (Exception e) {
-                log.error("[Deprecated subscription] : " + e.getLocalizedMessage());
+
+            } catch (ClientException ce) {
+                repareUserSubscription(coreSession, us, ce);
             }
 
         }
-        
+
         return documentsSubscribed;
+    }
+
+    /**
+     * @param serviceBean
+     * @param us
+     * @param ce
+     * @throws DeleteUserSubscriptionException
+     */
+    protected void repareUserSubscription(CoreSession session, UserSubscription us, ClientException ce)
+            throws DeleteUserSubscriptionException {
+
+        if (ce.getCause() instanceof NoSuchDocumentException) {
+            // Document doesn't exist anymore: remove subscription
+            removeUserSubscription(session, us);
+
+            if (log.isDebugEnabled()) {
+                log.debug("NoSuchDocumentException: subscription " + us.getNotification() + " on document " + us.getDocId() + "for user " + us.getUserId()
+                        + " removed");
+            }
+        } else if (ce instanceof DocumentSecurityException) {
+            // Can not access document anymore
+            removeUserSubscription(session, us);
+
+            if (log.isDebugEnabled()) {
+                log.debug("DocumentSecurityException: subscription " + us.getNotification() + " on document " + us.getDocId() + "for user " + us.getUserId()
+                        + " removed");
+            }
+        } else {
+            // Technical error
+            throw ce;
+        }
+    }
+
+    /**
+     * Remove given UserSubscription.
+     * 
+     * @param service
+     * @param session
+     * @param us
+     * @throws DeleteUserSubscriptionException
+     */
+    protected void removeUserSubscription(CoreSession session, UserSubscription us) throws DeleteUserSubscriptionException {
+        String currentUserId = NuxeoPrincipal.PREFIX + session.getPrincipal().getName();
+
+        if (StringUtils.equals(us.getUserId(), currentUserId)) {
+            // Do not use: PlacefulService#removeAnnotation(us) cause Hibernate exception:
+            // java.lang.IllegalArgumentException: Removing a detached instance
+            NotificationServiceHelper.getNotificationService().removeSubscription(us.getUserId(), us.getNotification(), us.getDocId());
+        } else {
+            throw new DeleteUserSubscriptionException("Trying deleting subscription for user " + us.getUserId() + "instead of user " + currentUserId);
+        }
     }
 
 }

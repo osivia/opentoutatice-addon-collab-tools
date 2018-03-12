@@ -45,7 +45,6 @@ public class GetUserSubscriptions {
     public DocumentModelList run() throws ClientException {
 
 		DocumentNotificationInfosProvider service = Framework.getService(DocumentNotificationInfosProvider.class);
-
 		return service.getUserSubscriptions(session);
 		
 	}

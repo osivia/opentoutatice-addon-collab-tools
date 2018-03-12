@@ -70,5 +70,6 @@ Nuxeo-Component: OSGI-INF/extensions/faq/schemas-contrib.xml,
  OSGI-INF/extensions/rooms/lifecycle-contrib.xml,
  OSGI-INF/extensions/rooms/ui-types-contrib.xml,
  OSGI-INF/extensions/rooms/filters-contrib.xml,
- OSGI-INF/extensions/rooms/listener-contrib.xml
+ OSGI-INF/extensions/rooms/listener-contrib.xml,
+ OSGI-INF/extensions/statistics/core-types-contrib.xml
  
