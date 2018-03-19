@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>opentoutatice-ecm.collab-tools</groupId>
 		<artifactId>opentoutatice-collab-tools-parent</artifactId>
-		<version>4.6.6</version>
+		<version>4.8-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>opentoutatice-collab-tools-marketplace</artifactId>
@@ -14,7 +14,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.nuxeo.ecm.distribution</groupId>
-			<artifactId>nuxeo-distribution-cap</artifactId>
+				<artifactId>nuxeo-nxr-server</artifactId>
 			<type>pom</type>
 		</dependency>
 	</dependencies>

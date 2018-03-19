@@ -27,7 +27,7 @@ function createTinyMceExtract() {
 				},
 				
 				relative_urls : true,
-				document_base_url : baseURL,
+				document_base_url : tinyMCEBbaseURL,
 
 				// Theme options
 				toolbar1 : "bold italic underline | strikethrough subscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | forecolor backcolor | nuxeolink link unlink",
@@ -52,4 +52,4 @@ function createTinyMceExtract() {
 
 }
 
-window.addEventListener("load", createTinyMceExtract);
+createTinyMceExtract();

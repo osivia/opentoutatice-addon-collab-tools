@@ -14,11 +14,11 @@
  *
  * Contributors:
  *   lbillon
- *    
+ *
  */
 package fr.toutatice.ecm.platform.collab.tools.notifications;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
@@ -27,29 +27,29 @@ import fr.toutatice.ecm.platform.core.services.infos.provider.DocumentInformatio
 
 /**
  * Service for managing notifications
- * 
+ *
  * @author lbillon
- * 
+ *
  */
 public interface DocumentNotificationInfosProvider extends DocumentInformationsProvider {
 
-	/**
-	 * Subscribe to all notifications on the document
-	 * 
-	 * @param coreSession
-	 * @param currentDocument
-	 */
-	void subscribe(CoreSession coreSession, DocumentModel currentDocument);
+    /**
+     * Subscribe to all notifications on the document
+     *
+     * @param coreSession
+     * @param currentDocument
+     */
+    void subscribe(CoreSession coreSession, DocumentModel currentDocument);
 
-	/**
-	 * Remove all subscriptions to notifications on the document
-	 * 
-	 * @param coreSession
-	 * @param currentDocument
-	 * @throws ClientException
-	 * @throws ClassNotFoundException
-	 */
-	void unsubscribe(CoreSession coreSession, DocumentModel currentDocument) throws ClientException, ClassNotFoundException;
+    /**
+     * Remove all subscriptions to notifications on the document
+     *
+     * @param coreSession
+     * @param currentDocument
+     * @throws NuxeoException
+     * @throws ClassNotFoundException
+     */
+	void unsubscribe(CoreSession coreSession, DocumentModel currentDocument) throws NuxeoException, ClassNotFoundException;
 
 	/**
 	 * Return a list of documents followed by the current user

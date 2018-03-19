@@ -31,7 +31,7 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.core.Events;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.international.StatusMessage;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.NuxeoGroup;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
@@ -64,7 +64,7 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
     private boolean isSelectedModeratorsFilled;
 
     @Override
-    protected DocumentModel getThreadModel() throws ClientException {
+    protected DocumentModel getThreadModel() throws NuxeoException {
         // Fill with form
         DocumentModel changeableDocument = navigationContext.getChangeableDocument();
 
@@ -99,7 +99,7 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
             try {
                 this.moderated = super.isThreadModerated(thread);
                 isModeratedFilled = true;
-            } catch (ClientException e) {
+            } catch (NuxeoException e) {
                 this.moderated = false;
             }
         }
@@ -118,12 +118,12 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
         return this.selectedModerators;
     }
 
-    public String addThread(String viewId) throws ClientException {
+    public String addThread(String viewId) throws NuxeoException {
         super.addThread();
         return viewId;
     }
 
-    public String updateThread() throws ClientException {
+    public String updateThread() throws NuxeoException {
         DocumentModel currentDocument = navigationContext.getCurrentDocument();
 
         currentDocument.setProperty(schema, "moderated", moderated);
@@ -159,13 +159,13 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
         return navigationContext.navigateToDocument(currentDocument, "after-edit");
     }
 
-    public String updateThread(String viewId) throws ClientException {
+    public String updateThread(String viewId) throws NuxeoException {
         updateThread();
         return viewId;
     }
 
     @Observer(value = {EventNames.NEW_DOCUMENT_CREATED, EventNames.DOCUMENT_SELECTION_CHANGED}, create = false)
-    public void refresh() throws ClientException {
+    public void refresh() throws NuxeoException {
         super.clean();
         isModeratedFilled = false;
         isSelectedModeratorsFilled = false;

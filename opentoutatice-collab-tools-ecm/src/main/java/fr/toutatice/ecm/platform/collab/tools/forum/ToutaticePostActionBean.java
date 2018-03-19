@@ -28,7 +28,7 @@ import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.ecm.platform.forum.web.PostActionBean;
@@ -64,7 +64,7 @@ public class ToutaticePostActionBean extends PostActionBean {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void startModeration(DocumentModel post) throws ClientException {
+	protected void startModeration(DocumentModel post) throws NuxeoException {
 		super.startModeration(post);
 		
 		DocumentModel thread = getParentThread();

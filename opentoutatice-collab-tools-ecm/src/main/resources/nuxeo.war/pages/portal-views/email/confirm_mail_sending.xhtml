@@ -1,0 +1,154 @@
+<ui:composition template="/pages/portal-views/pv_page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:nxl="http://nuxeo.org/nxforms/layout"
+	xmlns:nxu="http://nuxeo.org/nxweb/util"
+	xmlns:nxh="http://nuxeo.org/nxweb/html"
+	xmlns:nxd="http://nuxeo.org/nxweb/document"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<div class="container">
+
+		<ui:define name="pv title">
+			<ui:fragment rendered="#{currentDocument.version}">
+				<div class="form-group">
+					<h3>
+						<h:outputText
+							value="#{nxd:titleOrId(versionedActions.sourceDocument)}" />
+						(version
+						<h:outputText value=" #{currentDocument.uid.major_version}" />
+						.
+						<h:outputText value="#{currentDocument.uid.minor_version}" />
+						)
+					</h3>
+				</div>
+			</ui:fragment>
+
+			<ui:fragment rendered="#{!currentDocument.version}">
+				<div class="form-group">
+					<h3>
+						<h:outputText
+							value="#{messages['toutatice.email.label']} '#{nxd:titleOrId(currentDocument)}'" />
+					</h3>
+				</div>
+			</ui:fragment>
+		</ui:define>
+
+		
+		<ui:define name="pv body">
+			<ui:include src="/pages/portal-views/parts/message_banner.xhtml" />
+		<h:messages />
+		
+			<h:form class="form form-horizontal">
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Objet</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">#{emailNotifSenderAction.mailSubject}</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Contenu</label>
+					<div class="col-sm-9 form-control-static">
+						<nxl:widgetType name="ottc_htmltext" mode="view"
+							value="#{emailNotifSenderAction.mailContent}" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="alert alert-warning">
+						<i class="glyphicons halflings warning-sign"></i> <span
+							class="text-warning"> <h:outputText
+								value="Vous allez envoyer votre mail aux personnes et/ou groupes suivants: " /></span>
+
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Destinataire(s)</label>
+					<div class="col-sm-9">
+						<ul class="list-group">
+							<c:forEach var="recipient"
+								items="#{emailNotifSenderAction.displayedRecipients}">
+								<li class="list-group-item"><h:outputText
+										value="#{recipient}" /></li>
+							</c:forEach>
+
+							<c:forEach var="group"
+								items="#{emailNotifSenderAction.displayedGroups.entrySet()}">
+								<li class="list-group-item"><span class="badge"><h:outputText
+											value="#{group.value}" /> personne(s)</span> Groupe <h:outputText
+										value="#{group.key}" /></li>
+							</c:forEach>
+						</ul>
+					</div>
+				</div>
+
+				<h:inputHidden id="recipients"
+					value="#{emailNotifSenderAction.recipients}">
+					<f:converter
+						converterId="fr.toutatice.ecm.platform.web.util.ListConverter" />
+				</h:inputHidden>
+
+				<h:inputHidden id="subject"
+					value="#{emailNotifSenderAction.mailSubject}" />
+
+				<h:inputHidden id="content"
+					value="#{emailNotifSenderAction.mailContent}" />
+
+				<nav class="navbar navbar-default navbar-fixed-bottom">
+					<div class="container-fluid">
+						<div class="col-sm-offset-3">
+
+							<c:choose>
+								<c:when test="#{webActions.isInPortalViewContext()}">
+
+									<a class="btn btn-primary navbar-btn" data-placement="bottom"
+										data-toggle="tooltip" onclick="history.back();"> <i
+										class="glyphicons halflings arrow-left"></i> <span
+										class="sr-only">Retour</span>
+									</a>
+
+									<nxh:commandButton value="Confirmer"
+										class="btn btn-primary navbar-btn"
+										action="#{emailNotifSenderAction.send('mail_sending')}" />
+
+									<nxh:commandButton value="Annuler"
+										class="btn btn-primary navbar-btn" onclick="closeFancyBox();" />
+
+								</c:when>
+
+								<c:otherwise>
+
+									<a class="btn btn-primary navbar-btn" data-placement="bottom"
+										data-toggle="tooltip" onclick="history.back();"> <i
+										class="glyphicons halflings arrow-left"></i> <span
+										class="sr-only">Retour</span>
+									</a>
+
+									<a4j:commandButton value="Confirmer" onclick="closeFancyBox();"
+										styleClass="btn btn-primary navbar-btn"
+										action="#{emailNotifSenderAction.send}" />
+
+									<a4j:commandButton value="Annuler" onclick="closeFancyBox();"
+										styleClass="btn btn-primary navbar-btn" />
+
+								</c:otherwise>
+							</c:choose>
+
+						</div>
+					</div>
+				</nav>
+
+				<h:inputHidden id="fromUrl" value="#{pageBean.fromUrl}" />
+
+			</h:form>
+			<div class="pv-footer"></div>
+		</ui:define>
+	</div>
+</ui:composition>

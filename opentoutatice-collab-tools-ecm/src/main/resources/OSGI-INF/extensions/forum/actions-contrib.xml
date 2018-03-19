@@ -2,7 +2,7 @@
 <component name="fr.toutatice.ecm.platform.web.forum.actions">
 
 	<require>org.nuxeo.ecm.platform.actions.ActionService</require>
-	<require>org.nuxeo.ecm.platform.forum.actions</require>
+	<!-- <require>org.nuxeo.ecm.platform.forum.actions</require> -->
 	<require>fr.toutatice.ecm.platform.web.filters</require>
 	<require>fr.toutatice.ecm.platform.core.forum.filters</require>
 

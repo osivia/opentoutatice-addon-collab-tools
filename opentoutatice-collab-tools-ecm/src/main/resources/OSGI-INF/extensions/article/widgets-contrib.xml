@@ -22,7 +22,7 @@
 			</properties>
 		</widget>
 
-		<widget name="article_extrait" type="ttc_richtext_with_mimetype">
+		<widget name="article_extrait" type="ottc_extract_htmltext">
 			<labels>
 				<label mode="any">toutatice.label.extract</label>
 			</labels>
@@ -35,13 +35,6 @@
 			<fields>
 				<field>annonce:resume</field>
 			</fields>
-			<properties widgetMode="edit">
-                <property name="editorSelector">mceExtract</property>
-                <property name="disableHTMLInit">true</property>
-                <property name="alternateTinyMCEjs">tinymce/custom/tiny_mce_init_extrait.js</property>
-                <property name="showFormat">false</property>
-				<property name="pvOverride">false</property>
-			</properties>
 		</widget>
 		
 		<widget name="article_extrait_summary" type="summary_content_type">
@@ -63,7 +56,7 @@
 			</properties>
 		</widget>
 
-		<widget name="article_content" type="ttc_richtext_with_mimetype">
+		<widget name="article_content" type="ottc_htmltext">
 			<labels>
 				<label mode="any">toutatice.label.content</label>
 			</labels>
@@ -72,11 +65,6 @@
 				<field>note:note</field>
 				<field>note:mime_type</field>
 			</fields>
-			<properties widgetMode="edit">
-				<property name="editorSelector">mceSimpleEditorResponsive</property>
-				<property name="disableHTMLInit">true</property>
-				<property name="required">true</property>
-			</properties>
 		</widget>
 		
 		<widget name="article_content_summary" type="summary_content_type">
@@ -165,5 +153,46 @@
 
 	</extension>
 
+	<extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager"
+		point="widgettypes">
+
+		<widgetType name="ottc_extract_htmltext">
+			<aliases>
+				<alias>richtext_with_mimetype</alias>
+				<alias>htmltext</alias>
+				<!-- For 4.6 compatibility 
+				<alias>ttc_richtext_with_mimetype</alias>-->
+			</aliases>
+			<configuration>
+				<title>HTML text</title>
+				<description>
+					<p>Pre-configured Nx htmltext</p>
+				</description>
+				<categories>
+					<category>document</category>
+				</categories>
+				<supportedModes>
+					<mode>edit</mode>
+					<mode>view</mode>
+				</supportedModes>
+				<fields>
+					<list>false</list>
+					<complex>false</complex>
+					<supportedTypes>
+						<type>string</type>
+					</supportedTypes>
+				</fields>
+				<properties>
+					<defaultValues mode="any">
+						<property name="configuration">{height: "150",theme : "modern",plugins : "nuxeolink link textcolor",content_css: "/nuxeo/css/portal-view.min.css? + new Date().getTime()",valid_elements: "strong/b,em,sub,u,p[style],ol,ul,li,blockquote,span[style],a[href]",valid_styles: {"p": "text-align,padding-left","span": "text-decoration,color,background-color"},relative_urls : true,document_base_url : "/nuxeo",toolbar1 : "bold italic underline | strikethrough subscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | forecolor backcolor | nuxeolink link unlink",toolbar2:"", toolbar3:"",menubar: false,statusbar: false,gecko_spellcheck : true}</property>
+					</defaultValues>
+				</properties>
+			</configuration>
+			<handler-class>
+				org.nuxeo.ecm.platform.forms.layout.facelets.plugins.HtmlTextWidgetTypeHandler
+			</handler-class>
+		</widgetType>
+
+</extension>
 
 </component>
