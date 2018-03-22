@@ -18,14 +18,15 @@
  */
 package fr.toutatice.ecm.platform.collab.tools.mail;
 
-import static org.jboss.seam.ScopeType.EVENT;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
@@ -46,9 +47,11 @@ import fr.toutatice.ecm.platform.web.fragments.PageBean;
  *
  */
 @Name("emailNotifSenderAction")
-@Scope(EVENT)
+@Scope(ScopeType.CONVERSATION)
 @Install(precedence = ExtendedSeamPrecedence.TOUTATICE)
 public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificationSenderActionsBean {
+
+    private static final Log log = LogFactory.getLog(ToutaticeEmailNotificationSenderActionsBean.class);
 
     /* To send portal notification */
     @In(create = true)
@@ -56,15 +59,13 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
 
     @In(create = true)
     transient UserManager userManager;
-    
+
     /** To keep data in confirm portal view. */
     protected List<String> savedRecipients;
-    /** To resolve converter problem on hidden input in confirm portal view */
 
     private static final long serialVersionUID = -5722586829804268237L;
 
-    protected transient PrincipalListManager principalManager = (PrincipalListManager) SeamComponentCallHelper
-            .getSeamComponentByName("principalListManager");
+    protected transient PrincipalListManager principalManager = (PrincipalListManager) SeamComponentCallHelper.getSeamComponentByName("principalListManager");
 
     /**
      * To display names of groups and number of group members.
@@ -105,7 +106,7 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
 
         return displayedRecipients;
     }
-    
+
     /**
      * To "pre-fill" recipients
      */
@@ -123,6 +124,7 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
             }
             super.setRecipients(this.savedRecipients);
         }
+
         return this.savedRecipients;
     }
 
@@ -131,7 +133,7 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
         this.savedRecipients = recipients;
         super.setRecipients(this.savedRecipients);
     }
-    
+
     public String redirect(String viewId) {
         return viewId;
     }

@@ -5,7 +5,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:nxd="http://nuxeo.org/nxweb/document">
 
-
 	<ui:define name="pv title">
 		<ui:fragment rendered="#{currentDocument.version}">
 			<div class="container">
@@ -37,7 +36,11 @@
 
 	<ui:define name="pv body">
 		<div class="email-body">
-			<ui:include src="/pages/portal-views/email/email_body.xhtml" />
+			<div class="container">
+				<div class="col-sm-11">
+					<ui:include src="/pages/portal-views/email/email_body.xhtml" />
+				</div>
+			</div>
 		</div>
 	</ui:define>
 

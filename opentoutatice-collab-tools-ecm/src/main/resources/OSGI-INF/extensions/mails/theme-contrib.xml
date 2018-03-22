@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <component name="fr.toutatice.ecm.collab.tools.mails.theme">
 
-	<require>org.nuxeo.theme.nuxeo.webapp</require>
+	<require>org.opentoutatice.jsf.ui.portal.views.theme</require>
 
 	<extension target="org.nuxeo.ecm.platform.WebResources"
 		point="bundles">
 
-		<bundle name="pv_includes">
+		<!-- <bundle name="pv_includes">
 			<resources append="true">
 				<resource>mail-popup.min.css</resource>
 			</resources>
-		</bundle>
+		</bundle> -->
 
 	</extension>
 

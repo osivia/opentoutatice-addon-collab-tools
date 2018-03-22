@@ -7,19 +7,13 @@
 	xmlns:nxu="http://nuxeo.org/nxweb/util"
 	xmlns:nxh="http://nuxeo.org/nxweb/html">
 
-	<h:outputScript target="#{pageJstarget}">
-            function closeFancyBox() {
-                parent.jQuery.fancybox.close();
-            }
-        </h:outputScript>
-
 	<ui:include src="/pages/portal-views/parts/message_banner.xhtml" />
 
 	<h:form class="form form-horizontal">
 
 		<div class="form-group required">
 			<label class="col-sm-3 control-label">Destinataire(s)</label>
-			<div class="col-sm-9">
+			<div class="col-sm-9 ttc-form-control">
 				<nxl:widgetType name="emailRecipients" mode="edit" required="true" />
 			</div>
 		</div>
@@ -27,7 +21,7 @@
 		<div class="form-group required">
 			<label class="col-sm-3 control-label">Objet</label>
 
-			<div class="col-sm-9">
+			<div class="col-sm-9 ttc-form-control">
 				<h:inputText value="#{emailNotifSenderAction.mailSubject}"
 					required="true" class="form-control email-object"
 					binding="#{field.simpleComponent}">
@@ -39,38 +33,39 @@
 
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Contenu</label>
-			<div class="col-sm-9">
-				<nxl:widgetType name="ottc_minimal_htmltext" mode="edit"
+			<div class="col-sm-9 ttc-form-control">
+				<nxl:widgetType name="ottc_extract_htmltext" mode="edit"
 					required="false" value="#{emailNotifSenderAction.mailContent}" />
 			</div>
 		</div>
+		<div class="form-group">
+			<nav class="navbar navbar-default navbar-fixed-bottom">
+				<div class="container-fluid">
+					<div class="col-sm-offset-3">
 
-		<nav class="navbar navbar-default navbar-fixed-bottom">
-			<div class="container-fluid">
-				<div class="col-sm-offset-3">
+						<c:choose>
+							<c:when test="#{webActions.isInPortalViewContext()}">
 
-					<c:choose>
-						<c:when test="#{webActions.isInPortalViewContext()}">
+								<nxh:commandLink value="#{messages['command.email.send']}"
+									class="btn btn-primary navbar-btn fancyframe_refresh"
+									action="#{emailNotifSenderAction.redirect('confirm_mail_sending')}" />
 
-							<nxh:commandLink value="#{messages['command.email.send']}"
-								class="btn btn-primary navbar-btn fancyframe_refresh"
-								action="#{emailNotifSenderAction.redirect('confirm_mail_sending')}" />
+							</c:when>
 
-						</c:when>
+							<c:otherwise>
 
-						<c:otherwise>
+								<h:commandButton value="#{messages['command.email.send']}"
+									styleClass="btn btn-primary navbar-btn"
+									action="#{emailNotifSenderAction.redirect('confirm_mail_sending')}"
+									limitRender="true" />
 
-							<h:commandButton value="#{messages['command.email.send']}"
-								styleClass="btn btn-primary navbar-btn"
-								action="#{emailNotifSenderAction.redirect('confirm_mail_sending')}"
-								limitRender="true" />
+							</c:otherwise>
+						</c:choose>
 
-						</c:otherwise>
-					</c:choose>
-
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+		</div>
 
 		<h:inputHidden id="fromUrl" value="#{pageBean.fromUrl}" />
 

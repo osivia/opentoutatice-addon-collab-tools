@@ -14,8 +14,8 @@
 	<properties>
 		<nuxeo.version>8.10-HF22</nuxeo.version>
 		<nuxeo.sites.version>7.3</nuxeo.sites.version>
-		<nuxeo.agenda.version>8.10</nuxeo.agenda.version>
-		<nuxeo.opentoutatice.version>4.8-SNAPSHOT</nuxeo.opentoutatice.version>
+		<nuxeo.agenda.version>1.4.2</nuxeo.agenda.version>
+		<nuxeo.opentoutatice.version>4.8</nuxeo.opentoutatice.version>
 	</properties>
 
 	<modules>
