@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -8,29 +9,29 @@
 	<packaging>pom</packaging>
 	<description>Addon to leverage the collaboration tools</description>
 	<name>opentoutatice-collab-tools-parent</name>
-	<version>4.7-SNAPSHOT</version>
+	<version>5.0-SNAPSHOT</version>
 
 	<properties>
-		<nuxeo.version>6.0-HF42</nuxeo.version>
-		<nuxeo.cap.version>6.0</nuxeo.cap.version>
-		<nuxeo.opentoutatice.version>4.7</nuxeo.opentoutatice.version>
-		<nuxeo.agenda.version>1.2.1</nuxeo.agenda.version>
+		<nuxeo.version>8.10-HF28</nuxeo.version>
+		<nuxeo.sites.version>7.3</nuxeo.sites.version>
+		<nuxeo.agenda.version>1.4.2</nuxeo.agenda.version>
+		<nuxeo.opentoutatice.version>5.0-SNAPSHOT</nuxeo.opentoutatice.version>
 	</properties>
 
 	<modules>
-	   <module>opentoutatice-collab-tools-ecm</module>
-	   <module>opentoutatice-collab-tools-marketplace</module> 
+		<module>opentoutatice-collab-tools-ecm</module>
+		<module>opentoutatice-collab-tools-marketplace</module>
 	</modules>
-	
+
 	<dependencyManagement>
 		<dependencies>
-			 <dependency>
+			<dependency>
 				<groupId>org.nuxeo.ecm.distribution</groupId>
-				<artifactId>nuxeo-distribution-cap</artifactId>
+				<artifactId>nuxeo-nxr-server</artifactId>
 				<version>${nuxeo.version}</version>
 				<type>pom</type>
 			</dependency>
-		
+
 			<dependency>
 				<groupId>opentoutatice-ecm.platform</groupId>
 				<artifactId>opentoutatice-ecm-platform-core</artifactId>
@@ -42,6 +43,12 @@
 				<version>${nuxeo.opentoutatice.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>opentoutatice.ui</groupId>
+				<artifactId>opentoutatice-jsf-portal-views</artifactId>
+				<version>${nuxeo.opentoutatice.version}</version>
+			</dependency>
+			
+			<dependency>
 				<groupId>org.nuxeo.ecm.platform</groupId>
 				<artifactId>nuxeo-platform-notification-web</artifactId>
 				<version>${nuxeo.version}</version>
@@ -50,12 +57,22 @@
 				<groupId>org.nuxeo.ecm.platform</groupId>
 				<artifactId>nuxeo-user-notification</artifactId>
 				<version>${nuxeo.version}</version>
-			</dependency>			
+			</dependency>
 			<dependency>
-	            <groupId>org.nuxeo.ecm.webengine</groupId>
-	            <artifactId>nuxeo-webengine-sites-core-contrib</artifactId>
-	            <version>${nuxeo.version}</version>
-	        </dependency>
+				<groupId>org.nuxeo.ecm.webengine</groupId>
+				<artifactId>nuxeo-webengine-sites-core-contrib</artifactId>
+				<version>${nuxeo.sites.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.nuxeo.ecm.webengine</groupId>
+				<artifactId>nuxeo-webengine-core</artifactId>
+				<version>${nuxeo.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.nuxeo.ecm.platform</groupId>
+				<artifactId>nuxeo-agenda-core</artifactId>
+				<version>${nuxeo.agenda.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -65,14 +82,14 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
-			 	<configuration>
+				<configuration>
 					<tagBase>http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/tags</tagBase>
 					<releaseProfiles>unpack,pack</releaseProfiles>
 					<preparationGoals>clean install</preparationGoals>
 					<goals>deploy</goals>
-			      	</configuration>
+				</configuration>
 			</plugin>
-		</plugins>			
+		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -99,20 +116,6 @@
 			<url>http://projet.toutatice.fr/nexus/content/repositories/toutatice-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
-	
-    <profiles>
-    	<profile>
-    		<id>ci</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<distributionManagement>
-    			<snapshotRepository>
-            		<id>galactica-ci-snapshots</id>
-            		<url>http://nexus:8081/repository/ci-snapshots</url>
-        		</snapshotRepository>
-    		</distributionManagement>
-    	</profile>
-    </profiles>
+
 </project>
 

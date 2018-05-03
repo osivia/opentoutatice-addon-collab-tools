@@ -9,21 +9,28 @@
 	<require>fr.toutatice.ecm.platform.web</require>
 
 	<extension target="faces-config#NAVIGATION">
+		
 		<navigation-case>
-			<from-outcome>thread_create</from-outcome>
-			<to-view-id>/thread_create_document.xhtml</to-view-id>
-			<redirect />
+			<from-outcome>send_notification_email</from-outcome>
+			<to-view-id>/pages/portal-views/email/document_notif_email.xhtml</to-view-id>
 		</navigation-case>
+		
+		<!--  For BO -->
+		<!-- <navigation-case>
+			<from-outcome>document_notification_email</from-outcome>
+			<to-view-id>/pages/portal-views/email/document_notif_email.xhtml</to-view-id>
+		</navigation-case> -->
 		
 		<navigation-case>
 			<from-outcome>confirm_mail_sending</from-outcome>
-			<to-view-id>/mails/confirm_mail_sending.xhtml</to-view-id>
+			<to-view-id>/pages/portal-views/email/confirm_mail_sending.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
 			<from-outcome>mail_sending</from-outcome>
-			<to-view-id>/mails/mail_sending.xhtml</to-view-id>
-		</navigation-case>		
+			<to-view-id>/pages/portal-views/email/mail_sending.xhtml</to-view-id>
+		</navigation-case>
+		
 	</extension>
 	
 	<extension target="faces-config#CONVERTER">

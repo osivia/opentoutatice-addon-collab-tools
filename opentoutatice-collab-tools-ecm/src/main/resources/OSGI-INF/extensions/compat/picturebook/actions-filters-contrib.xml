@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<component
+	name="fr.toutatice.ecm.platform.collab.tools.compat.picturebook.filters">
+
+	<require>fr.toutatice.ecm.platform.web.filters</require>
+	<require>fr.toutatice.ecm.platform.web.local.publishing.filters
+	</require>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="filters">
+
+		<filter id="create" append="true">
+			<rule grant="false">
+				<condition>document.isImmutable()</condition>
+			</rule>
+			<rule grant="true">
+				<permission>AddChildren</permission>
+				<type>PictureBook</type>
+				<condition>#{typeManager.getAllowedSubTypes(document.getType(),
+					document).size() &gt; 0}</condition>
+			</rule>
+		</filter>
+
+	</extension>
+
+</component>

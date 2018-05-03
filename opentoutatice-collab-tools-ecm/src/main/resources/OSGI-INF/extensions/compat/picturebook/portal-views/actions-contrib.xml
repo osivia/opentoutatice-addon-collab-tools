@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<component
+	name="fr.toutatice.ecm.platform.collab.tools.compat.picturebook.actions">
+
+	<require>fr.toutatice.ecm.platform.web.portalviews.actions</require>
+	<require>fr.toutatice.ecm.platform.web.filters</require>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+
+		<action id="TOUTATICE_CREATE_PICTUREBOOK_DOCUMENT" link="#{documentActions.createPictureBook('done')}"
+			order="1" label="command.create">
+			<category>TOUTATICE_CREATE_DOCUMENT_FORM</category>
+			<filter id="filter@CREATE_PICTUREBOOK_DOCUMENT">
+				<rule grant="true">
+					<condition>#{changeableDocument.type == 'PictureBook'}</condition>
+				</rule>
+			</filter>
+		</action>
+
+		<action id="TOUTATICE_CREATE_AND_SET_ONLINE_PICTUREBOOK_DOCUMENT"
+			link="#{documentActions.createNSetOnLinePictureBook('done')}" order="0"
+			label="toutatice.command.create.and.setonline">
+			<category>TOUTATICE_CREATE_DOCUMENT_FORM</category>
+			<filter-id>belong_to_publish_space</filter-id>
+			<filter-id>not_proxy</filter-id>
+			<filter-id>not_version</filter-id>
+			<filter-id>canUpdateNSetDocumentOnline</filter-id>
+			<filter id="filter@CREATE_AND_SET_ONLINE_PICTUREBOOK_DOCUMENT">
+				<rule grant="true">
+					<condition>#{changeableDocument.type == 'PictureBook'}</condition>
+				</rule>
+			</filter>
+			<filter id="filter@CAN_CREATE_AND_SET_ONLINE_PICTUREBOOK_DOCUMENT">
+				<rule grant="true">
+					<permission>validationWorkflow_validation</permission>
+				</rule>
+			</filter>
+			<filter-id>ABSTRACT_FILTER@INNER_PUBLICATION_FEATURE</filter-id>
+		</action>
+
+		<action id="TOUTATICE_CREATE_AND_SET_ONLINE_PICTUREBOOK_DOCUMENT_REQUEST"
+			link="#{documentActions.createNSetOnLinePictureBook('done')}" order="0"
+			label="toutatice.command.create.and.setonline.request">
+			<category>TOUTATICE_CREATE_DOCUMENT_FORM</category>
+			<filter-id>belong_to_publish_space</filter-id>
+			<filter-id>not_proxy</filter-id>
+			<filter-id>not_version</filter-id>
+			<filter-id>canUpdateNSetDocumentOnline</filter-id>
+			<filter id="filter@CREATE_AND_SET_ONLINE_PICTUREBOOK_DOCUMENT">
+				<rule grant="true">
+					<condition>#{changeableDocument.type == 'PictureBook'}</condition>
+				</rule>
+			</filter>
+			<filter id="filter@CAN_NOT_CREATE_AND_SET_ONLINE_PICTUREBOOK_DOCUMENT">
+				<rule grant="false">
+					<permission>validationWorkflow_validation</permission>
+				</rule>
+			</filter>
+			<filter-id>ABSTRACT_FILTER@INNER_PUBLICATION_FEATURE</filter-id>
+		</action>
+
+	</extension>
+
+</component>

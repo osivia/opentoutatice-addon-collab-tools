@@ -23,9 +23,9 @@ import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 import org.nuxeo.runtime.api.Framework;
+import org.opentoutatice.portalview.adapter.WidgetsAdapterService;
 
 import fr.toutatice.ecm.platform.collab.tools.constants.ExtendedSeamPrecedence;
-import fr.toutatice.ecm.platform.service.portalviews.adapter.WidgetsAdapterService;
 import fr.toutatice.ecm.platform.web.document.ToutaticeWebActionsBean;
 
 
@@ -39,11 +39,11 @@ import fr.toutatice.ecm.platform.web.document.ToutaticeWebActionsBean;
 public class ToutaticeCTWebActionsBean extends ToutaticeWebActionsBean {
 
     private static final long serialVersionUID = -6124671913159928250L;
-    
+
     @Override
-    public boolean isInPortalViewContext(){
+    public boolean isInPortalViewContext() {
         WidgetsAdapterService widgetsAdapterService = Framework.getLocalService(WidgetsAdapterService.class);
-        widgetsAdapterService.addPortalViewsIds("send_notification_email", "document_notif_email");
+        widgetsAdapterService.addPortalViewsIds("send_notification_email", "document_notif_email", "confirm_mail_sending", "mail_sending");
         return widgetsAdapterService.isInPortalViewContext();
     }
 

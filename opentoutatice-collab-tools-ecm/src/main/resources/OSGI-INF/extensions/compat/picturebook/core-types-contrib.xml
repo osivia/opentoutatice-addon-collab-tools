@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<component
+	name="fr.toutatice.ecm.platform.collab.tools.compat.picturebook.doctypes">
+
+	<require>org.nuxeo.ecm.platform.picture.web.coreTypes</require>
+	<require>fr.toutatice.ecm.platform.core.schemas</require>
+	
+	<extension target="org.nuxeo.ecm.core.schema.TypeService"
+		point="doctype">
+
+		<doctype name="PictureBook" append="true">
+			<facet name="Orderable" />
+			<facet name="SpaceContent" />
+		</doctype>
+		
+	</extension>
+
+	<extension target="org.nuxeo.ecm.platform.types.TypeService"
+		point="types">
+
+		<type id="Workspace">
+			<subtypes>
+				<type>PictureBook</type>
+			</subtypes>
+		</type>
+		
+		<type id="Folder">
+			<subtypes>
+				<type>PictureBook</type>
+			</subtypes>
+		</type>
+		
+		<type id="PictureBook">
+			<subtypes>
+				<type>PictureBook</type>
+			</subtypes>
+		</type>
+		
+		<type id="PortalSite">
+			<subtypes>
+				<type>PictureBook</type>
+			</subtypes>
+		</type>
+
+		<type id="PortalPage">
+			<subtypes>
+				<type>PictureBook</type>
+			</subtypes>
+		</type>
+		
+			<type id="Room">
+			<subtypes>
+				<type>PictureBook</type>
+			</subtypes>
+		</type>
+
+	</extension>
+
+</component>

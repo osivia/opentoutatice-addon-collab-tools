@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentRef;
@@ -48,7 +48,7 @@ public class ThreadUpdateListener implements EventListener {
      * Update Thread on added, removed Post.
      */
     @Override
-    public void handleEvent(Event event) throws ClientException {
+    public void handleEvent(Event event) throws NuxeoException {
 
         if (event.getContext() instanceof DocumentEventContext) {
 
@@ -144,7 +144,7 @@ public class ThreadUpdateListener implements EventListener {
         }
 
         @Override
-        public void run() throws ClientException {
+        public void run() throws NuxeoException {
             DocumentModel doc = session.getSourceDocument(docRef);
             if (doc != null) {
                 for (Map.Entry<String, Serializable> property : properties.entrySet()) {

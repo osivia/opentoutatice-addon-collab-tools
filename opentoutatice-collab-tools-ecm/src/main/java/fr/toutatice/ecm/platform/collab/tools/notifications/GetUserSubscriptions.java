@@ -13,8 +13,8 @@
  *
  *
  * Contributors:
- *   lbillon
- *    
+ * lbillon
+ * 
  */
 package fr.toutatice.ecm.platform.collab.tools.notifications;
 
@@ -22,9 +22,9 @@ import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
 import org.nuxeo.ecm.automation.core.annotations.OperationMethod;
-import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModelList;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.runtime.api.Framework;
 
 /**
@@ -33,20 +33,19 @@ import org.nuxeo.runtime.api.Framework;
  * @author lbillon
  * 
  */
-@Operation(id = GetUserSubscriptions.ID, category = Constants.CAT_NOTIFICATION, label = "Get documents subscriptions", description = "Get all the documents followed by the current user")
+@Operation(id = GetUserSubscriptions.ID, category = Constants.CAT_NOTIFICATION, label = "Get documents subscriptions",
+        description = "Get all the documents followed by the current user")
 public class GetUserSubscriptions {
 
-	public static final String ID = "Notification.GetUserSubscriptions";
+    public static final String ID = "Notification.GetUserSubscriptions";
 
-	@Context
-	protected CoreSession session;
+    @Context
+    protected CoreSession session;
 
-	@OperationMethod
-    public DocumentModelList run() throws ClientException {
-
-		DocumentNotificationInfosProvider service = Framework.getService(DocumentNotificationInfosProvider.class);
-		return service.getUserSubscriptions(session);
-		
-	}
+    @OperationMethod
+    public DocumentModelList run() throws NuxeoException {
+        DocumentNotificationInfosProvider service = Framework.getService(DocumentNotificationInfosProvider.class);
+        return service.getUserSubscriptions(session);
+    }
 
 }

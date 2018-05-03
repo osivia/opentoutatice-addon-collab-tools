@@ -6,7 +6,7 @@ package fr.toutatice.ecm.platform.collab.tools.room.listener;
 import static org.nuxeo.ecm.core.api.event.DocumentEventTypes.ABOUT_TO_CREATE;
 
 import org.apache.commons.lang.StringUtils;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.impl.DocumentModelImpl;
@@ -38,7 +38,7 @@ public class InheritSiteActionListener extends SiteActionListener {
      * Original SiteActionListener test if source document is of Workspace or WebSite type.
      * We want to test if type is subtype of Workspace too (case of Room).
      */
-    public void handleEvent(Event event) throws ClientException {
+    public void handleEvent(Event event) throws NuxeoException {
         if (ABOUT_TO_CREATE.equals(event.getName())) {
 
             SchemaManager schemaManager = (SchemaManager) Framework.getService(SchemaManager.class);
