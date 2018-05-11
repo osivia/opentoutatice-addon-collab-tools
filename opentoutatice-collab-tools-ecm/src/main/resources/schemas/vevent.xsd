@@ -17,6 +17,7 @@
   <xs:element name="transp" type="xs:string" default="OPAQUE" />
 
   <xs:element name="participants" type="nxs:stringList"></xs:element>  
+  <xs:element name="color" type="xs:string"></xs:element>  
 
   <!--
   build and description fields are bound respectively to dc:build and dc:description
