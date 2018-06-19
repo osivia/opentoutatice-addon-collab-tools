@@ -13,6 +13,7 @@
 
 	<properties>
 		<nuxeo.version>8.10-HF28</nuxeo.version>
+		<nuxeo.distribution.version>8.10</nuxeo.distribution.version>
 		<nuxeo.sites.version>7.3</nuxeo.sites.version>
 		<nuxeo.agenda.version>1.4.2</nuxeo.agenda.version>
 		<nuxeo.opentoutatice.version>5.0-SNAPSHOT</nuxeo.opentoutatice.version>
