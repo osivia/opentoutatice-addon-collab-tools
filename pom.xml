@@ -11,7 +11,7 @@
 	<version>4.4-SNAPSHOT</version>
 
 	<properties>
-		<nuxeo.version>6.0-HF34</nuxeo.version>
+		<nuxeo.version>6.0-HF44</nuxeo.version>
 		<nuxeo.opentoutatice.version>4.4.2</nuxeo.opentoutatice.version>
 	</properties>
 
@@ -26,12 +26,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
-			 	<configuration>
-					<tagBase>http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/tags</tagBase>
-					<releaseProfiles>unpack,pack</releaseProfiles>
-					<preparationGoals>clean install</preparationGoals>
-					<goals>deploy</goals>
-			      	</configuration>
 			</plugin>
 		</plugins>			
 		<pluginManagement>
@@ -45,21 +39,25 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<scm>
-		<developerConnection>scm:svn:http://projet.toutatice.fr/repos/toutatice-ecm/opentoutatice-addons/opentoutatice-collab-tools/branches/3.4-maintenance</developerConnection>
+	
+    <scm>
+		<url>https://github.com/osivia/opentoutatice-addon-collab-tools</url>
+		<connection>scm:git:ssh://git@github.com/osivia/opentoutatice-addon-collab-tools.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/osivia/opentoutatice-addon-collab-tools.git</developerConnection>     
+		<tag>HEAD</tag> 
 	</scm>
+	
+    <distributionManagement>
+        <repository>
+            <id>osivia-releases</id>
+            <url>http://www.osivia.org/nexus/content/repositories/osivia-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>osivia-snapshots</id>
+            <url>http://www.osivia.org/nexus/content/repositories/osivia-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
-	<distributionManagement>
-		<repository>
-			<id>toutatice-releases</id>
-			<url>http://projet.toutatice.fr/nexus/content/repositories/toutatice-releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>toutatice-snapshots</id>
-			<url>http://projet.toutatice.fr/nexus/content/repositories/toutatice-snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 </project>
 
