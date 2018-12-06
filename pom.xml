@@ -12,7 +12,7 @@
 
 	<properties>
 		<nuxeo.version>6.0-HF44</nuxeo.version>
-		<nuxeo.opentoutatice.version>4.4.2</nuxeo.opentoutatice.version>
+		<nuxeo.opentoutatice.version>4.4.15.5</nuxeo.opentoutatice.version>
 	</properties>
 
 	<modules>
