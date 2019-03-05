@@ -13,9 +13,10 @@
                 <theme>toutatice/popup</theme>
             </view>   
 			
-			<view id="/document_notif_email.xhtml">
+			<view id="/mails/document_notif_email.xhtml">
 				<theme>toutatice/popup</theme>
-			</view>			
+			</view>	
+					
 		</application>
 	</extension>
 
