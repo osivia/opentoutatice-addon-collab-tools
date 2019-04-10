@@ -16,4 +16,21 @@
 	<!-- CGU -->
 	<xs:element name="terms_of_use_agreement" type="xs:integer" default="0" />
 
+	<!-- folder preferences -->
+	<xs:element name="folders_prefs" type="nxs:folders_prefs" />
+	<xs:complexType name="folders_prefs">
+        <xs:sequence>
+            <xs:element name="folder_pref" type="nxs:folder_pref" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="folder_pref">
+        <xs:sequence>
+            <xs:element name="webid" type="xs:string" />
+            <xs:element name="display_style" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Profile shown in search -->
+    <xs:element name="shownInSearch" type="xs:boolean" default="true" />
+
 </xs:schema>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.ecm.collab.tools.userprofile.service">
+
+  <require>org.nuxeo.ecm.user.center.profile.UserProfileService</require>
+  <require>org.nuxeo.elasticsearch.ElasticSearchComponent.contrib</require>
+
+  <implementation class="fr.toutatice.ecm.platform.collab.tools.userprofile.TtcUserProfileServiceImpl" />
+
+  <documentation>
+    Component and Service to manage the user profile
+
+	- Patch for performance, query ES for UserProfiles
+  </documentation>
+
+  <service>
+    <provide interface="org.nuxeo.ecm.user.center.profile.UserProfileService" />
+  </service>
+
+</component>

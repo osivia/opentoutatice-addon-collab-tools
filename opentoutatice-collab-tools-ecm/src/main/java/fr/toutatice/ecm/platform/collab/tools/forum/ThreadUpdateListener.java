@@ -37,7 +37,7 @@ public class ThreadUpdateListener implements EventListener {
     /** CommentManager. */
     protected static CommentManager commentManager;
 
-    protected static CommentManager getCommentManager() {
+    protected synchronized static CommentManager getCommentManager() {
         if (commentManager == null) {
             commentManager = Framework.getService(CommentManager.class);
         }
@@ -58,8 +58,9 @@ public class ThreadUpdateListener implements EventListener {
             DocumentModel srcDoc = docCtx.getSourceDocument();
 
             if (srcDoc != null && ToutaticeDocumentEventListenerHelper.isAlterableDocument(srcDoc)) {
+                boolean isThread = CollabToolsConstants.THREAD_TYPE.equals(srcDoc.getType());
                 // Creation case
-                boolean isThreadCreated = CollabToolsConstants.THREAD_TYPE.equals(srcDoc.getType()) && DocumentEventTypes.DOCUMENT_CREATED.equals(eventName);
+                boolean isThreadCreated = isThread && DocumentEventTypes.DOCUMENT_CREATED.equals(eventName);
                 if (isThreadCreated) {
                     initializeThread(srcDoc);
                 } else {
@@ -68,7 +69,7 @@ public class ThreadUpdateListener implements EventListener {
                     if (isCommentAddedOrRemoved) {
                         // Check if comment type is Post
                         DocumentModel comment = (DocumentModel) docCtx.getProperty(CommentConstants.COMMENT_DOCUMENT);
-                        if ("Post".equals(comment.getType())) {
+                        if ("Post".equals(comment.getType()) && isThread) {
                             updateAnswersOfThread(srcDoc, session);
                         }
                     }
