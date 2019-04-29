@@ -49,7 +49,6 @@
 		<type id="Workspace">
 			<subtypes>
 				<type>Agenda</type>
-				<type>AgendaInteractik</type>
 			</subtypes>
 		</type>
 		
@@ -65,12 +64,6 @@
 			</subtypes>
 		</type>
 		
-		<type id="AgendaInteractik">
-			<subtypes>
-				<type>VEVENTInteractik</type>
-			</subtypes>
-		</type>
-
 	</extension>
 
 </component>
