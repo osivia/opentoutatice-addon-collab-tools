@@ -1,89 +1,92 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>opentoutatice-ecm.collab-tools</groupId>
+        <artifactId>opentoutatice-collab-tools-parent</artifactId>
+        <version>4.9-SNAPSHOT</version>
+    </parent>
 
-	<parent>
-		<groupId>opentoutatice-ecm.collab-tools</groupId>
-		<artifactId>opentoutatice-collab-tools-parent</artifactId>
-		<version>4.7-SNAPSHOT</version>
-	</parent>
+    <artifactId>opentoutatice-collab-tools-ecm</artifactId>
+    <packaging>jar</packaging>
 
-	<artifactId>opentoutatice-collab-tools-ecm</artifactId>
-	<packaging>jar</packaging>
-	<name>collaboratives objects</name>
+    <name>collaboratives objects</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>opentoutatice-ecm.platform</groupId>
-			<artifactId>opentoutatice-ecm-platform-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>opentoutatice-ecm.platform</groupId>
-			<artifactId>opentoutatice-ecm-platform-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.nuxeo.ecm.platform</groupId>
-			<artifactId>nuxeo-platform-notification-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.nuxeo.ecm.platform</groupId>
-			<artifactId>nuxeo-user-notification</artifactId>
-		</dependency>
-		<dependency>
+
+    <dependencies>
+        <dependency>
+            <groupId>opentoutatice-ecm.platform</groupId>
+            <artifactId>opentoutatice-ecm-platform-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>opentoutatice-ecm.platform</groupId>
+            <artifactId>opentoutatice-ecm-platform-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.nuxeo.ecm.platform</groupId>
+            <artifactId>nuxeo-platform-notification-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.nuxeo.ecm.platform</groupId>
+            <artifactId>nuxeo-user-notification</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.nuxeo.ecm.webengine</groupId>
             <artifactId>nuxeo-webengine-sites-core-contrib</artifactId>
         </dependency>
-	</dependencies>
+    </dependencies>
 
-	<build>
-			<plugins>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<encoding>UTF-8</encoding>
-						<source>1.7</source>
-						<target>1.7</target>
-					</configuration>
-				</plugin>
+    <build>
+        <plugins>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.3</version>
-					<configuration>
-						<archive>
-							<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-							<manifestEntries>
-								<Bundle-Version>${eclipseVersion}-t${buildNumber}</Bundle-Version>
-								<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-							</manifestEntries>
-						</archive>
-					</configuration>
-				</plugin>
-				<plugin>
-                    <groupId>org.lesscss</groupId>
-                    <artifactId>lesscss-maven-plugin</artifactId>
-                    <version>1.7.0.1.1</version>
-                    <configuration>
-                        <sourceDirectory>${project.basedir}/src/main/less</sourceDirectory>
-                        <outputDirectory>${project.basedir}/src/main/resources/nuxeo.war/css</outputDirectory>
-                        <compress>true</compress>
-                        <includes>
-                            <include>mail-popup.less</include>
-                        </includes>
-                        <outputFileFormat>{fileName}.min.css</outputFileFormat>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-			</plugins>
-	</build>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                        <manifestEntries>
+                            <Bundle-Version>${eclipseVersion}-t${buildNumber}</Bundle-Version>
+                            <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+                <version>1.7.0.1.1</version>
+                <configuration>
+                    <sourceDirectory>${project.basedir}/src/main/less</sourceDirectory>
+                    <outputDirectory>${project.basedir}/src/main/resources/nuxeo.war/css</outputDirectory>
+                    <compress>true</compress>
+                    <includes>
+                        <include>mail-popup.less</include>
+                    </includes>
+                    <outputFileFormat>{fileName}.min.css</outputFileFormat>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
