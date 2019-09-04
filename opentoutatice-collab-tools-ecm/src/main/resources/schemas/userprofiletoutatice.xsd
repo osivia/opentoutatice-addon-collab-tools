@@ -33,4 +33,20 @@
     <!-- Profile shown in search -->
     <xs:element name="shownInSearch" type="xs:boolean" default="true" />
 
+    <!-- Saved searches -->
+    <xs:element name="savedSearches" type="nxs:savedSearches"/>
+    <xs:complexType name="savedSearches">
+        <xs:sequence>
+            <xs:element name="savedSearch" type="nxs:savedSearch" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="savedSearch">
+        <xs:sequence>
+            <xs:element name="searchId" type="xs:integer"/>
+            <xs:element name="displayName" type="xs:string"/>
+            <xs:element name="order" type="xs:integer"/>
+            <xs:element name="data" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
 </xs:schema>
