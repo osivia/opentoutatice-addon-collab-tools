@@ -34,8 +34,8 @@
 						<property name="width">100%</property>
 					</defaultValues>
 					<defaultValues mode="edit">
-						<property name="minChars">3</property>
-						<property name="operationId">UserGroup.SuggestUserEntriesWithPermission
+						<property name="minChars">0</property>
+						<property name="operationId">UserGroup.SuggestUserEntriesInWorkspace
 						</property>
 						<property name="permission">Read</property>
 						<property name="documentId">#{currentDocument.id}</property>
