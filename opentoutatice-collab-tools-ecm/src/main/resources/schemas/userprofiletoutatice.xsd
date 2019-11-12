@@ -13,8 +13,8 @@
 	<!-- News -->
     <xs:element name="newsSubscription" type="xs:boolean" default="true" />
     
-	<!-- CGU -->
-	<xs:element name="terms_of_use_agreement" type="xs:integer" default="0" />
+	<!-- Terms of service -->
+	<xs:element name="termsOfService" type="xs:string" />
 
 	<!-- folder preferences -->
 	<xs:element name="folders_prefs" type="nxs:folders_prefs" />
