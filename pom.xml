@@ -11,25 +11,16 @@
 	<version>4.7-SNAPSHOT</version>
 
 	<properties>
-		<nuxeo.version>6.1.0</nuxeo.version>
-		<opentoutatice.version>4.7.17</opentoutatice.version>
+		<nuxeo.version>6.1.1</nuxeo.version>
+		<opentoutatice.version>4.7-SNAPSHOT</opentoutatice.version>
 	</properties>
 
 	<modules>
 	   <module>opentoutatice-collab-tools-ecm</module>
-	   <!-- <module>opentoutatice-collab-tools-marketplace</module> --> 
 	</modules>
 	
 	<dependencyManagement>
 		<dependencies>
-
-			 <dependency>
-				<groupId>org.nuxeo.ecm.distribution</groupId>
-				<artifactId>nuxeo-distribution-cap</artifactId>
-				<version>${nuxeo.version}</version>
-				<type>pom</type>
-			</dependency>
-
 			<dependency>
 				<groupId>opentoutatice-ecm.platform</groupId>
 				<artifactId>opentoutatice-ecm-platform-core</artifactId>
@@ -63,7 +54,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.1</version>
 			</plugin>
 			
 			<!-- Disable strict javadoc checking since java8 -->

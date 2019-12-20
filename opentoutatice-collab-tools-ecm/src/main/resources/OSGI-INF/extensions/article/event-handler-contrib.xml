@@ -20,6 +20,7 @@
 			<event>beforeDocumentModification</event>
 			<filters>
 				<doctype>Annonce</doctype>
+				<condition>!currentDocument.isImmutable()</condition>
 			</filters>
 		</handler>
 
