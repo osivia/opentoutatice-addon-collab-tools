@@ -49,4 +49,20 @@
         </xs:sequence>
     </xs:complexType>
     
+    
+    <!-- generic user properties -->
+    <xs:element name="propertys_prefs" type="nxs:propertys_prefs" />
+    <xs:complexType name="propertys_prefs">
+        <xs:sequence>
+            <xs:element name="property_pref" type="nxs:property_pref" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="property_pref">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="value" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    
 </xs:schema>
