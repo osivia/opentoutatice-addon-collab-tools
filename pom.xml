@@ -13,7 +13,7 @@
 
     <properties>
         <nuxeo.version>6.1.0</nuxeo.version>
-        <opentoutatice.version>4.7.17</opentoutatice.version>
+        <opentoutatice.version>4.9</opentoutatice.version>
     </properties>
 
 
