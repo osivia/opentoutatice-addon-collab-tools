@@ -113,14 +113,14 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
     public List<String> getRecipients() {
         if (this.savedRecipients == null) {
             this.savedRecipients = new ArrayList<String>();
-            List<String> defaultRecipients = super.getRecipients();
-            if (CollectionUtils.isNotEmpty(defaultRecipients)) {
-                this.savedRecipients.addAll(defaultRecipients);
-            }
-            List<String> selectedUsers = principalManager.getSelectedUsers();
-            if (CollectionUtils.isNotEmpty(selectedUsers)) {
-                this.savedRecipients.addAll(selectedUsers);
-            }
+//            List<String> defaultRecipients = super.getRecipients();
+//            if (CollectionUtils.isNotEmpty(defaultRecipients)) {
+//                this.savedRecipients.addAll(defaultRecipients);
+//            }
+//            List<String> selectedUsers = principalManager.getSelectedUsers();
+//            if (CollectionUtils.isNotEmpty(selectedUsers)) {
+//                this.savedRecipients.addAll(selectedUsers);
+//            }
             super.setRecipients(this.savedRecipients);
         }
         return this.savedRecipients;

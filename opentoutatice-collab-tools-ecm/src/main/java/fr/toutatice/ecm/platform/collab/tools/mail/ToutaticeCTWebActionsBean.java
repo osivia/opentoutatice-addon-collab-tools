@@ -22,6 +22,7 @@ import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.api.Framework;
 
 import fr.toutatice.ecm.platform.collab.tools.constants.ExtendedSeamPrecedence;
@@ -45,6 +46,19 @@ public class ToutaticeCTWebActionsBean extends ToutaticeWebActionsBean {
         WidgetsAdapterService widgetsAdapterService = Framework.getLocalService(WidgetsAdapterService.class);
         widgetsAdapterService.addPortalViewsIds("send_notification_email", "document_notif_email");
         return widgetsAdapterService.isInPortalViewContext();
+    }
+    
+    public boolean isInCollabWorkspaceContext() {
+    	String collabWorkspacePath = Framework.getProperty("ottc.collab.workspacepath", "/default-domain/workspaces");
+    	
+    	DocumentModel currentDocument = navigationContext.getCurrentDocument();
+    	
+    	boolean inworkspacepath = false;
+    	if (currentDocument != null) {
+    		inworkspacepath = currentDocument.getPathAsString().startsWith(collabWorkspacePath);
+    	}
+    	return inworkspacepath;
+    	
     }
 
 }

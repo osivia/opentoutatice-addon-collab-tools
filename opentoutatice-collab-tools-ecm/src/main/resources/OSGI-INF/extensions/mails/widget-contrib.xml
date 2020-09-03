@@ -184,6 +184,183 @@
 				/widgets/toutatice_email_recipients_widget_template.xhtml
 			</property>
 		</widgetType>
+		
+		
+
+		<widgetType name="emailRecipientsInWorkspace">
+			<configuration>
+				<title>Multiple users/groups suggestion with workspace membership
+				</title>
+				<sinceVersion>6.0</sinceVersion>
+				<supportedModes>
+					<mode>edit</mode>
+					<mode>view</mode>
+				</supportedModes>
+				<fields>
+					<list>true</list>
+					<complex>false</complex>
+					<supportedTypes>
+						<type>string</type>
+					</supportedTypes>
+				</fields>
+				<categories>
+					<category>document</category>
+				</categories>
+				<properties>
+					<defaultValues mode="any">
+						<property name="width">100%</property>
+					</defaultValues>
+					<defaultValues mode="edit">
+						<property name="minChars">0</property>
+						<property name="operationId">UserGroup.SuggestUserEntriesInWorkspace
+						</property>
+						<property name="permission">Read</property>
+						<property name="documentId">#{currentDocument.id}</property>
+						<property name="searchType">USER_GROUP_TYPE</property>
+						<property name="selectionFormatter">userformatter</property>						
+						<property name="suggestionFormatter">userformatter</property>
+						<property name="inlinejs">
+						<![CDATA[ function userformatter(entry) {
+							var markup = "";
+							if (entry.displayIcon && entry.type) {
+								if (entry.type == "USER_TYPE") {
+									markup += "<img src='" + window.nxContextPath + "/icons/user.png'/>";
+								}
+								else if (entry.type == "GROUP_TYPE") {
+									markup += "<img src='" + window.nxContextPath + "/icons/group.png'/>";  
+								}
+								markup += entry.displayLabel;
+								
+								return markup;
+							}
+						}]]>
+						</property>
+					</defaultValues>
+					<layouts mode="view">
+						<layout name="multipleUsersSuggestion_widget_type_properties_view">
+							<rows>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_prefixed</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestionSearchType</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_firstLabelField
+									</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_secondLabelField
+									</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_thirdLabelField
+									</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_hideFirstLabel</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_hideSecondLabel
+									</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_hideThirdLabel</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_displayAction</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_displayEmailInSuggestion
+									</widget>
+								</row>
+							</rows>
+						</layout>
+					</layouts>
+					<layouts mode="edit">
+						<layout name="multipleUsersSuggestion_widget_type_properties_edit">
+							<rows>
+								<row>
+									<widget category="widgetTypeConf">required</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">permission</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">documentId</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">placeholder</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">suggestion_width</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">suggestion_minChars</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">suggestion_orderable</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestionSearchType</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_groupRestriction
+									</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_prefixed</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestionMaxSearchResults
+									</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">ajaxReRender</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">userSuggestion_displayEmailInSuggestion
+									</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">suggestion_helpLabel</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">suggestion_hideHelpLabel</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">select2_containerCssClass</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">select2_dropdownCssClass</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">select2_inlinejs</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">select2_inlinejsDemoPreview</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">select2_selectionFormatter</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">select2_suggestionFormatter</widget>
+								</row>
+								<row>
+									<widget category="widgetTypeConf">select2_separator</widget>
+								</row>
+							</rows>
+						</layout>
+					</layouts>
+				</properties>
+			</configuration>
+			<handler-class>
+				org.nuxeo.ecm.platform.forms.layout.facelets.plugins.TemplateWidgetTypeHandler
+			</handler-class>
+			<property name="template">
+				/widgets/toutatice_email_recipients_widget_template.xhtml
+			</property>
+		</widgetType>		
 
 	</extension>
 

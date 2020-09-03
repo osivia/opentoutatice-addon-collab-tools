@@ -73,7 +73,17 @@
                 <div class="form-group required">
                     <label class="col-sm-3 control-label">Destinataire(s)</label>
                     <div class="col-sm-9">
-                        <nxl:widgetType name="emailRecipients" mode="edit" required="true" />
+                    
+                    	<c:choose>
+                    		<c:when test="#{webActions.isInCollabWorkspaceContext()}">
+                    			<nxl:widgetType name="emailRecipientsInWorkspace" mode="edit" required="true" />
+                    		</c:when>
+                    		<c:otherwise>
+                    			<nxl:widgetType name="emailRecipients" mode="edit" required="true" />
+                    		</c:otherwise>
+                    	</c:choose>
+                    	
+                        
                     </div>
                 </div>
 
