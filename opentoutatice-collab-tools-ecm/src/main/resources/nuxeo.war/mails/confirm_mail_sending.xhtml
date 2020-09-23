@@ -83,17 +83,10 @@
                 </div>
 
 
-                <div class="form-group">
-                    <div class="alert alert-warning">
-                        <i class="glyphicons halflings warning-sign"></i> <span
-                            class="text-warning"> <h:outputText
-                                value="Vous allez envoyer votre mail aux personnes et/ou groupes suivants: " /></span>
 
-                    </div>
-                </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Destinataire(s)</label>
+                    <label class="col-sm-3 control-label">Vous allez envoyer votre mail aux personnes et/ou groupes suivants : </label>
                     <div class="col-sm-9">
                         <ul class="list-group">
                             <c:forEach var="recipient"
@@ -111,6 +104,32 @@
                         </ul>
                     </div>
                 </div>
+                
+                <c:set var="nbEnvoi" value="#{emailNotifSenderAction.totalUserCount(emailNotifSenderAction.recipients)}"></c:set>
+
+				<div class="form-group">
+
+					<c:choose>
+						<c:when test="${nbEnvoi gt 5}">
+			                    <div class="alert alert-warning">
+			                        <i class="glyphicons halflings warning-sign"></i> <span
+			                            class="text-warning"> <h:outputText
+			                                value="Attention, vous envoyez votre e-mail a ${nbEnvoi} personnes. Utilisez cette fonction avec parcimonie." /></span>
+			
+			                    </div>
+			                
+						</c:when>
+						<c:otherwise>
+			                    <div class="alert alert-info">
+			                        <span
+			                            class="text-info"> <h:outputText
+			                                value="Vous envoyez votre e-mail a ${nbEnvoi} personnes. " /></span>
+			
+			                    </div>						
+						</c:otherwise>
+					</c:choose> 
+				</div>
+
 
                 <h:inputHidden id="recipients"
                     value="#{emailNotifSenderAction.recipients}">

@@ -21,9 +21,12 @@ package fr.toutatice.ecm.platform.collab.tools.mail;
 import static org.jboss.seam.ScopeType.EVENT;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.jboss.seam.annotations.In;
@@ -59,6 +62,9 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
     
     /** To keep data in confirm portal view. */
     protected List<String> savedRecipients;
+    
+    private Integer totalUserCount ;
+    
     /** To resolve converter problem on hidden input in confirm portal view */
 
     private static final long serialVersionUID = -5722586829804268237L;
@@ -121,7 +127,12 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
 //            if (CollectionUtils.isNotEmpty(selectedUsers)) {
 //                this.savedRecipients.addAll(selectedUsers);
 //            }
+                        
             super.setRecipients(this.savedRecipients);
+            
+//            if(totalUserCount == null) {
+//
+//            }
         }
         return this.savedRecipients;
     }
@@ -130,9 +141,34 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
     public void setRecipients(List<String> recipients) {
         this.savedRecipients = recipients;
         super.setRecipients(this.savedRecipients);
+
     }
     
-    public String redirect(String viewId) {
+    
+    
+    public Integer totalUserCount(List<String> recipients) {
+    	
+        Set<String> all = new HashSet<>();
+        
+        for (String recipient : savedRecipients) {
+        	NuxeoPrincipal principal = userManager.getPrincipal(recipient);
+            if (principal != null) {
+            	all.add(principal.getName());
+            }
+            else {
+            	NuxeoGroup group = userManager.getGroup(recipient);
+                if (group != null) {
+                    List<String> memberUsers = group.getMemberUsers();
+
+                    all.addAll(memberUsers);
+                }
+            }
+        }
+		return all.size();
+	}
+
+
+	public String redirect(String viewId) {
         return viewId;
     }
 
