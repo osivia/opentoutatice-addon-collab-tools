@@ -43,6 +43,7 @@ import org.nuxeo.ecm.platform.notification.api.NotificationManager;
 import org.nuxeo.runtime.api.Framework;
 
 import fr.toutatice.ecm.platform.collab.tools.notifications.exception.DeleteUserSubscriptionException;
+import fr.toutatice.ecm.platform.core.constants.ToutaticeNuxeoStudioConst;
 import fr.toutatice.ecm.platform.core.helper.ToutaticeDocumentHelper;
 
 /**
@@ -74,7 +75,7 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
     @Override
     public void subscribe(CoreSession coreSession, DocumentModel currentDocument) {
 
-        if (getStatus(coreSession, currentDocument) == SubscriptionStatus.can_subscribe) {
+        if (getStatus(coreSession, currentDocument, false) == SubscriptionStatus.can_subscribe) {
             NotificationManager notificationManager = Framework.getService(NotificationManager.class);
 
             NuxeoPrincipal principal = (NuxeoPrincipal) coreSession.getPrincipal();
@@ -90,7 +91,7 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
     @Override
     public void unsubscribe(CoreSession coreSession, DocumentModel currentDocument) throws ClientException, ClassNotFoundException {
 
-        if (getStatus(coreSession, currentDocument) == SubscriptionStatus.can_unsubscribe) {
+        if (getStatus(coreSession, currentDocument, false) == SubscriptionStatus.can_unsubscribe) {
             NotificationManager notificationManager = Framework.getService(NotificationManager.class);
 
             NuxeoPrincipal principal = (NuxeoPrincipal) coreSession.getPrincipal();
@@ -111,84 +112,107 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
 
         Map<String, Object> infos = new HashMap<String, Object>();
 
-        infos.put(SUBSCRIPTION_STATUS, getStatus(coreSession, currentDocument).toString());
+        infos.put(SUBSCRIPTION_STATUS, getStatus(coreSession, currentDocument, true).toString());
 
         return infos;
     }
 
     /**
-     * Evaluation status of subscription for the user and the document
+     * Evaluation status of subscription for the user and the document.
+     * This method is called by fetchInfos, subscribe and unsubscribe.
+     * fetchInfos can have proxy as parameter (when called by Portal) 
+     * whereas subscribe and unsubscribe have always live (when called by Portal)
+     * and we want to set or unset subscriptions on lives.
+     * 
      * 
      * @param coreSession
      * @param currentDocument
+     * @param fetchCall: indicates if method is called by fetchInfos method 
      * @return a status
      * @throws ClientException
      */
-    public SubscriptionStatus getStatus(CoreSession coreSession, DocumentModel currentDocument) throws ClientException {
+    public SubscriptionStatus getStatus(CoreSession coreSession, DocumentModel currentDocument, boolean fetchCall) throws ClientException {
 
         SubscriptionStatus status = SubscriptionStatus.no_subscriptions;
 
-        // Not used in published spaces for the moment
-        if (!ToutaticeDocumentHelper.isInPublishSpace(coreSession, currentDocument)) {
-            // first : test document type
-            if (!(currentDocument.getType().equals("Domain") || currentDocument.getType().equals("WorkspaceRoot"))) {
+        if (ToutaticeDocumentHelper.isInPublishSpace(coreSession, currentDocument)) {
+            if (currentDocument.isProxy()) {
+                // Local proxy -> take live: correct subscriptions are set on it
+                if (!currentDocument.hasFacet(ToutaticeNuxeoStudioConst.CST_FACET_REMOTE_PROXY)) {
+                    // By pass rights
+                    currentDocument = ToutaticeDocumentHelper.getUnrestrictedWorkingCopy(coreSession, currentDocument.getId());
+                } else {
+                    if (fetchCall) {
+                        // Functionnaly, we do not allow subscription to remote proxy leaf
+                        return status;
+                    }
+                }
+            } else {
+                if (fetchCall) {
+                    // Do not allow subscription on lives in Publish spaces
+                    return status;
+                }
+            }
+        }
+        
+        // first : test document type
+        if (!(currentDocument.getType().equals("Domain") || currentDocument.getType().equals("WorkspaceRoot"))) {
 
-                // then : test if subscriptions has been put on the current document
-                NotificationManager notificationManager = Framework.getService(NotificationManager.class);
+            // then : test if subscriptions has been put on the current document
+            NotificationManager notificationManager = Framework.getService(NotificationManager.class);
 
-                List<String> subscriptionsForUserOnDocument;
+            List<String> subscriptionsForUserOnDocument;
 
+            try {
+
+                subscriptionsForUserOnDocument = notificationManager
+                        .getSubscriptionsForUserOnDocument(NuxeoPrincipal.PREFIX + coreSession.getPrincipal().getName(), currentDocument.getId());
+            } catch (ClassNotFoundException e) {
+                throw new ClientException(e);
+            }
+
+            if (subscriptionsForUserOnDocument.size() > 0) {
+                status = SubscriptionStatus.can_unsubscribe;
+            } else {
+                // then : test if subscriptions are enabled on parent documents through other subscriptions by the user or
+                // by its group.
+
+                NuxeoPrincipal currentUser = (NuxeoPrincipal) coreSession.getPrincipal();
+
+                PlacefulService service;
                 try {
-
-                    subscriptionsForUserOnDocument = notificationManager.getSubscriptionsForUserOnDocument(NuxeoPrincipal.PREFIX
-                            + coreSession.getPrincipal().getName(), currentDocument.getId());
-                } catch (ClassNotFoundException e) {
+                    service = NotificationServiceHelper.getPlacefulService();
+                } catch (Exception e) {
                     throw new ClientException(e);
                 }
+                String className = service.getAnnotationRegistry().get(NotificationService.SUBSCRIPTION_NAME);
+                String shortClassName = className.substring(className.lastIndexOf('.') + 1);
 
-                if (subscriptionsForUserOnDocument.size() > 0) {
-                    status = SubscriptionStatus.can_unsubscribe;
+                PlacefulService serviceBean = NotificationServiceHelper.getPlacefulServiceBean();
+                List<Annotation> tempSubscriptions = new ArrayList<Annotation>();
+
+                // First, get user subscriptions
+                Map<String, Object> paramMap = new HashMap<String, Object>();
+                paramMap.put("userId", NuxeoPrincipal.PREFIX + currentUser.getName());
+
+                tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
+
+                // Then, get group subscriptions
+                // for (String group : currentUser.getAllGroups()) {
+                // paramMap.put("userId", NuxeoGroup.PREFIX + group);
+                // tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
+                // }
+
+
+                if (isSubsInheritDocument(coreSession, tempSubscriptions, currentDocument)) {
+                    status = SubscriptionStatus.has_inherited_subscriptions;
+
                 } else {
-                    // then : test if subscriptions are enabled on parent documents through other subscriptions by the user or
-                    // by its group.
+                    status = SubscriptionStatus.can_subscribe;
 
-                    NuxeoPrincipal currentUser = (NuxeoPrincipal) coreSession.getPrincipal();
-
-                    PlacefulService service;
-                    try {
-                        service = NotificationServiceHelper.getPlacefulService();
-                    } catch (Exception e) {
-                        throw new ClientException(e);
-                    }
-                    String className = service.getAnnotationRegistry().get(NotificationService.SUBSCRIPTION_NAME);
-                    String shortClassName = className.substring(className.lastIndexOf('.') + 1);
-
-                    PlacefulService serviceBean = NotificationServiceHelper.getPlacefulServiceBean();
-                    List<Annotation> tempSubscriptions = new ArrayList<Annotation>();
-
-                    // First, get user subscriptions
-                    Map<String, Object> paramMap = new HashMap<String, Object>();
-                    paramMap.put("userId", NuxeoPrincipal.PREFIX + currentUser.getName());
-
-                    tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
-
-                    // Then, get group subscriptions
-                    // for (String group : currentUser.getAllGroups()) {
-                    // paramMap.put("userId", NuxeoGroup.PREFIX + group);
-                    // tempSubscriptions.addAll(serviceBean.getAnnotationListByParamMap(paramMap, shortClassName));
-                    // }
-
-
-                    if (isSubsInheritDocument(coreSession, tempSubscriptions, currentDocument)) {
-                        status = SubscriptionStatus.has_inherited_subscriptions;
-
-                    } else {
-                        status = SubscriptionStatus.can_subscribe;
-
-                    }
                 }
-
             }
+
         }
 
         return status;
