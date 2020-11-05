@@ -39,6 +39,7 @@ import org.nuxeo.ecm.platform.ui.web.util.SeamComponentCallHelper;
 import org.nuxeo.ecm.platform.usermanager.UserManager;
 import org.nuxeo.ecm.webapp.notification.email.EmailNotificationSenderActionsBean;
 import org.nuxeo.ecm.webapp.security.PrincipalListManager;
+import org.nuxeo.runtime.api.Framework;
 
 import fr.toutatice.ecm.platform.core.constants.ExtendedSeamPrecedence;
 import fr.toutatice.ecm.platform.web.fragments.PageBean;
@@ -167,6 +168,9 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
 		return all.size();
 	}
 
+    public Integer getWarningLimit() {
+    	return Integer.parseInt(Framework.getProperty("ottc.collab.mail.warningLimit", "1000"));
+    }
 
 	public String redirect(String viewId) {
         return viewId;
