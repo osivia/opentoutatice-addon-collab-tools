@@ -4,7 +4,7 @@
 
     <groupId>opentoutatice-ecm.collab-tools</groupId>
     <artifactId>opentoutatice-collab-tools-parent</artifactId>
-    <version>4.9.2</version>
+    <version>4.9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>opentoutatice-collab-tools-parent</name>
