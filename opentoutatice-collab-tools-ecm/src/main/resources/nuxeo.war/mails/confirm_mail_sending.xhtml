@@ -112,19 +112,24 @@
 					<c:choose>
 						<c:when test="${nbEnvoi gt emailNotifSenderAction.warningLimit}">
 			                    <div class="alert alert-warning">
-			                        <i class="glyphicons halflings warning-sign"></i> <span
-			                            class="text-warning"> <h:outputText
-			                                value="Attention, vous envoyez votre e-mail a ${nbEnvoi} personnes. Utilisez cette fonction avec parcimonie." /></span>
-			
+			                        <i class="glyphicons halflings warning-sign"></i> 
+			                        	<span class="text-warning"> 
+			                            	<h:outputFormat value="#{messages['toutatice.label.warn.nbRecipients']}">
+			                            		<f:param value="${nbEnvoi}"></f:param>
+			                            	</h:outputFormat>
+			                            </span>
+
 			                    </div>
 			                
 						</c:when>
 						<c:otherwise>
 			                    <div class="alert alert-info">
 			                        <span
-			                            class="text-info"> <h:outputText
-			                                value="Vous envoyez votre e-mail a ${nbEnvoi} personnes. " /></span>
-			
+			                            class="text-info"> 
+			                            	<h:outputFormat value="#{messages['toutatice.label.info.nbRecipients']}">
+			                            		<f:param value="${nbEnvoi}"></f:param>
+			                            	</h:outputFormat>
+									</span>
 			                    </div>						
 						</c:otherwise>
 					</c:choose> 
