@@ -35,6 +35,7 @@
 					</defaultValues>
 					<defaultValues mode="edit">
 						<property name="minChars">3</property>
+						<property name="hideHelpLabel">true</property>
 						<property name="operationId">UserGroup.SuggestUserEntriesWithPermission
 						</property>
 						<property name="permission">Read</property>

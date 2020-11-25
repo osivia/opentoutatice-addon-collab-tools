@@ -33,6 +33,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.NuxeoGroup;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.ecm.platform.ui.web.util.SeamComponentCallHelper;
@@ -120,23 +121,39 @@ public class ToutaticeEmailNotificationSenderActionsBean extends EmailNotificati
     public List<String> getRecipients() {
         if (this.savedRecipients == null) {
             this.savedRecipients = new ArrayList<String>();
-//            List<String> defaultRecipients = super.getRecipients();
-//            if (CollectionUtils.isNotEmpty(defaultRecipients)) {
-//                this.savedRecipients.addAll(defaultRecipients);
-//            }
-//            List<String> selectedUsers = principalManager.getSelectedUsers();
-//            if (CollectionUtils.isNotEmpty(selectedUsers)) {
-//                this.savedRecipients.addAll(selectedUsers);
-//            }
-                        
-            super.setRecipients(this.savedRecipients);
             
-//            if(totalUserCount == null) {
-//
-//            }
+            // When context is collab workspace, users may select users or groups in directory
+            // based on their attributes
+            // In other case, we pre-fill the recipients by reading ACLs
+			if (!isInCollabWorkspaceContext()) {
+				List<String> defaultRecipients = super.getRecipients();
+				if (CollectionUtils.isNotEmpty(defaultRecipients)) {
+					this.savedRecipients.addAll(defaultRecipients);
+				}
+				List<String> selectedUsers = principalManager.getSelectedUsers();
+				if (CollectionUtils.isNotEmpty(selectedUsers)) {
+					this.savedRecipients.addAll(selectedUsers);
+				}
+			}
+
+            super.setRecipients(this.savedRecipients);
+
         }
         return this.savedRecipients;
     }
+    
+    public boolean isInCollabWorkspaceContext() {
+    	String collabWorkspacePath = Framework.getProperty("ottc.collab.workspacepath", "/default-domain/workspaces");
+    	
+    	DocumentModel currentDocument = navigationContext.getCurrentDocument();
+    	
+    	boolean inworkspacepath = false;
+    	if (currentDocument != null) {
+    		inworkspacepath = currentDocument.getPathAsString().startsWith(collabWorkspacePath);
+    	}
+    	return inworkspacepath;
+    	
+    }    
 
     @Override
     public void setRecipients(List<String> recipients) {
