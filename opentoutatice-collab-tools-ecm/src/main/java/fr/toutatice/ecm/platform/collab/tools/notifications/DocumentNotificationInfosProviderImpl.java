@@ -105,6 +105,26 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
 
 
     }
+    
+	@Override
+	public void workspaceUnsubscribe(CoreSession session, DocumentModel workspace, String user)
+			throws ClientException, ClassNotFoundException {
+		
+        NotificationManager notificationManager = Framework.getService(NotificationManager.class);
+
+		DocumentModelList usersubscriptions = getSubscriptionsFor(session, user);
+		
+		for(DocumentModel subscr : usersubscriptions) {
+		
+			if (StringUtils.startsWith(subscr.getPathAsString(), workspace.getPathAsString())) {
+	            List<String> listNotifs = notificationManager.getSubscriptionsForUserOnDocument(NuxeoPrincipal.PREFIX + user,
+	            		subscr.getId());
+	            notificationManager.removeSubscriptions(NuxeoPrincipal.PREFIX + user, listNotifs, subscr.getId());
+			}
+		}
+	}
+	
+	
 
     @Override
     public Map<String, Object> fetchInfos(CoreSession coreSession, DocumentModel currentDocument) throws ClientException {
@@ -235,12 +255,18 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
     @Override
     public DocumentModelList getUserSubscriptions(CoreSession coreSession) {
 
+    	return getSubscriptionsFor(coreSession, coreSession.getPrincipal().getName());
+    }
+    
+    
+    private DocumentModelList getSubscriptionsFor(CoreSession coreSession, String user) {
+
         DocumentModelList documentsSubscribed = new DocumentModelListImpl();
 
         PlacefulService serviceBean = NotificationServiceHelper.getPlacefulServiceBean();
 
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("userId", NuxeoPrincipal.PREFIX + coreSession.getPrincipal().getName());
+        paramMap.put("userId", NuxeoPrincipal.PREFIX + user);
 
         String className = serviceBean.getAnnotationRegistry().get(NotificationService.SUBSCRIPTION_NAME);
         String shortClassName = className.substring(className.lastIndexOf('.') + 1);
@@ -315,5 +341,7 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
             throw new DeleteUserSubscriptionException("Trying deleting subscription for user " + us.getUserId() + "instead of user " + currentUserId);
         }
     }
+
+
 
 }

@@ -51,6 +51,16 @@ public interface DocumentNotificationInfosProvider extends DocumentInformationsP
 	 */
 	void unsubscribe(CoreSession coreSession, DocumentModel currentDocument) throws ClientException, ClassNotFoundException;
 
+    /**
+     * 
+     * Remove all subscriptions to notifications on the documents in the given workspace
+     * 
+     * @param session
+     * @param user 
+     * @param document
+     */
+	void workspaceUnsubscribe(CoreSession session, DocumentModel workspace, String user)  throws ClientException, ClassNotFoundException;
+	
 	/**
 	 * Return a list of documents followed by the current user
 	 * 
