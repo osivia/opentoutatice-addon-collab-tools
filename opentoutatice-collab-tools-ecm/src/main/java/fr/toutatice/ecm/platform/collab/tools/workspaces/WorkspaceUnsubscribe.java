@@ -1,4 +1,4 @@
-package fr.toutatice.ecm.platform.collab.tools.notifications;
+package fr.toutatice.ecm.platform.collab.tools.workspaces;
 
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
@@ -9,7 +9,14 @@ import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
+import org.nuxeo.ecm.core.api.security.ACE;
+import org.nuxeo.ecm.core.api.security.ACL;
+import org.nuxeo.ecm.core.api.security.ACP;
+import org.nuxeo.elasticsearch.api.ElasticSearchService;
+import org.nuxeo.elasticsearch.query.NxQueryBuilder;
 import org.nuxeo.runtime.api.Framework;
+
+import fr.toutatice.ecm.platform.collab.tools.notifications.DocumentNotificationInfosProvider;
 
 /**
  * Get all the documents followed by the current user
@@ -48,7 +55,27 @@ public class WorkspaceUnsubscribe {
 			service.workspaceUnsubscribe(session, workspace, userId);
 			
 			// remove ACLs - TODO
+			ElasticSearchService es = Framework.getService(ElasticSearchService.class);
 			
+			NxQueryBuilder query = new NxQueryBuilder(session);
+			query.nxql("SELECT * FROM Document WHERE ecm:path STARTSWITH '"+workspace.getPathAsString()+"' AND ecm:acl/* = '"+userId+"'");
+			DocumentModelList query2 = es.query(query);
+			
+			for(DocumentModel docWithAcls : query2) {
+				
+		        ACP acp = session.getACP(docWithAcls.getRef());
+		        ACL[] acls = acp.getACLs();
+		        for(ACL acl : acls) {
+		        	for(ACE ace : acl.getACEs()) {
+		        		if(ace.getUsername().equals(userId)) {
+		    		        acp.removeACL(acl.getName());
+		        		}
+		        	}
+		        }
+		        acp.removeACL("inherited"); 
+		        session.setACP(docWithAcls.getRef(), acp, true);
+		        
+			}
 		}
 		else {
 			// error
