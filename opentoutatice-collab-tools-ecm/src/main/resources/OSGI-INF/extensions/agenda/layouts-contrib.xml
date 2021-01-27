@@ -27,10 +27,7 @@
 				</row>
 				<row>
 					<widget>description</widget>
-				</row>
-				<row>
-					<widget>event_participants</widget>
-				</row>				
+				</row>		
 				<row>
 					<widget>files</widget>
 				</row>
@@ -67,34 +64,6 @@
                 <property name="disableHtmlInit">true</property>
             </properties>
 		</widget>
-		
-	
-		<widget name="event_participants" type="multipleUsersSuggestionWithPermission">
-            <labels>
-                <label mode="any">toutatice.label.agenda.event.participants
-                </label>
-            </labels>
-            <helpLabels>
-                <label mode="edit">
-                    toutatice.label.agenda.event.participants
-                </label>
-            </helpLabels>
-            <translated>true</translated>
-            <fields>
-                <field>vevent:participants</field>
-            </fields>
-            <properties widgetMode="edit">
-                <property name="documentId">#{currentDocument.id}</property>
-                <property name="orderable">true</property>
-                <property name="permission">Read</property>
-                <property name="searchType">USER_TYPE</property>
-                <property name="placeholder">label.security.search</property>
-                <property name="width">70%</property>
-                <property name="prefixed">true</property>
-                <property name="required">false</property>
-            </properties>
-        </widget>
-		
 		
 		<!-- For PortalView -->
 		<widget name="pv_event_object" type="htmltext">
