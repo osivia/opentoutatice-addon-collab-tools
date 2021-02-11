@@ -63,17 +63,21 @@ public class WorkspaceUnsubscribe {
 			
 			for(DocumentModel docWithAcls : query2) {
 				
+				boolean AcpModified = false;
 		        ACP acp = session.getACP(docWithAcls.getRef());
 		        ACL[] acls = acp.getACLs();
 		        for(ACL acl : acls) {
 		        	for(ACE ace : acl.getACEs()) {
 		        		if(ace.getUsername().equals(userId)) {
-		    		        acp.removeACL(acl.getName());
+		        			acl.remove(ace);
+		        			AcpModified = true;
 		        		}
 		        	}
 		        }
-		        acp.removeACL("inherited"); 
-		        session.setACP(docWithAcls.getRef(), acp, true);
+		        
+		        if(AcpModified) {
+		        	session.setACP(docWithAcls.getRef(), acp, true);
+		        }
 		        
 			}
 		}
