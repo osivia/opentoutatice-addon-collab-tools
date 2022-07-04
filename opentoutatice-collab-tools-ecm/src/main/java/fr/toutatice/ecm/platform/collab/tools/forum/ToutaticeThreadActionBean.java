@@ -42,6 +42,8 @@ import org.nuxeo.ecm.webapp.helpers.EventManager;
 import org.nuxeo.ecm.webapp.helpers.EventNames;
 
 import fr.toutatice.ecm.platform.core.constants.ExtendedSeamPrecedence;
+import fr.toutatice.ecm.platform.core.constants.PortalConstants;
+import fr.toutatice.ecm.platform.web.fragments.PageBean;
 
 @Name("threadAction")
 @Scope(ScopeType.CONVERSATION)
@@ -63,6 +65,9 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
 
     /** Indicates if we have to get DocumentModel value of attribute selectedModerators */
     private boolean isSelectedModeratorsFilled;
+    
+    @In(create = true)
+    protected PageBean pageBean;    
 
     @Override
     protected DocumentModel getThreadModel() throws ClientException {
@@ -105,6 +110,9 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
 
     public String addThread(String viewId) throws ClientException {
         super.addThread();
+        
+        pageBean.setNotificationKey(PortalConstants.Notifications.SUCCESS_MESSAGE_CREATE_IN_WS.name()); 	
+        
         return viewId;
     }
 
@@ -146,8 +154,12 @@ public class ToutaticeThreadActionBean extends ThreadActionBean {
 
     public String updateThread(String viewId) throws ClientException {
         updateThread();
+        
+        pageBean.setNotificationKey(PortalConstants.Notifications.SUCCESS_MESSAGE_MODIFY.name());
+
         return viewId;
     }
+
 
     @Observer(value = {EventNames.NEW_DOCUMENT_CREATED, EventNames.DOCUMENT_SELECTION_CHANGED}, create = false)
     public void refresh() throws ClientException {
