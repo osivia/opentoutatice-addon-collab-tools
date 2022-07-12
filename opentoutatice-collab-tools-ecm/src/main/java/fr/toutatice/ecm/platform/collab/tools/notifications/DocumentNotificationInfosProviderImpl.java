@@ -228,10 +228,11 @@ public class DocumentNotificationInfosProviderImpl implements DocumentNotificati
         for (Object obj : allSubscriptions) {
             UserSubscription us = (UserSubscription) obj;
             try {
-                DocumentModel doc = ToutaticeDocumentHelper.getUnrestrictedDocument(coreSession, us.getDocId());
-                String path = doc.getPathAsString();
+                
+                String parentPath = StringUtils.substringBeforeLast(currentDoc.getPathAsString(), "/");
 
-                boolean contains = StringUtils.contains(currentDoc.getPathAsString(), path);
+                DocumentModel doc = ToutaticeDocumentHelper.getUnrestrictedDocument(coreSession, us.getDocId());
+                boolean contains = StringUtils.contains(parentPath, doc.getPathAsString());
 
                 if (contains) {
                     return true;
