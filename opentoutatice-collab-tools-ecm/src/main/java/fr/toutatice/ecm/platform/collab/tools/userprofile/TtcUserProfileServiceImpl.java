@@ -29,7 +29,7 @@ public class TtcUserProfileServiceImpl extends UserProfileServiceImpl {
 		return this.getUserProfileDocument(userName,session);
 				
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.nuxeo.ecm.user.center.profile.UserProfileServiceImpl#getUserProfileDocument(java.lang.String, org.nuxeo.ecm.core.api.CoreSession)
 	 */
@@ -48,13 +48,16 @@ public class TtcUserProfileServiceImpl extends UserProfileServiceImpl {
 				return query.get(0);
 			}
 			else {
-				return super.getUserProfileDocument(userName, session);
+				return null;
 
 			}
 		}
-		
 		else {
-			return super.getUserProfileDocument(userName, session);
+			return null;
 		}
+	}
+
+	public DocumentModel getOrCreateUserProfileDocument(String userName, CoreSession session) throws ClientException {
+		return super.getUserProfileDocument(userName, session);
 	}
 }
