@@ -73,6 +73,18 @@
                 <param type="string" name="xpath_img_out">annonce:image</param>
                 <param type="boolean" name="enlarge">true</param>
             </operation>
+			<operation id="Document.SetProperty">
+				<param type="serializable" name="value">expr:Fn.truncateTextFromHTML(Document.getProperty("note:note"), 300)
+				</param>
+				<param type="string" name="xpath">annonce:resume</param>
+				<param type="boolean" name="save">false</param>
+			</operation>
+			<operation id="Document.SetProperty">
+				<param type="serializable" name="value">expr:Fn.extractTextFromHTML(Document.getProperty("annonce:resume"))
+				</param>
+				<param type="string" name="xpath">dc:description</param>
+				<param type="boolean" name="save">false</param>
+			</operation>
         </chain>
 
 	</extension>
